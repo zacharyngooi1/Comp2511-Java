@@ -381,12 +381,17 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 ## Logs of work completed per partner
 
 ### Week-05
-
-Fill in here.
+#Zach:
+#- Created google document for user story skeleton
+#- Added some user stories
+#- Researched on epics/RGB
 
 ### Week-06
 
-Fill in here.
+#Zach:
+#- Added more user stories
+#- Added a few relevant acceptance criteria
+#- 
 
 ### Week-07
 
