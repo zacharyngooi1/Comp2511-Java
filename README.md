@@ -382,25 +382,43 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 ### Week-05
 Zach:
-- Created google document for user story skeleton
+- Created Google document for user story skeleton
 - Added some user stories
 - Researched on epics/RGB
+
+Matt:
+- Added some user stories
 
 ### Week-06
 
 Zach:
 - Added more user stories
 - Added a few relevant acceptance criteria
-- 
+
+Matt:
+- Added user stories
+- Added acceptance criteria
 
 ### Week-07
 
-Fill in here.
+Zach:
+- Moved content from the Google document to the Gitlab
+
+Matt:
+- x
 
 ### Week-08
 
-Fill in here.
+Zach:
+- x
+
+Matt:
+- x
 
 ### Week-09
 
-Fill in here.
+Zach:
+- x
+
+Matt:
+- x
