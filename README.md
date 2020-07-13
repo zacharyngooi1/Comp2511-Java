@@ -405,7 +405,9 @@ Zach:
 - Moved content from the Google document to the Gitlab
 
 Matt:
-- x
+- Revised priorities
+- Assigned user story points
+- Made minor changes to story & label names
 
 ### Week-08
 
