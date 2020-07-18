@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.List;
+
 /**
  * A moveable entity in the dungeon.
  *
@@ -18,19 +20,24 @@ public class MoveableEntity extends Entity {
             return false;
         }
 
-        Entity entityAtSquare = dungeon.getEntityAtSquare(x, y);
+        List<Entity> entitiesAtSquare = dungeon.getEntitiesAtSquare(x, y);
 
-        if (entityAtSquare == null) {
-            setX(x);
-            setY(y);
-            return true;
-        } else if (!entityAtSquare.isCollidable()) {
-            setX(x);
-            setY(y);
-            entityAtSquare.onEntityEnter(this);
-            return true;
-        } else {
-            return false;
+        for (Entity entity : entitiesAtSquare) {
+            if (entity != null && entity.isCollidable()) {
+                return false;
+            }
         }
+
+        for (Entity entity : entitiesAtSquare) {
+            if (entity != null) {
+                entity.onEntityEnter(this);
+                this.onEntityEnter(entity);
+            }
+        }
+        
+        setX(x);
+        setY(y);
+
+        return true;
     }
 }

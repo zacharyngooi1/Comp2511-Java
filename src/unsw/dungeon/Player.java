@@ -1,10 +1,10 @@
 package unsw.dungeon;
 
 import java.lang.Math;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * The player entity
+ * The player entity.
  * @author Robert Clifton-Everest
  *
  */
@@ -42,37 +42,38 @@ public class Player extends MoveableEntity {
         // If the player is moving normally, i.e. not if they're being
         // teleported, check if they can move a boulder
         if (Math.abs(xMovement) <= 1 && Math.abs(yMovement) <= 1) {
-            Entity entityAtSquare = dungeon.getEntityAtSquare(x, y);
+            for (Entity entity : dungeon.getEntitiesAtSquare(x, y)) {
+                if (entity != null && entity.getTag() == Tag.BOULDER) {
+                    Boulder boulder = (Boulder) entity;
 
-            if (entityAtSquare != null && entityAtSquare.getTag() == Tag.BOULDER) {
-                Boulder boulder = (Boulder) entityAtSquare;
-
-                // Move the boulder in the direction the player is going. The
-                // boulder will do its own collision checking, preventing it from
-                // moving onto other boulders and walls
-                boulder.moveTo(boulder.getX() + xMovement, boulder.getY() + yMovement);
+                    // Move the boulder in the direction the player is going. The
+                    // boulder will do its own collision checking, preventing it from
+                    // moving onto other boulders and walls
+                    boulder.moveTo(boulder.getX() + xMovement, boulder.getY() + yMovement);
+                }
             }
         }
 
-       Entity entityAtSquare = dungeon.getEntityAtSquare(x, y);
        
-       if (entityAtSquare != null && entityAtSquare.getTag() == Tag.PORTAL) {
-           int id = 0;
-           // check if the portal has an existing pair with the same id
-           // portalHasPair will return the pairing portal
-            for (Portal p: this.dungeon.getPortalList()) {
-                if (p != null) {
-                    if (p.getX() == entityAtSquare.getX() && p.getY() == entityAtSquare.getY()) {
-                        id = p.getID();
+       for (Entity e : dungeon.getEntitiesAtSquare(x, y)) {
+            if (e != null && e.getTag() == Tag.PORTAL) {
+                int id = 999999;
+                // check if the portal has an existing pair with the same id
+                // Cleanup required
+                for (Portal p: this.dungeon.getPortalList()) {
+                        if (p != null) {
+                            if (p.getX() == e.getX() && p.getY() == e.getY()) {
+                                id = p.getID();
+                            }
+                        }
+
                     }
-                }
 
-            }
-
-            for (Portal p: this.dungeon.getPortalList()) {
-                if (p != null) {
-                    if (p.getX() != entityAtSquare.getX() && p.getY() != entityAtSquare.getY() && p.getID() == id) {
-                        return super.moveTo(p.getX(), p.getY());
+                for (Portal p: this.dungeon.getPortalList()) {
+                    if (p != null) {
+                        if (p.getX() != e.getX() && p.getY() != e.getY() && p.getID() == id) {
+                            return super.moveTo(p.getX(), p.getY());
+                        }
                     }
                 }
             }
@@ -102,7 +103,7 @@ public class Player extends MoveableEntity {
                 break;
             case SWORD:
                 break;
-            case POTION:
+            case INVINCIBILITY:
                 break;
             default:
                 break;

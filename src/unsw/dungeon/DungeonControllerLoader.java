@@ -28,7 +28,16 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image playerImage;
     private Image wallImage;
     private Image boulderImage;
+    private Image enemyImage;
+    private Image treasureImage;
+    private Image exitImage;
+    private Image keyImage;
+    private Image floorSwitchImage;
+    private Image invincibilityImage;
+    private Image doorImage;
     private Image portalImage;
+    private Image swordImage;
+
 
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -37,7 +46,15 @@ public class DungeonControllerLoader extends DungeonLoader {
         playerImage = new Image((new File("images/human_new.png")).toURI().toString());
         wallImage = new Image((new File("images/brick_brown_0.png")).toURI().toString());
         boulderImage = new Image((new File("images/boulder.png")).toURI().toString());
+        enemyImage = new Image((new File("images/deep_elf_master_archer.png")).toURI().toString());
+        treasureImage = new Image((new File("images/gold_pile.png")).toURI().toString());
+        exitImage = new Image((new File("images/exit.png")).toURI().toString());
+        keyImage = new Image((new File("images/key.png")).toURI().toString());
+        floorSwitchImage = new Image((new File("images/pressure_plate.png")).toURI().toString());
+        invincibilityImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
+        doorImage = new Image((new File("images/closed_door.png")).toURI().toString());
         portalImage = new Image((new File("images/portal.png")).toURI().toString());
+        swordImage = new Image((new File("images/greatsword_1_new.png")).toURI().toString());
     }
 
     @Override
@@ -59,9 +76,57 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
+    public void onLoad(Enemy enemy) {
+        ImageView view = new ImageView(enemyImage);
+        connectEntity(enemy, view);
+    }
+
+    @Override
+    public void onLoad(Treasure treasure) {
+        ImageView view = new ImageView(treasureImage);
+        connectEntity(treasure, view);
+    }
+
+    @Override
+    public void onLoad(Exit exit) {
+        ImageView view = new ImageView(exitImage);
+        connectEntity(exit, view);
+    }
+
+    @Override
+    public void onLoad(Key key) {
+        ImageView view = new ImageView(keyImage);
+        connectEntity(key, view);
+    }
+
+    @Override
+    public void onLoad(FloorSwitch floorSwitch) {
+        ImageView view = new ImageView(floorSwitchImage);
+        connectEntity(floorSwitch, view);
+    }
+
+    @Override
+    public void onLoad(Invincibility invincibility) {
+        ImageView view = new ImageView(invincibilityImage);
+        connectEntity(invincibility, view);
+    }
+
+    @Override
+    public void onLoad(Door door) {
+        ImageView view = new ImageView(doorImage);
+        connectEntity(door, view);
+    }
+
+    @Override
     public void onLoad(Portal portal) {
         ImageView view = new ImageView(portalImage);
         connectEntity(portal, view);
+    }
+
+    @Override
+    public void onLoad(Sword sword) {
+        ImageView view = new ImageView(swordImage);
+        connectEntity(sword, view);
     }
 
     private void connectEntity(Entity entity, ImageView view) {
