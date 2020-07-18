@@ -47,6 +47,8 @@ public class Player extends MoveableEntity {
             case BOULDER:
                 break;
             case PORTAL:
+                
+                this.moveTo(x, y);
                 break;
             case ENEMY:
                 break;
