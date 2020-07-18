@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.lang.Math;
+import java.util.ArrayList;
 
 /**
  * The player entity
@@ -53,6 +54,30 @@ public class Player extends MoveableEntity {
             }
         }
 
+       Entity entityAtSquare = dungeon.getEntityAtSquare(x, y);
+       
+       if (entityAtSquare != null && entityAtSquare.getTag() == Tag.PORTAL) {
+           int id = 0;
+           // check if the portal has an existing pair with the same id
+           // portalHasPair will return the pairing portal
+            for (Portal p: this.dungeon.getPortalList()) {
+                if (p != null) {
+                    if (p.getX() == entityAtSquare.getX() && p.getY() == entityAtSquare.getY()) {
+                        id = p.getID();
+                    }
+                }
+
+            }
+
+            for (Portal p: this.dungeon.getPortalList()) {
+                if (p != null) {
+                    if (p.getX() != entityAtSquare.getX() && p.getY() != entityAtSquare.getY() && p.getID() == id) {
+                        return super.moveTo(p.getX(), p.getY());
+                    }
+                }
+            }
+       }
+
         return super.moveTo(x, y);
     }
 
@@ -72,8 +97,6 @@ public class Player extends MoveableEntity {
             case BOULDER:
                 break;
             case PORTAL:
-                
-                this.moveTo(x, y);
                 break;
             case ENEMY:
                 break;

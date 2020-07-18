@@ -17,12 +17,14 @@ import java.util.List;
 public class Dungeon {
     private int width, height;
     private List<Entity> entities;
+    private List<Portal> portals;
     private Player player;
 
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
+        this.portals = new ArrayList<>();
         this.player = null;
     }
 
@@ -52,11 +54,22 @@ public class Dungeon {
         return null;
     }
 
+
     public void setPlayer(Player player) {
         this.player = player;
     }
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+    }
+
+    public List<Entity> getEntityList() {
+        return this.entities;
+    }
+    public List<Portal> getPortalList() {
+        return this.portals;
+    }
+    public void addPortal(Portal p) {
+        portals.add(p);
     }
 }

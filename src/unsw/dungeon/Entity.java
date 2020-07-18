@@ -67,7 +67,6 @@ public class Entity {
     public void setY(int y) {
         this.y().set(y);
     }
-
     /**
      * Called whenever another entity enters the same square as this entity.
      * @param other the other entity that has just been imposed on this

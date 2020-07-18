@@ -52,6 +52,7 @@ public abstract class DungeonLoader {
         int y = json.getInt("y");
 
         Entity entity = null;
+        Portal p = null;
 
         switch (type) {
             case "player":
@@ -70,9 +71,17 @@ public abstract class DungeonLoader {
                 onLoad(boulder);
                 entity = boulder;
                 break;
+            case "portal":
+                int id = json.getInt("id");
+                Portal portal = new Portal(dungeon, x, y, id);
+                onLoad(portal);
+                entity = portal;
+                p = portal;
+                break;
+                
             // TODO Handle other possible entities
         }
-
+        dungeon.addPortal(p);
         dungeon.addEntity(entity);
     }
 
@@ -81,6 +90,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Wall wall);
 
     public abstract void onLoad(Boulder boulder);
+
+    public abstract void onLoad(Portal portal);
 
     // TODO Create additional abstract methods for the other entities
 }

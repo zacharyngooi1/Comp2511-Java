@@ -1,17 +1,18 @@
 package unsw.dungeon;
 
-import sun.tools.tree.IntExpression;
 
-public class Portal extends Entity {
-    public Portal(Dungeon dungeon, int x, int y) {
+public class Portal extends Entity{
+
+    private int id;
+
+    public Portal(Dungeon dungeon, int x, int y, int id) {
         super(x, y, Tag.PORTAL, false, dungeon);
+        this.id = id;
     }
 
-    
 
-    public boolean checkLink(Dungeon dungeon, Portal link) {
-        link.getX(), 
-        link.getY()
-        return this.
+    public int getID() {
+        return this.id;
     }
+
 }

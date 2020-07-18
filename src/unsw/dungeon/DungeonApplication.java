@@ -16,8 +16,10 @@ public class DungeonApplication extends Application {
         // Initialises the dungeon controller loader's variables
         DungeonControllerLoader dungeonControllerLoader = new DungeonControllerLoader("boulders.json");
 
+        DungeonControllerLoader dungeonControllerLoader2 = new DungeonControllerLoader("portals.json");
+
         // Actually creates the dungeon
-        DungeonController controller = dungeonControllerLoader.loadController();
+        DungeonController controller = dungeonControllerLoader2.loadController();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
         loader.setController(controller);
