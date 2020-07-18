@@ -1,9 +1,10 @@
 package unsw.dungeon;
 
 import java.lang.Math;
+import java.util.List;
 
 /**
- * The player entity
+ * The player entity.
  * @author Robert Clifton-Everest
  *
  */
@@ -41,15 +42,15 @@ public class Player extends MoveableEntity {
         // If the player is moving normally, i.e. not if they're being
         // teleported, check if they can move a boulder
         if (Math.abs(xMovement) <= 1 && Math.abs(yMovement) <= 1) {
-            Entity entityAtSquare = dungeon.getEntityAtSquare(x, y);
+            for (Entity entity : dungeon.getEntitiesAtSquare(x, y)) {
+                if (entity != null && entity.getTag() == Tag.BOULDER) {
+                    Boulder boulder = (Boulder) entity;
 
-            if (entityAtSquare != null && entityAtSquare.getTag() == Tag.BOULDER) {
-                Boulder boulder = (Boulder) entityAtSquare;
-
-                // Move the boulder in the direction the player is going. The
-                // boulder will do its own collision checking, preventing it from
-                // moving onto other boulders and walls
-                boulder.moveTo(boulder.getX() + xMovement, boulder.getY() + yMovement);
+                    // Move the boulder in the direction the player is going. The
+                    // boulder will do its own collision checking, preventing it from
+                    // moving onto other boulders and walls
+                    boulder.moveTo(boulder.getX() + xMovement, boulder.getY() + yMovement);
+                }
             }
         }
 
@@ -77,7 +78,7 @@ public class Player extends MoveableEntity {
                 break;
             case SWORD:
                 break;
-            case POTION:
+            case INVINCIBILITY:
                 break;
             default:
                 break;
