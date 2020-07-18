@@ -9,6 +9,7 @@ public class Enemy extends MoveableEntity {
         dungeon.getPlayer().attachEnemy(this);
     }
 
+
     /**
      * @param x the x co-ordinate of the player.
      * @param y the y co-ordinate of the player.

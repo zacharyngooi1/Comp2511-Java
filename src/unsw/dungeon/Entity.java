@@ -66,6 +66,10 @@ public class Entity {
         return isCollidable;
     }
 
+    public void setCollidable(boolean stat) {
+        this.isCollidable = stat;
+    }
+
     public void setX(int x) {
         this.x().set(x);
     }
@@ -91,5 +95,14 @@ public class Entity {
      */
     public void onEntityEnter(Entity other) {
         System.out.println(other.getTag() + " entered " + getTag());
+    }
+
+     /**
+     * Called whenever another entity exits the same square as this entity.
+     * @param other the other entity that has just left
+     * entity's square.
+     */
+    public void onEntityExit(Entity other) {
+        System.out.println(other.getTag() + " exited " + getTag());
     }
 }

@@ -60,6 +60,7 @@ public class Dungeon {
         return list;
     }
 
+
     public void setPlayer(Player player) {
         this.player = player;
     }

@@ -83,12 +83,18 @@ public class Player extends MoveableEntity {
     public boolean moveTo(int x, int y) {
         int xMovement = x - getX();
         int yMovement = y - getY();
+        Door d = doorCheck(x, y);
+        
+        if (d != null) {
+            attemptDoorOpen(d);
+        }
 
         // If the player is moving normally, i.e. not if they're being
         // teleported, check if they can move a boulder
         if (Math.abs(xMovement) <= 1 && Math.abs(yMovement) <= 1) {
             TryPushBoulder(x, y, xMovement, yMovement);
         }
+
 
         boolean res = super.moveTo(x, y);
 
@@ -118,6 +124,18 @@ public class Player extends MoveableEntity {
         }
     }
 
+    // check for door in players surroundings and returns if present
+    private Door doorCheck(int x, int y) {
+        Door door = null;
+        for (Entity e: dungeon.getEntitiesAtSquare(x, y)) {
+            if (e != null && e.getTag() == Tag.DOOR) {
+                door = (Door) e;
+                return door;
+            }
+        }
+        return door;
+    }
+
     /**
      * Notifies all enemy listeners that the player has moved.
      */
@@ -142,6 +160,7 @@ public class Player extends MoveableEntity {
             case TREASURE:
                 break;
             case KEY:
+                onKeyEnter((Key) other);
                 break;
             case ENEMY:
                 onEnemyEnter((Enemy) other);
@@ -151,10 +170,38 @@ public class Player extends MoveableEntity {
                 break;
             case INVINCIBILITY:
                 onInvincibilityEnter((Invincibility) other);
-                break;
+                break;                
             default:
                 break;
         }
+    }
+
+
+
+    private void attemptDoorOpen(Door door) {
+        if (this.keys.isEmpty()) {
+            System.out.println("Door is locked, no key in possesion");
+        }
+        else {
+            System.out.println("Checking keys in inventory...");
+            for (Key k: this.keys) {
+                if (k.getKeyId() != door.getDoorId()) {
+                    continue;
+                }
+                else if (k.getKeyId() == door.getDoorId()) {
+                    System.out.println("Key Found!\nDoor unlocked!");
+                    door.destroy();
+                    this.keys.remove(k);
+                    return;
+                }
+            }
+        }
+        System.out.println("No corresponding keys found!");
+    }
+
+    private void onKeyEnter(Key key) {
+        this.keys.add(key);
+        key.destroy();
     }
 
     private void onEnemyEnter(Enemy enemy) {
