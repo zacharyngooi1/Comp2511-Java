@@ -131,6 +131,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void connectEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
+        trackVisibility(entity, view);
         entities.add(view);
     }
 
@@ -166,6 +167,15 @@ public class DungeonControllerLoader extends DungeonLoader {
                 GridPane.setRowIndex(node, newValue.intValue());
             }
         });
+    }
+
+    /**
+     * Bind a node's visiblity to an entity's visiblity.
+     * @param entity
+     * @param node
+     */
+    private void trackVisibility(Entity entity, Node node) {
+        entity.visible().bindBidirectional(node.visibleProperty());
     }
 
     /**
