@@ -247,8 +247,7 @@ public class Player extends MoveableEntity {
     }
 
     private void onTreasureEnter(Treasure treasure) {
-        int goal;
-        goal = this.dungeon.getTreasureGoal() - 1;
+        int goal = this.dungeon.getTreasureGoal() - 1;
 
         System.out.println("Treasure found!");
     

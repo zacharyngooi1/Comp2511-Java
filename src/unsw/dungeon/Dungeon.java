@@ -50,8 +50,8 @@ public class Dungeon {
         return this.treasureGoal;
     }
 
-    public void addToTreasureGoal(int i) {
-        this.treasureGoal += i;
+    public void addToTreasureGoal() {
+        this.treasureGoal ++;
     }
 
     /**
