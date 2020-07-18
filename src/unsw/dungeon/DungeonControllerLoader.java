@@ -14,16 +14,18 @@ import javafx.scene.layout.GridPane;
 import java.io.File;
 
 /**
- * A DungeonLoader that also creates the necessary ImageViews for the UI,
- * connects them via listeners to the model, and creates a controller.
+ * Loads the model via DungeonLoader. Implements the functions on the view
+ * side of things, which involves taking the model's entities, creating
+ * corresponding view/UI elements and tying the two together.
+ * 
+ * This class also creates the controller.
+ * 
  * @author Robert Clifton-Everest
- *
  */
 public class DungeonControllerLoader extends DungeonLoader {
-
     private List<ImageView> entities;
 
-    //Images
+    // Images
     private Image playerImage;
     private Image wallImage;
 
@@ -38,16 +40,16 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override
     public void onLoad(Entity player) {
         ImageView view = new ImageView(playerImage);
-        addEntity(player, view);
+        connectEntity(player, view);
     }
 
     @Override
     public void onLoad(Wall wall) {
         ImageView view = new ImageView(wallImage);
-        addEntity(wall, view);
+        connectEntity(wall, view);
     }
 
-    private void addEntity(Entity entity, ImageView view) {
+    private void connectEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entities.add(view);
     }
@@ -63,8 +65,13 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @param node
      */
     private void trackPosition(Entity entity, Node node) {
+        // Set the entity to the grid square corresponding to its starting
+        // x/y values
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
+
+        // Ensure that whenever the entity's x/y values are changed, the
+        // entity's grid square changes to match
         entity.x().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
@@ -84,12 +91,12 @@ public class DungeonControllerLoader extends DungeonLoader {
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.
-     * @return
+     * @return a dungeon controller.
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
-        return new DungeonController(load(), entities);
+        Dungeon dungeon = load();
+
+        return new DungeonController(dungeon, entities);
     }
-
-
 }

@@ -13,10 +13,8 @@ import java.util.List;
  * entity can occupy the same square.
  *
  * @author Robert Clifton-Everest
- *
  */
 public class Dungeon {
-
     private int width, height;
     private List<Entity> entities;
     private Player player;
@@ -38,6 +36,20 @@ public class Dungeon {
 
     public Player getPlayer() {
         return player;
+    }
+
+    /**
+     * Tries to find an entity at square (x, y).
+     * @return the entity if it found, or otherwise null.
+     */
+    public Entity getEntityAtSquare(int x, int y) {
+        for (Entity entity : entities) {
+            if (entity != null && entity.getX() == x && entity.getY() == y) {
+                return entity;
+            }
+        }
+
+        return null;
     }
 
     public void setPlayer(Player player) {

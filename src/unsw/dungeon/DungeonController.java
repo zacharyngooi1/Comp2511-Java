@@ -13,11 +13,10 @@ import java.io.File;
 
 /**
  * A JavaFX controller for the dungeon.
+ * 
  * @author Robert Clifton-Everest
- *
  */
 public class DungeonController {
-
     @FXML
     private GridPane squares;
 
@@ -44,30 +43,28 @@ public class DungeonController {
             }
         }
 
-        for (ImageView entity : initialEntities)
+        for (ImageView entity : initialEntities) {
             squares.getChildren().add(entity);
-
+        }
     }
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
-        case UP:
-            player.moveUp();
-            break;
-        case DOWN:
-            player.moveDown();
-            break;
-        case LEFT:
-            player.moveLeft();
-            break;
-        case RIGHT:
-            player.moveRight();
-            break;
-        default:
-            break;
+            case UP:
+                player.moveUp();
+                break;
+            case DOWN:
+                player.moveDown();
+                break;
+            case LEFT:
+                player.moveLeft();
+                break;
+            case RIGHT:
+                player.moveRight();
+                break;
+            default:
+                break;
         }
     }
-
 }
-
