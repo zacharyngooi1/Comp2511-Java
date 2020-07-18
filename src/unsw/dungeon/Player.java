@@ -83,9 +83,10 @@ public class Player extends MoveableEntity {
     public boolean moveTo(int x, int y) {
         int xMovement = x - getX();
         int yMovement = y - getY();
-
-        if (doorCheck(x, y) != null) {
-            attemptDoorOpen(doorCheck(x, y));
+        Door d = doorCheck(x, y);
+        
+        if (d != null) {
+            attemptDoorOpen(d);
         }
 
         // If the player is moving normally, i.e. not if they're being
