@@ -90,6 +90,6 @@ public class Entity {
      * entity's square.
      */
     public void onEntityEnter(Entity other) {
-        System.out.println(other.getTag() + " -> " + getTag());
+        System.out.println(other.getTag() + " entered " + getTag());
     }
 }
