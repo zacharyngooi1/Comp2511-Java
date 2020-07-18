@@ -19,6 +19,7 @@ public class Dungeon {
     private List<Entity> entities;
     private List<Portal> portals;
     private Player player;
+    private int treasureGoal;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -26,6 +27,7 @@ public class Dungeon {
         this.entities = new ArrayList<Entity>();
         this.portals = new ArrayList<Portal>();
         this.player = null;
+        this.treasureGoal = 0;
     }
 
     public int getWidth() {
@@ -44,6 +46,14 @@ public class Dungeon {
         return portals;
     }
 
+    public int getTreasureGoal() {
+        return this.treasureGoal;
+    }
+
+    public void addToTreasureGoal(int i) {
+        this.treasureGoal += i;
+    }
+
     /**
      * Find the entities at square (x, y).
      * @return a list of entities.
@@ -60,6 +70,14 @@ public class Dungeon {
         return list;
     }
 
+    public Entity getsingleEntity(int x, int y) {
+        for (Entity entity : entities) {
+            if (entity != null && entity.getX() == x && entity.getY() == y) {
+                return entity;
+            }
+        }
+        return null;
+    }
 
     public void setPlayer(Player player) {
         this.player = player;
