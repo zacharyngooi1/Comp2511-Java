@@ -61,7 +61,7 @@ public abstract class DungeonLoader {
                 entity = player;
                 break;
             case "wall":
-                Wall wall = new Wall(x, y);
+                Wall wall = new Wall(dungeon, x, y);
                 onLoad(wall);
                 entity = wall;
                 break;

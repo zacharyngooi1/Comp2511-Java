@@ -15,7 +15,7 @@ import java.io.File;
 
 /**
  * Loads the model via DungeonLoader. Implements the functions on the view
- * side of things, which involves take the model's entities, creating
+ * side of things, which involves taking the model's entities, creating
  * corresponding view/UI elements and tying the two together.
  * 
  * This class also creates the controller.
@@ -91,7 +91,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.
-     * @return
+     * @return a dungeon controller.
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {

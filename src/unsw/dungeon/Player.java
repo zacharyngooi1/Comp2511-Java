@@ -5,40 +5,57 @@ package unsw.dungeon;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity {
-    private Dungeon dungeon;
-
+public class Player extends MoveableEntity {
     /**
-     * Create a player positioned in square (x,y)
+     * Create a player positioned in square (x, y).
      * @param x
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(x, y);
-        this.dungeon = dungeon;
+        super(x, y, Tag.PLAYER, true, dungeon);
     }
 
     public void moveUp() {
-        if (getY() > 0) {
-            setY(getY() - 1);
-        }
+        moveTo(getX(), getY() - 1);
     }
 
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1) {
-            setY(getY() + 1);
-        }
+        moveTo(getX(), getY() + 1);
     }
 
     public void moveLeft() {
-        if (getX() > 0) {
-            setX(getX() - 1);
-        }
+        moveTo(getX() - 1, getY());
     }
 
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1) {
-            setX(getX() + 1);
+        moveTo(getX() + 1, getY());
+    }
+
+    @Override
+    public void onEntityEnter(Entity other) {
+        super.onEntityEnter(other);
+
+        switch (other.getTag()) {
+            case EXIT:
+                break;
+            case TREASURE:
+                break;
+            case DOOR:
+                break;
+            case KEY:
+                break;
+            case BOULDER:
+                break;
+            case PORTAL:
+                break;
+            case ENEMY:
+                break;
+            case SWORD:
+                break;
+            case POTION:
+                break;
+            default:
+                break;
         }
     }
 }
