@@ -195,7 +195,7 @@ public class Player extends MoveableEntity {
                 }
             }
         }
-        System.out.println("No correspoonding keys found!");
+        System.out.println("No corresponding keys found!");
     }
 
     private void onKeyEnter(Key key) {
