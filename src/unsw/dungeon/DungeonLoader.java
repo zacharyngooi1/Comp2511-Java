@@ -86,7 +86,7 @@ public abstract class DungeonLoader {
                 entity = exit;
                 break;
             case "key":
-                Key key = new Key(dungeon, x, y);
+                Key key = new Key(dungeon, x, y, json.getInt("id"));
                 onLoad(key);
                 entity = key;
                 break;
@@ -101,7 +101,7 @@ public abstract class DungeonLoader {
                 entity = invincibility;
                 break;
             case "door":
-                Door door = new Door(dungeon, x, y);
+                Door door = new Door(dungeon, x, y, json.getInt("id"));
                 onLoad(door);
                 entity = door;
                 break;
