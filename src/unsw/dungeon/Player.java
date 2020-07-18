@@ -53,32 +53,6 @@ public class Player extends MoveableEntity {
                 }
             }
         }
-
-       
-       for (Entity e : dungeon.getEntitiesAtSquare(x, y)) {
-            if (e != null && e.getTag() == Tag.PORTAL) {
-                int id = 999999;
-                // check if the portal has an existing pair with the same id
-                // Cleanup required
-                for (Portal p: this.dungeon.getPortalList()) {
-                        if (p != null) {
-                            if (p.getX() == e.getX() && p.getY() == e.getY()) {
-                                id = p.getID();
-                            }
-                        }
-
-                    }
-
-                for (Portal p: this.dungeon.getPortalList()) {
-                    if (p != null) {
-                        if (p.getX() != e.getX() && p.getY() != e.getY() && p.getID() == id) {
-                            return super.moveTo(p.getX(), p.getY());
-                        }
-                    }
-                }
-            }
-       }
-
         return super.moveTo(x, y);
     }
 

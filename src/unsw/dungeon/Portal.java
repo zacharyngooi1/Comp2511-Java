@@ -15,4 +15,21 @@ public class Portal extends Entity{
         return this.id;
     }
 
+    @Override
+    public void onEntityEnter(Entity other) {
+        MoveableEntity object = (MoveableEntity) other;
+        if (object.getTag() != Tag.PORTAL) {
+            super.onEntityEnter(other);
+            for (Portal p: this.dungeon.getPortalList()) {
+                if (p != null) {
+                    if (p.getID() == this.getID() && this.getX() != p.getX() && this.getY() != p.getY()) {
+                        object.moveTo(p.getX() +1, p.getY());
+                        break;
+                    }
+                }
+            }  
+        }
+    }
+
+
 }
