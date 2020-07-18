@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import java.lang.Math;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * The player entity.
@@ -9,6 +10,12 @@ import java.util.List;
  *
  */
 public class Player extends MoveableEntity {
+    private List<Enemy> enemies;
+    private List<Key> keys;
+    private Sword sword;
+    private Invincibility invincibility;
+    private int treasure;
+
     /**
      * Create a player positioned in square (x, y).
      * @param x
@@ -16,6 +23,9 @@ public class Player extends MoveableEntity {
      */
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, Tag.PLAYER, true, dungeon);
+        enemies = new ArrayList<Enemy>();
+        keys = new ArrayList<Key>();
+        treasure = 0;
     }
 
     public void moveUp() {
@@ -34,26 +44,111 @@ public class Player extends MoveableEntity {
         moveTo(getX() + 1, getY());
     }
 
+    public void attachEnemy(Enemy enemy) {
+        enemies.add(enemy);
+    }
+
+    public void detatchEnemy(Enemy enemy) {
+        enemies.remove(enemy);
+    }
+
+    public boolean hasConsumable(Tag tag) {
+        switch (tag) {
+            case SWORD:
+                return !(sword == null);
+            case INVINCIBILITY:
+                return !(invincibility == null);
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Called whenever a player's consumable runs out.
+     */
+    public void consumableDepleted(Tag tag) {
+        switch (tag) {
+            case SWORD:
+                sword = null;
+                break;
+            case INVINCIBILITY:
+                invincibility = null;
+                break;
+            default:
+                break;
+        }
+    }
+
     @Override
     public boolean moveTo(int x, int y) {
         int xMovement = x - getX();
         int yMovement = y - getY();
 
+        if (doorCheck(x, y) != null) {
+            onDoorEnter(doorCheck(x, y));
+        }
+
         // If the player is moving normally, i.e. not if they're being
         // teleported, check if they can move a boulder
         if (Math.abs(xMovement) <= 1 && Math.abs(yMovement) <= 1) {
-            for (Entity entity : dungeon.getEntitiesAtSquare(x, y)) {
-                if (entity != null && entity.getTag() == Tag.BOULDER) {
-                    Boulder boulder = (Boulder) entity;
+            TryPushBoulder(x, y, xMovement, yMovement);
+        }
 
-                    // Move the boulder in the direction the player is going. The
-                    // boulder will do its own collision checking, preventing it from
-                    // moving onto other boulders and walls
-                    boulder.moveTo(boulder.getX() + xMovement, boulder.getY() + yMovement);
-                }
+
+        boolean res = super.moveTo(x, y);
+
+        if (res) {
+            if (invincibility != null) {
+                invincibility.setValue(invincibility.getValue() - 1);
+            }
+
+            notifyEnemies();
+        }
+
+        return res;
+    }
+
+    /**
+     * @param x the x co-ordinate of the boulder.
+     * @param y the y co-ordinate of the boulder.
+     * @param xPush how much to push the boulder by in the x direction.
+     * @param yPush how much to push the boulder by in the y direction.
+     */
+    private void TryPushBoulder(int x, int y, int xPush, int yPush) {
+        for (Entity entity : dungeon.getEntitiesAtSquare(x, y)) {
+            if (entity != null && entity.getTag() == Tag.BOULDER) {
+                Boulder boulder = (Boulder) entity;
+                boulder.moveTo(boulder.getX() + xPush, boulder.getY() + yPush);
             }
         }
-        return super.moveTo(x, y);
+    }
+
+    // check for door in players surroundings and returns if present
+    private Door doorCheck(int x, int y) {
+        Door door = null;
+        for (Entity e: dungeon.getEntitiesAtSquare(x, y)) {
+            if (e != null && e.getTag() == Tag.DOOR) {
+                door = (Door) e;
+                return door;
+            }
+        }
+        return door;
+    }
+
+    /**
+     * Notifies all enemy listeners that the player has moved.
+     */
+    private void notifyEnemies() {
+        for (Enemy enemy : enemies) {
+            enemy.moveTowardsPlayer(getX(), getY());
+        }
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        System.out.println("Player destroyed, level should restart");
+        // then restart level
     }
 
     @Override
@@ -61,26 +156,77 @@ public class Player extends MoveableEntity {
         super.onEntityEnter(other);
 
         switch (other.getTag()) {
-            case EXIT:
-                break;
             case TREASURE:
                 break;
-            case DOOR:
-                break;
             case KEY:
-                break;
-            case BOULDER:
-                break;
-            case PORTAL:
+                onKeyEnter((Key) other);
                 break;
             case ENEMY:
+                onEnemyEnter((Enemy) other);
                 break;
             case SWORD:
+                onSwordEnter((Sword) other);
                 break;
             case INVINCIBILITY:
+                onInvincibilityEnter((Invincibility) other);
                 break;
+            case DOOR:
+                onDoorEnter((Door) other);
             default:
                 break;
+        }
+    }
+
+
+
+    private void onDoorEnter(Door door) {
+        if (this.keys.isEmpty()) {
+            System.out.println("Door is locked, no key in possesion");
+            door.setCollidable(true);
+        }
+        else {
+            System.out.println("Key used");
+            door.setCollidable(false);
+            door.destroy();
+            for (Key k: this.keys) {
+                this.keys.remove(k);
+                break;
+            }
+        }
+
+    }
+
+    private void onKeyEnter(Key key) {
+        this.keys.add(key);
+        key.destroy();
+        key.setInvisible();
+    }
+
+    private void onEnemyEnter(Enemy enemy) {
+        if (sword == null) {
+            destroy();
+        } else {
+            sword.setValue(sword.getValue() - 1);
+            detatchEnemy(enemy);
+            enemy.destroy();
+        }
+    }
+
+    private void onSwordEnter(Sword sword) {
+        if (this.sword == null) {
+            this.sword = sword;
+        } else {
+            // Repair sword
+            this.sword.setValue(this.sword.getMaxValue());
+        }
+    }
+
+    private void onInvincibilityEnter(Invincibility invincibility) {
+        if (this.invincibility == null) {
+            this.invincibility = invincibility;
+        } else {
+            // Replenish invincibility
+            this.invincibility.setValue(this.invincibility.getMaxValue());
         }
     }
 }

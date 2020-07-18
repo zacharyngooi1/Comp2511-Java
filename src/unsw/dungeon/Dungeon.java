@@ -23,8 +23,8 @@ public class Dungeon {
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
-        this.entities = new ArrayList<>();
-        this.portals = new ArrayList<>();
+        this.entities = new ArrayList<Entity>();
+        this.portals = new ArrayList<Portal>();
         this.player = null;
     }
 
@@ -38,6 +38,10 @@ public class Dungeon {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public List<Portal> getPortals() {
+        return portals;
     }
 
     /**
@@ -65,13 +69,12 @@ public class Dungeon {
         entities.add(entity);
     }
 
-    public List<Entity> getEntityList() {
-        return this.entities;
+    public void addPortal(Portal portal) {
+        portals.add(portal);
     }
-    public List<Portal> getPortalList() {
-        return this.portals;
-    }
-    public void addPortal(Portal p) {
-        portals.add(p);
+
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
+        portals.remove(entity);
     }
 }

@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
-public class Sword extends Entity {
+public class Sword extends ConsumableEntity {
     public Sword(Dungeon dungeon, int x, int y) {
-        super(x, y, Tag.SWORD, false, dungeon);
+        super(dungeon, x, y, Tag.SWORD, 5);
     }
 }

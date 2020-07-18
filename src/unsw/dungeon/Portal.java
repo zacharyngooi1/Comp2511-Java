@@ -1,8 +1,10 @@
 package unsw.dungeon;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Random; 
 
-public class Portal extends Entity{
-
+public class Portal extends Entity {
     private int id;
 
     public Portal(Dungeon dungeon, int x, int y, int id) {
@@ -10,26 +12,25 @@ public class Portal extends Entity{
         this.id = id;
     }
 
-
     public int getID() {
         return this.id;
     }
 
     @Override
     public void onEntityEnter(Entity other) {
-        MoveableEntity object = (MoveableEntity) other;
-        if (object.getTag() != Tag.PORTAL) {
-            super.onEntityEnter(other);
-            for (Portal p: this.dungeon.getPortalList()) {
-                if (p != null) {
-                    if (p.getID() == this.getID() && this.getX() != p.getX() && this.getY() != p.getY()) {
-                        object.moveTo(p.getX() +1, p.getY());
-                        break;
-                    }
-                }
-            }  
+        super.onEntityEnter(other);
+        MoveableEntity moveableEntity = (MoveableEntity) other;
+
+        List<Portal> connectedPortals = new ArrayList<Portal>();
+
+        for (Portal portal : this.dungeon.getPortals()) {
+            if (portal != null && portal != this && portal.getID() == getID()) {
+                connectedPortals.add(portal);
+            }
         }
+
+        Portal dest = connectedPortals.get((new Random()).nextInt(connectedPortals.size()));
+
+        moveableEntity.moveTo(dest.getX(), dest.getY(), false);
     }
-
-
 }
