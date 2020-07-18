@@ -39,17 +39,19 @@ public class Dungeon {
     }
 
     /**
-     * Tries to find an entity at square (x, y).
-     * @return the entity if it found, or otherwise null.
+     * Find the entities at square (x, y).
+     * @return a list of entities.
      */
-    public Entity getEntityAtSquare(int x, int y) {
+    public List<Entity> getEntitiesAtSquare(int x, int y) {
+        List<Entity> list = new ArrayList<Entity>();
+
         for (Entity entity : entities) {
             if (entity != null && entity.getX() == x && entity.getY() == y) {
-                return entity;
+                list.add(entity);
             }
         }
 
-        return null;
+        return list;
     }
 
     public void setPlayer(Player player) {

@@ -10,8 +10,8 @@ import javafx.beans.property.SimpleIntegerProperty;
  */
 public class Entity {
     public enum Tag {
-        PLAYER, WALL, EXIT, TREASURE, DOOR, KEY, BOULDER, SWITCH, PORTAL,
-        ENEMY, SWORD, POTION
+        PLAYER, WALL, EXIT, TREASURE, DOOR, KEY, BOULDER, FLOORSWITCH, PORTAL,
+        ENEMY, SWORD, INVINCIBILITY
     }
 
     // IntegerProperty is used so that changes to the entities position can be
