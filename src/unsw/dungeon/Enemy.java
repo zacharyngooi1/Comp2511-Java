@@ -62,26 +62,25 @@ public class Enemy extends MoveableEntity {
                     moveTo(getX() + i, getY());
                     return;
                 }
-            }
-            else if (!entity.isCollidable() && entitySize <= 1) {
-                moveTo(getX() + i, getY());
-                return;
+                else if (!entity.isCollidable() && entitySize <= 1) {
+                    moveTo(getX() + i, getY());
+                    return;
+                }
             }
         }
         for (int g = -1; g <= 1; g++) {
             Entity entity = this.dungeon.getsingleEntity(getX(), getY() + g);
             int entitySize = this.dungeon.getEntitiesAtSquare(getX(), getY() + g).size();
             double newDistance = calDis(getX(), getY() + g, x, y);
-            if (entity == null) {
-                if (newDistance > initialDistance) {
-                    moveTo(getX(), getY() + g);
-                    return;
+            if (newDistance > initialDistance) {
+                if (entity == null) {
+                        moveTo(getX(), getY() + g);
+                        return;
+                    
                 }
-            }
-            else if (!entity.isCollidable() && entitySize <= 1) {
-                if (newDistance > initialDistance) {
-                    moveTo(getX(), getY() + g);
-                    return;
+                else if (!entity.isCollidable() && entitySize <= 1) {
+                        moveTo(getX(), getY() + g);
+                        return;
                 }
             }
         }
