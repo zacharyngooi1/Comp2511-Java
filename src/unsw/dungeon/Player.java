@@ -169,9 +169,7 @@ public class Player extends MoveableEntity {
                 break;
             case INVINCIBILITY:
                 onInvincibilityEnter((Invincibility) other);
-                break;
-            case DOOR:
-                onDoorEnter((Door) other);
+                break;                
             default:
                 break;
         }

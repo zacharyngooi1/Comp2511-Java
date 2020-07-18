@@ -15,5 +15,14 @@ public class FloorSwitch extends Entity {
         return this.status;
     }
 
-    
+    // Create a method that detects if a boulder entered its space;
+    @Override
+    public void onEntityEnter(Entity other) {
+        super.onEntityEnter(other);
+        switch(other.getTag()){
+            case BOULDER:
+                this.setStatus(true);
+
+        }        
+    }
 }
