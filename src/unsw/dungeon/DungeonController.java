@@ -17,7 +17,6 @@ import java.io.File;
  *
  */
 public class DungeonController {
-
     @FXML
     private GridPane squares;
 

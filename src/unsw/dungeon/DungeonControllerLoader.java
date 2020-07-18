@@ -20,10 +20,9 @@ import java.io.File;
  *
  */
 public class DungeonControllerLoader extends DungeonLoader {
-
     private List<ImageView> entities;
 
-    //Images
+    // Images
     private Image playerImage;
     private Image wallImage;
 
@@ -88,8 +87,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
-        return new DungeonController(load(), entities);
+        Dungeon dungeon = load();
+        return new DungeonController(dungeon, entities);
     }
-
-
 }
