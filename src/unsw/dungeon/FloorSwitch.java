@@ -22,7 +22,10 @@ public class FloorSwitch extends Entity {
         switch(other.getTag()){
             case BOULDER:
                 this.setStatus(true);
-
+                System.out.println("Switch activated!");
+                break;
+            default:
+                break;
         }        
     }
 }

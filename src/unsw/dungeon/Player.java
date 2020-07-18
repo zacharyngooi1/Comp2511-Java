@@ -85,7 +85,7 @@ public class Player extends MoveableEntity {
         int yMovement = y - getY();
 
         if (doorCheck(x, y) != null) {
-            onDoorEnter(doorCheck(x, y));
+            attemptDoorOpen(doorCheck(x, y));
         }
 
         // If the player is moving normally, i.e. not if they're being
@@ -177,7 +177,7 @@ public class Player extends MoveableEntity {
 
 
 
-    private void onDoorEnter(Door door) {
+    private void attemptDoorOpen(Door door) {
         if (this.keys.isEmpty()) {
             System.out.println("Door is locked, no key in possesion");
         }
