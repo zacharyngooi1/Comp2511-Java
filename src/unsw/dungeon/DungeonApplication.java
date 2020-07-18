@@ -14,7 +14,7 @@ public class DungeonApplication extends Application {
         primaryStage.setTitle("Dungeon");
 
         // Initialises the dungeon controller loader's variables
-        DungeonControllerLoader dungeonControllerLoader = new DungeonControllerLoader("maze.json");
+        DungeonControllerLoader dungeonControllerLoader = new DungeonControllerLoader("boulders.json");
 
         // Actually creates the dungeon
         DungeonController controller = dungeonControllerLoader.loadController();

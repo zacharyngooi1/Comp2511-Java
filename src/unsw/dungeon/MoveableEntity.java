@@ -11,10 +11,11 @@ public class MoveableEntity extends Entity {
 
     /**
      * Try to move this entity to the square at (x, y).
+     * @return whether or not the movement was successful.
      */
-    public void moveTo(int x, int y) {
+    public boolean moveTo(int x, int y) {
         if (x < 0 || y < 0 || x >= dungeon.getWidth() || y >= dungeon.getHeight()) {
-            return;
+            return false;
         }
 
         Entity entityAtSquare = dungeon.getEntityAtSquare(x, y);
@@ -22,10 +23,14 @@ public class MoveableEntity extends Entity {
         if (entityAtSquare == null) {
             setX(x);
             setY(y);
+            return true;
         } else if (!entityAtSquare.isCollidable()) {
             setX(x);
             setY(y);
             entityAtSquare.onEntityEnter(this);
+            return true;
+        } else {
+            return false;
         }
     }
 }
