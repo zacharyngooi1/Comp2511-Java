@@ -96,4 +96,13 @@ public class Entity {
     public void onEntityEnter(Entity other) {
         System.out.println(other.getTag() + " entered " + getTag());
     }
+
+     /**
+     * Called whenever another entity exits the same square as this entity.
+     * @param other the other entity that has just left
+     * entity's square.
+     */
+    public void onEntityExit(Entity other) {
+        System.out.println(other.getTag() + " exited " + getTag());
+    }
 }

@@ -182,20 +182,20 @@ public class Player extends MoveableEntity {
             System.out.println("Door is locked, no key in possesion");
         }
         else {
+            System.out.println("Checking keys in inventory...");
             for (Key k: this.keys) {
                 if (k.getKeyId() != door.getDoorId()) {
-                    System.out.println("Door is locked, no corresponding key in possesion");
-                    break;
+                    continue;
                 }
                 else if (k.getKeyId() == door.getDoorId()) {
-                    System.out.println("Door unlocked!");
+                    System.out.println("Key Found!\nDoor unlocked!");
                     door.destroy();
                     this.keys.remove(k);
-                    break;
+                    return;
                 }
-                else {break;}
             }
         }
+        System.out.println("No correspoonding keys found!");
     }
 
     private void onKeyEnter(Key key) {

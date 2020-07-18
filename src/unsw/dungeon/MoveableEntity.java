@@ -32,6 +32,9 @@ public class MoveableEntity extends Entity {
             }
         }
 
+        int prevX = getX();
+        int prevY = getY();
+
         setX(x);
         setY(y);
         System.out.println(getTag() + " -> (" + x + ", " + y + ")");
@@ -44,6 +47,13 @@ public class MoveableEntity extends Entity {
 
                 entity.onEntityEnter(this);
                 this.onEntityEnter(entity);
+            }
+        }
+
+        for (Entity entity : dungeon.getEntitiesAtSquare(prevX, prevY)) {
+            if (entity != null && entity != this) {
+                entity.onEntityExit(this);
+                this.onEntityExit(entity);
             }
         }
 

@@ -1,7 +1,10 @@
 package unsw.dungeon;
 
+import java.util.List;
+
 public class FloorSwitch extends Entity {
     private boolean status = false;
+
     public FloorSwitch(Dungeon dungeon, int x, int y) {
         super(x, y, Tag.FLOORSWITCH, false, dungeon);
         this.status = false;
@@ -21,11 +24,28 @@ public class FloorSwitch extends Entity {
         super.onEntityEnter(other);
         switch(other.getTag()){
             case BOULDER:
+                System.out.println("Switch Activated!");
                 this.setStatus(true);
-                System.out.println("Switch activated!");
+                System.out.println("switch status: " + getStatus());
                 break;
             default:
                 break;
         }        
     }
+
+    @Override
+    public void onEntityExit(Entity other) {
+        super.onEntityExit(other);
+        switch(other.getTag()) {
+            case BOULDER:
+                System.out.println("Switch Deactivated!");
+                this.setStatus(false);
+                System.out.println("switch status: " + getStatus());
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }
