@@ -15,4 +15,5 @@ public class FloorSwitch extends Entity {
         return this.status;
     }
 
+    
 }

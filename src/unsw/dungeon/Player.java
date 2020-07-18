@@ -182,17 +182,15 @@ public class Player extends MoveableEntity {
     private void onDoorEnter(Door door) {
         if (this.keys.isEmpty()) {
             System.out.println("Door is locked, no key in possesion");
-            door.setCollidable(true);
         }
         else {
             for (Key k: this.keys) {
                 if (k.getKeyId() != door.getDoorId()) {
                     System.out.println("Door is locked, no corresponding key in possesion");
-                    door.setCollidable(true);
                     break;
                 }
                 else if (k.getKeyId() == door.getDoorId()) {
-                    door.setInvisible();
+                    System.out.println("Door unlocked!");
                     door.destroy();
                     this.keys.remove(k);
                     break;
