@@ -13,8 +13,10 @@ public class DungeonApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dungeon");
 
+        // Initialises the dungeon controller loader's variables
         DungeonControllerLoader dungeonControllerLoader = new DungeonControllerLoader("maze.json");
 
+        // Actually creates the dungeon
         DungeonController controller = dungeonControllerLoader.loadController();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));

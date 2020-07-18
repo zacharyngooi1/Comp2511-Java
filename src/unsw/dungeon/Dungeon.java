@@ -13,10 +13,8 @@ import java.util.List;
  * entity can occupy the same square.
  *
  * @author Robert Clifton-Everest
- *
  */
 public class Dungeon {
-
     private int width, height;
     private List<Entity> entities;
     private Player player;

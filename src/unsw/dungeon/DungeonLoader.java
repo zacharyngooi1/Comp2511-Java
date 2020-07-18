@@ -8,13 +8,13 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 /**
- * Loads a dungeon from a .json file.
- *
- * By extending this class, a subclass can hook into entity creation. This is
- * useful for creating UI elements with corresponding entities.
- *
+ * Loads the model (the dungeon, from a .json file) but not the view.
+ * 
+ * It is the responsibility of a subclass to implement the functions that
+ * take the model's entities made by this class, create corresponding view/UI
+ * elements and then tie the two together.
+ * 
  * @author Robert Clifton-Everest
- *
  */
 public abstract class DungeonLoader {
     private JSONObject json;
@@ -42,6 +42,10 @@ public abstract class DungeonLoader {
         return dungeon;
     }
 
+    /**
+     * Parses the JSON to create an entity.
+     * @return
+     */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");

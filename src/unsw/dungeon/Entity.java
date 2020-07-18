@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleIntegerProperty;
  *
  */
 public class Entity {
-
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
     private IntegerProperty x, y;
@@ -32,11 +31,19 @@ public class Entity {
         return y;
     }
 
+    public int getX() {
+        return x().get();
+    }
+
     public int getY() {
         return y().get();
     }
 
-    public int getX() {
-        return x().get();
+    public void setX(int x) {
+        this.x().set(x);
+    }
+
+    public void setY(int y) {
+        this.y().set(y);
     }
 }
