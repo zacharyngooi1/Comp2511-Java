@@ -201,7 +201,6 @@ public class Player extends MoveableEntity {
     private void onKeyEnter(Key key) {
         this.keys.add(key);
         key.destroy();
-        key.setInvisible();
     }
 
     private void onEnemyEnter(Enemy enemy) {
