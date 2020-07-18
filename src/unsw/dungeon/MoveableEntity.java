@@ -23,13 +23,13 @@ public class MoveableEntity extends Entity {
         List<Entity> entitiesAtSquare = dungeon.getEntitiesAtSquare(x, y);
 
         for (Entity entity : entitiesAtSquare) {
-            if (entity != null && entity.isCollidable()) {
+            if (entity != null && entity.isCollidable() && entity != this) {
                 return false;
             }
         }
 
         for (Entity entity : entitiesAtSquare) {
-            if (entity != null) {
+            if (entity != null && entity != this) {
                 entity.onEntityEnter(this);
                 this.onEntityEnter(entity);
             }
@@ -37,6 +37,8 @@ public class MoveableEntity extends Entity {
         
         setX(x);
         setY(y);
+
+        System.out.println(getTag() + " -> (" + x + ", " + y + ")");
 
         return true;
     }

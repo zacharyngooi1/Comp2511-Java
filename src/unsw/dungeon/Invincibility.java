@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
-public class Invincibility extends Entity {
+public class Invincibility extends ConsumableEntity {
     public Invincibility(Dungeon dungeon, int x, int y) {
-        super(x, y, Tag.INVINCIBILITY, false, dungeon);
+        super(dungeon, x, y, Tag.INVINCIBILITY, 30);
     }
 }

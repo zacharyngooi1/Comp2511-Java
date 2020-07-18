@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 /**
  * An entity in the dungeon.
@@ -14,9 +16,8 @@ public class Entity {
         ENEMY, SWORD, INVINCIBILITY
     }
 
-    // IntegerProperty is used so that changes to the entities position can be
-    // externally observed
     private IntegerProperty x, y;
+    private BooleanProperty visible;
     private Tag tag;
     private boolean isCollidable;
     protected Dungeon dungeon;
@@ -31,6 +32,7 @@ public class Entity {
     public Entity(int x, int y, Tag tag, boolean isCollidable, Dungeon dungeon) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
+        this.visible = new SimpleBooleanProperty(true);
         this.tag = tag;
         this.isCollidable = isCollidable;
         this.dungeon = dungeon;
@@ -42,6 +44,10 @@ public class Entity {
 
     public IntegerProperty y() {
         return y;
+    }
+
+    public BooleanProperty visible() {
+        return visible;
     }
 
     public int getX() {
@@ -68,12 +74,22 @@ public class Entity {
         this.y().set(y);
     }
 
+    public void setInvisible() {
+        visible().set(false);
+    }
+
+    public void destroy() {
+        System.out.println("Destroying " + getTag());
+        setInvisible();
+        dungeon.removeEntity(this);
+    }
+
     /**
      * Called whenever another entity enters the same square as this entity.
      * @param other the other entity that has just been imposed on this
      * entity's square.
      */
     public void onEntityEnter(Entity other) {
-        System.out.println(other.getTag() + " entered " + this.getTag());
+        System.out.println(other.getTag() + " -> " + getTag());
     }
 }
