@@ -84,17 +84,18 @@ public class Player extends MoveableEntity {
         int xMovement = x - getX();
         int yMovement = y - getY();
         Door d = doorCheck(x, y);
-        
+
+        // If the player is going to move to a door, check if they can 
+        // open the door.
         if (d != null) {
             attemptDoorOpen(d);
         }
 
         // If the player is moving normally, i.e. not if they're being
-        // teleported, check if they can move a boulder
+        // teleported, check if they can move a boulder.
         if (Math.abs(xMovement) <= 1 && Math.abs(yMovement) <= 1) {
             TryPushBoulder(x, y, xMovement, yMovement);
         }
-
 
         boolean res = super.moveTo(x, y);
 
@@ -124,7 +125,12 @@ public class Player extends MoveableEntity {
         }
     }
 
-    // check for door in players surroundings and returns if present
+    /**
+     * 
+     * @param x the x co-ordinate of the location
+     * @param y the y co-ordinate of the location
+     * @return the Door class if its present at the location, if not, null is returned.
+     */
     private Door doorCheck(int x, int y) {
         Door door = null;
         for (Entity e: dungeon.getEntitiesAtSquare(x, y)) {
@@ -175,8 +181,6 @@ public class Player extends MoveableEntity {
                 break;
         }
     }
-
-
 
     private void attemptDoorOpen(Door door) {
         if (this.keys.isEmpty()) {

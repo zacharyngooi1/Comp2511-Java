@@ -1,7 +1,5 @@
 package unsw.dungeon;
 
-import java.util.List;
-
 public class FloorSwitch extends Entity {
     private boolean status = false;
 
@@ -18,7 +16,6 @@ public class FloorSwitch extends Entity {
         return this.status;
     }
 
-    // Create a method that detects if a boulder entered its space;
     @Override
     public void onEntityEnter(Entity other) {
         super.onEntityEnter(other);
@@ -46,6 +43,4 @@ public class FloorSwitch extends Entity {
                 break;
         }
     }
-
-
 }
