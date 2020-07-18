@@ -54,6 +54,10 @@ public class Dungeon {
         this.treasureGoal ++;
     }
 
+    public void removeFromTreasureGoal() {
+        this.treasureGoal --;
+    }
+
     /**
      * Find the entities at square (x, y).
      * @return a list of entities.
