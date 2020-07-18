@@ -44,34 +44,42 @@ public class Enemy extends MoveableEntity {
         directionToggle = !directionToggle;
     }
 
+    /**
+     * 
+     * @param x the x co-ordinate of the player.
+     * @param y the y co-ordinate of the player.
+     */
     public void moveAwayFromPlayer(int x, int y) {
         double initialDistance = calDis(x, y, getX(), getY());
 
         for (int i = -1; i <= 1; i++) {
             Entity entity = this.dungeon.getsingleEntity(getX() + i, getY());
-            if (entity == null) {
-                if (calDis(getX() + i, getY(), x, y) > initialDistance) {
+            int entitySize = this.dungeon.getEntitiesAtSquare(getX() + i, getY()).size();
+            double newDistance = calDis(getX() + i, getY(), x, y);
+
+            if (newDistance > initialDistance) {
+                if (entity == null) {
                     moveTo(getX() + i, getY());
                     return;
                 }
             }
-            else if (!entity.isCollidable()) {
-                if (calDis(getX() + i, getY(), x, y) > initialDistance) {
-                    moveTo(getX() + i, getY());
-                    return;
-                }
+            else if (!entity.isCollidable() && entitySize <= 1) {
+                moveTo(getX() + i, getY());
+                return;
             }
         }
         for (int g = -1; g <= 1; g++) {
             Entity entity = this.dungeon.getsingleEntity(getX(), getY() + g);
+            int entitySize = this.dungeon.getEntitiesAtSquare(getX(), getY() + g).size();
+            double newDistance = calDis(getX(), getY() + g, x, y);
             if (entity == null) {
-                if (calDis(getX(), getY() + g, x, y) > initialDistance) {
+                if (newDistance > initialDistance) {
                     moveTo(getX(), getY() + g);
                     return;
                 }
             }
-            else if (!entity.isCollidable()) {
-                if (calDis(getX(), getY() + g, x, y) > initialDistance) {
+            else if (!entity.isCollidable() && entitySize <= 1) {
+                if (newDistance > initialDistance) {
                     moveTo(getX(), getY() + g);
                     return;
                 }
@@ -79,6 +87,14 @@ public class Enemy extends MoveableEntity {
         }
     }
 
+    /**
+     * 
+     * @param x1 x co-ordinate of point 1
+     * @param y1 y co-ordinate of point 1
+     * @param x2 x co-ordinate of point 2
+     * @param y2 y co-ordinate of point 2
+     * @return Distance between point 1 and point 2 derived from the Pythagorean Theorem.
+     */
     public double calDis(int x1,int y1,int x2,int y2)
 	{
 	    return (Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1)));
