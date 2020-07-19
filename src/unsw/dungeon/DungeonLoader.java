@@ -41,6 +41,13 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        JSONObject jsongoalconditon = json.getJSONObject("goal-condition");
+        JSONArray jsonSubGoals = jsongoalconditon.getJSONArray("subgoals");
+        for (int i = 0; i < jsonSubGoals.length(); i++) {
+            loadGoal(null, jsonSubGoals.getJSONObject(i), dungeon);
+        }
+
 
         // todo
         // JSONObject goalCondition = json.getJSONObject("goal-condition");
@@ -94,7 +101,7 @@ public abstract class DungeonLoader {
             default:
                 throw new Error("Unhandled goal type");
         }
-            subgoals.add(newGoal);
+            dungeon.setGoal(newGoal);
     }
 
     /**
