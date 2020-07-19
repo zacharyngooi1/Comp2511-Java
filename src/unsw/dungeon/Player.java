@@ -159,12 +159,6 @@ public class Player extends MoveableEntity {
     }
 
     @Override
-    public void removeFromDungeon() {
-        super.removeFromDungeon();
-        System.out.println("Player removed, level should restart");
-    }
-
-    @Override
     public void onEntityEnter(Entity other) {
         super.onEntityEnter(other);
 
