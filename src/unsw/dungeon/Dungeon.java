@@ -16,18 +16,26 @@ import java.util.List;
  */
 public class Dungeon {
     private int width, height;
+    private Goal goal;
+    private Player player;
+    private Exit exit;
     private List<Entity> entities;
     private List<Portal> portals;
     private List<Treasure> treasures;
-    private Player player;
+    private List<Enemy> enemies;
+    private List<FloorSwitch> floorSwitches;
 
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
+        this.goal = null;
+        this.player = null;
+        this.exit = null;
         this.entities = new ArrayList<Entity>();
         this.portals = new ArrayList<Portal>();
         this.treasures = new ArrayList<Treasure>();
-        this.player = null;
+        this.enemies = new ArrayList<Enemy>();
+        this.floorSwitches = new ArrayList<FloorSwitch>();
     }
 
     public int getWidth() {
@@ -42,8 +50,24 @@ public class Dungeon {
         return player;
     }
 
+    public Exit getExit() {
+        return exit;
+    }
+
     public List<Portal> getPortals() {
         return portals;
+    }
+
+    public List<Treasure> getTreasures() {
+        return treasures;
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public List<FloorSwitch> getFloorSwitches() {
+        return floorSwitches;
     }
 
     /**
@@ -62,32 +86,60 @@ public class Dungeon {
         return list;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setGoal(Goal goal) {
+        this.goal = goal;
+    }
+
+    public boolean isGameWon() {
+        return goal.isComplete();
     }
 
     public void addEntity(Entity entity) {
         entities.add(entity);
-    }
 
-    public void addPortal(Portal portal) {
-        portals.add(portal);
-    }
-
-    public void addTreasure(Treasure treasure) {
-        treasures.add(treasure);
+        switch (entity.getTag()) {
+            case PLAYER:
+                this.player = (Player) entity;
+                break;
+            case EXIT:
+                this.exit = (Exit) entity;
+                break;
+            case PORTAL:
+                portals.add((Portal) entity);
+                break;
+            case TREASURE:
+                treasures.add((Treasure) entity);
+                break;
+            case ENEMY:
+                enemies.add((Enemy) entity);
+                break;
+            case FLOORSWITCH:
+                floorSwitches.add((FloorSwitch) entity);
+                break;
+            default:
+                break;
+        }
     }
 
     public void removeEntity(Entity entity) {
         entities.remove(entity);
 
         switch (entity.getTag()) {
+            case PLAYER:
+                System.out.println("Restart level");
+                break;
             case PORTAL:
                 portals.remove(entity);
                 break;
             case TREASURE:
                 treasures.remove(entity);
                 System.out.println(treasures.size() + " treasure(s) remaining");
+                break;
+            case ENEMY:
+                enemies.remove(entity);
+                break;
+            case FLOORSWITCH:
+                floorSwitches.remove(entity);
                 break;
             default:
                 break;

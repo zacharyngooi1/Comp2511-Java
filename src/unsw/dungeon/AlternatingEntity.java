@@ -15,6 +15,10 @@ public class AlternatingEntity extends Entity {
         return status;
     }
 
+    public boolean getStatus() {
+        return status.getValue();
+    }
+
     public void setStatus(boolean status) {
         this.status.set(status);
         System.out.println(getTag() + " status = " + status);

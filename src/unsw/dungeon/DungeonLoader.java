@@ -56,7 +56,6 @@ public abstract class DungeonLoader {
         switch (type) {
             case "player":
                 Player player = new Player(dungeon, x, y);
-                dungeon.setPlayer(player);
                 onLoad(player);
                 entity = player;
                 break;
@@ -78,7 +77,6 @@ public abstract class DungeonLoader {
             case "treasure":
                 Treasure treasure = new Treasure(dungeon, x, y);
                 onLoad(treasure);
-                dungeon.addTreasure(treasure);
                 entity = treasure;
                 break;
             case "exit":
@@ -109,7 +107,6 @@ public abstract class DungeonLoader {
             case "portal":
                 Portal portal = new Portal(dungeon, x, y, json.getInt("id"));
                 onLoad(portal);
-                dungeon.addPortal(portal);
                 entity = portal;
                 break;
             case "sword":
