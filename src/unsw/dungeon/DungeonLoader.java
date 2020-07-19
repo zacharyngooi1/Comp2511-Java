@@ -42,17 +42,9 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
-        JSONObject jsongoalconditon = json.getJSONObject("goal-condition");
-        JSONArray jsonSubGoals = jsongoalconditon.getJSONArray("subgoals");
-        for (int i = 0; i < jsonSubGoals.length(); i++) {
-            loadGoal(null, jsonSubGoals.getJSONObject(i), dungeon);
-        }
+        Goal endGoal = loadGoal(json.getJSONObject("goal-condition"), dungeon);
+        dungeon.setGoal(endGoal);
 
-
-        // todo
-        // JSONObject goalCondition = json.getJSONObject("goal-condition");
-        // the end goal is to call the below function with a goal that has all the goals
-        // dungeon.setGoal(goal);
 
         return dungeon;
     }
@@ -63,11 +55,10 @@ public abstract class DungeonLoader {
      * @param json the json of the goal.
      * @param dungeon the dungeon entity needed for constructing goals.
      */
-    private void loadGoal(Goal parentGoal, JSONObject json, Dungeon dungeon) {
+    private Goal loadGoal(JSONObject json, Dungeon dungeon) {
         // todo etc etc etc
         String goal = json.getString("goal");
         Goal newGoal;
-        List<Goal> subgoals = new ArrayList<Goal>();
 
         switch (goal) {
             case "AND":
@@ -80,7 +71,7 @@ public abstract class DungeonLoader {
                 // properly append subgoals etc
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
                 for (int i = 0; i < jsonSubgoals.length(); i++) {
-                    loadGoal(newGoal, jsonSubgoals.getJSONObject(i), dungeon);
+                    loadGoal(jsonSubgoals.getJSONObject(i), dungeon);
                 }
                 break;
             case "OR":
@@ -101,7 +92,7 @@ public abstract class DungeonLoader {
             default:
                 throw new Error("Unhandled goal type");
         }
-            dungeon.setGoal(newGoal);
+        return newGoal;
     }
 
     /**
