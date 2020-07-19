@@ -87,7 +87,6 @@ public abstract class DungeonLoader {
         }
         return newGoal;
     }
-
     /**
      * Parse an entity's JSON into an entity.
      */
