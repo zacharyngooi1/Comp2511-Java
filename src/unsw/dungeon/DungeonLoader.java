@@ -59,21 +59,14 @@ public abstract class DungeonLoader {
         // todo etc etc etc
         String goal = json.getString("goal");
         Goal newGoal;
-
         switch (goal) {
             case "AND":
-                newGoal = new GoalAnd();
-
-                // todo; someth ing like this, similarly for or etc
-                // will be recursive
-                // consider abstracting GoalAnd and GoalOr into another class
-                // and having that as the parentGoal argument so you can
-                // properly append subgoals etc
+                GoalAnd goalAnd = new GoalAnd();
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
                 for (int i = 0; i < jsonSubgoals.length(); i++) {
-                    loadGoal(jsonSubgoals.getJSONObject(i), dungeon);
+                    goalAnd.addGoal(loadGoal(jsonSubgoals.getJSONObject(i), dungeon));
                 }
-                break;
+                return goalAnd;
             case "OR":
                 newGoal = new GoalOr();
                 break;
