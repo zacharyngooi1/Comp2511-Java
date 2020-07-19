@@ -82,7 +82,7 @@ public class Entity {
         visible().set(false);
     }
 
-    public void destroy() {
+    public void removeFromDungeon() {
         System.out.println("Destroying " + getTag());
         setInvisible();
         dungeon.removeEntity(this);
@@ -99,8 +99,7 @@ public class Entity {
 
      /**
      * Called whenever another entity exits the same square as this entity.
-     * @param other the other entity that has just left
-     * entity's square.
+     * @param other the other entity that has just left this entity's square.
      */
     public void onEntityExit(Entity other) {
         System.out.println(other.getTag() + " exited " + getTag());

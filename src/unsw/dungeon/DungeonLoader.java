@@ -9,11 +9,11 @@ import org.json.JSONTokener;
 
 /**
  * Loads the model (the dungeon, from a .json file) but not the view.
- * 
+ *
  * It is the responsibility of a subclass to implement the functions that
  * take the model's entities made by this class, create corresponding view/UI
  * elements and then tie the two together.
- * 
+ *
  * @author Robert Clifton-Everest
  */
 public abstract class DungeonLoader {
@@ -77,8 +77,8 @@ public abstract class DungeonLoader {
                 break;
             case "treasure":
                 Treasure treasure = new Treasure(dungeon, x, y);
-                dungeon.addToTreasureGoal();
                 onLoad(treasure);
+                dungeon.addTreasure(treasure);
                 entity = treasure;
                 break;
             case "exit":
@@ -134,7 +134,7 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Treasure treasure);
 
     public abstract void onLoad(Exit exit);
-    
+
     public abstract void onLoad(Key key);
 
     public abstract void onLoad(FloorSwitch floorSwitch);
@@ -142,7 +142,7 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Invincibility floorSwitch);
 
     public abstract void onLoad(Door door);
-    
+
     public abstract void onLoad(Portal portal);
 
     public abstract void onLoad(Sword sword);

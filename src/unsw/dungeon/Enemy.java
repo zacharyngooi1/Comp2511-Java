@@ -9,11 +9,19 @@ public class Enemy extends MoveableEntity {
         dungeon.getPlayer().attachEnemy(this);
     }
 
+    public void playerMoved(int x, int y, boolean isInvincible) {
+        if (isInvincible) {
+            moveAwayFromPlayer(x, y);
+        } else {
+            moveTowardsPlayer(x, y);
+        }
+    }
+
     /**
      * @param x the x co-ordinate of the player.
      * @param y the y co-ordinate of the player.
      */
-    public void moveTowardsPlayer(int x, int y) {
+    private void moveTowardsPlayer(int x, int y) {
         int xMovement = 0;
         int yMovement = 0;
 
@@ -45,57 +53,41 @@ public class Enemy extends MoveableEntity {
     }
 
     /**
-     * 
      * @param x the x co-ordinate of the player.
      * @param y the y co-ordinate of the player.
      */
-    public void moveAwayFromPlayer(int x, int y) {
+    private void moveAwayFromPlayer(int x, int y) {
         double initialDistance = calDis(x, y, getX(), getY());
 
-        for (int i = -1; i <= 1; i++) {
-            Entity entity = this.dungeon.getsingleEntity(getX() + i, getY());
-            int entitySize = this.dungeon.getEntitiesAtSquare(getX() + i, getY()).size();
-            double newDistance = calDis(getX() + i, getY(), x, y);
-
+        for (int xMovement = -1; xMovement <= 1; xMovement++) {
+            double newDistance = calDis(getX() + xMovement, getY(), x, y);
             if (newDistance > initialDistance) {
-                if (entity == null) {
-                    moveTo(getX() + i, getY());
-                    return;
-                }
-                else if (!entity.isCollidable() && entitySize <= 1) {
-                    moveTo(getX() + i, getY());
+                if (moveTo(getX() + xMovement, getY())) {
                     return;
                 }
             }
         }
-        for (int g = -1; g <= 1; g++) {
-            Entity entity = this.dungeon.getsingleEntity(getX(), getY() + g);
-            int entitySize = this.dungeon.getEntitiesAtSquare(getX(), getY() + g).size();
-            double newDistance = calDis(getX(), getY() + g, x, y);
+
+        for (int yMovement = -1; yMovement <= 1; yMovement++) {
+            double newDistance = calDis(getX(), getY() + yMovement, x, y);
             if (newDistance > initialDistance) {
-                if (entity == null) {
-                        moveTo(getX(), getY() + g);
-                        return;
-                    
-                }
-                else if (!entity.isCollidable() && entitySize <= 1) {
-                        moveTo(getX(), getY() + g);
-                        return;
+                if (moveTo(getX(), getY() + yMovement)) {
+                    return;
                 }
             }
         }
     }
 
     /**
-     * 
      * @param x1 x co-ordinate of point 1
      * @param y1 y co-ordinate of point 1
      * @param x2 x co-ordinate of point 2
      * @param y2 y co-ordinate of point 2
-     * @return Distance between point 1 and point 2 derived from the Pythagorean Theorem.
+     * @return the distance between point 1 and point 2 derived from the
+     * Pythagorean Theorem.
      */
     public double calDis(int x1,int y1,int x2,int y2)
 	{
-	    return (Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1)));
-	}
+	    return Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+    }
 }

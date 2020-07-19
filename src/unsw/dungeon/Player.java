@@ -81,18 +81,13 @@ public class Player extends MoveableEntity {
     public boolean moveTo(int x, int y) {
         int xMovement = x - getX();
         int yMovement = y - getY();
-        Door d = doorCheck(x, y);
 
-        // If the player is going to move to a door, check if they can 
-        // open the door.
-        if (d != null) {
-            attemptDoorOpen(d);
-        }
+        checkDoor(x, y);
 
         // If the player is moving normally, i.e. not if they're being
         // teleported, check if they can move a boulder.
         if (Math.abs(xMovement) <= 1 && Math.abs(yMovement) <= 1) {
-            TryPushBoulder(x, y, xMovement, yMovement);
+            checkBoulder(x, y, xMovement, yMovement);
         }
 
         boolean res = super.moveTo(x, y);
@@ -109,12 +104,40 @@ public class Player extends MoveableEntity {
     }
 
     /**
-     * @param x the x co-ordinate of the boulder.
-     * @param y the y co-ordinate of the boulder.
+     * If the player is going to move to a door, check if they can
+     * open the door.
+     * @param x the x co-ordinate to check for a door.
+     * @param y the y co-ordinate to check for a door.
+     */
+    private void checkDoor(int x, int y) {
+        for (Entity entity : dungeon.getEntitiesAtSquare(x, y)) {
+            if (entity != null && entity.getTag() == Tag.DOOR) {
+                attemptDoorOpen((Door) entity);
+            }
+        }
+    }
+
+    private void attemptDoorOpen(Door door) {
+        if (keys.isEmpty()) {
+            System.out.println("No keys");
+        } else {
+            System.out.println("Checking keys");
+
+            for (int i = 0; i < keys.size(); i++) {
+                if (door.tryUnlock(keys.get(i))) {
+                    keys.remove(keys.get(i));
+                }
+            }
+        }
+    }
+
+    /**
+     * @param x the x co-ordinate to check for a boulder.
+     * @param y the y co-ordinate to check for a boulder.
      * @param xPush how much to push the boulder by in the x direction.
      * @param yPush how much to push the boulder by in the y direction.
      */
-    private void TryPushBoulder(int x, int y, int xPush, int yPush) {
+    private void checkBoulder(int x, int y, int xPush, int yPush) {
         for (Entity entity : dungeon.getEntitiesAtSquare(x, y)) {
             if (entity != null && entity.getTag() == Tag.BOULDER) {
                 Boulder boulder = (Boulder) entity;
@@ -124,39 +147,17 @@ public class Player extends MoveableEntity {
     }
 
     /**
-     * 
-     * @param x the x co-ordinate of the location
-     * @param y the y co-ordinate of the location
-     * @return the Door class if its present at the location, if not, null is returned.
-     */
-    private Door doorCheck(int x, int y) {
-        Door door = null;
-        for (Entity e: dungeon.getEntitiesAtSquare(x, y)) {
-            if (e != null && e.getTag() == Tag.DOOR) {
-                door = (Door) e;
-                return door;
-            }
-        }
-        return door;
-    }
-
-    /**
      * Notifies all enemy listeners that the player has moved.
      */
     private void notifyEnemies() {
         for (Enemy enemy : enemies) {
-            if (this.hasConsumable(Tag.INVINCIBILITY)) {
-                enemy.moveAwayFromPlayer(getX(), getY());
-            }
-            else{
-                enemy.moveTowardsPlayer(getX(), getY());
-            }
+            enemy.playerMoved(getX(), getY(), hasConsumable(Tag.INVINCIBILITY));
         }
     }
 
     @Override
-    public void destroy() {
-        super.destroy();
+    public void removeFromDungeon() {
+        super.removeFromDungeon();
         System.out.println("Player destroyed, level should restart");
         // then restart level
     }
@@ -180,51 +181,31 @@ public class Player extends MoveableEntity {
                 break;
             case INVINCIBILITY:
                 onInvincibilityEnter((Invincibility) other);
-                break;                
+                break;
             default:
                 break;
         }
     }
 
-    private void attemptDoorOpen(Door door) {
-        if (this.keys.isEmpty()) {
-            System.out.println("Door is locked, no key in possesion");
-            return;
-        }
-        else {
-            System.out.println("Checking keys in inventory...");
-            for (Key k: this.keys) {
-                if (k.getKeyId() != door.getDoorId()) {
-                    continue;
-                }
-                else if (k.getKeyId() == door.getDoorId()) {
-                    System.out.println("Key Found!\nDoor unlocked!");
-                    door.destroy();
-                    this.keys.remove(k);
-                    return;
-                }
-            }
-        }
-        System.out.println("No corresponding keys found!");
+    private void onTreasureEnter(Treasure treasure) {
+        treasure.removeFromDungeon();
     }
 
     private void onKeyEnter(Key key) {
-        this.keys.add(key);
-        key.destroy();
+        keys.add(key);
+        key.removeFromDungeon();
     }
 
     private void onEnemyEnter(Enemy enemy) {
         if (sword != null) {
             sword.setValue(sword.getValue() - 1);
             detatchEnemy(enemy);
-            enemy.destroy();
-        } 
-        else if (invincibility != null) {
+            enemy.removeFromDungeon();
+        } else if (invincibility != null) {
             detatchEnemy(enemy);
-            enemy.destroy();
-        }
-        else {
-            destroy();
+            enemy.removeFromDungeon();
+        } else {
+            removeFromDungeon();
         }
     }
 
@@ -232,7 +213,6 @@ public class Player extends MoveableEntity {
         if (this.sword == null) {
             this.sword = sword;
         } else {
-            // Repair sword
             this.sword.setValue(this.sword.getMaxValue());
         }
     }
@@ -241,26 +221,7 @@ public class Player extends MoveableEntity {
         if (this.invincibility == null) {
             this.invincibility = invincibility;
         } else {
-            // Replenish invincibility
             this.invincibility.setValue(this.invincibility.getMaxValue());
         }
-    }
-
-    private void onTreasureEnter(Treasure treasure) {
-        this.dungeon.removeFromTreasureGoal();
-        int goal = this.dungeon.getTreasureGoal();
-
-        System.out.println("Treasure found!");
-    
-        if (goal == 0) {
-            System.out.println("All treasures found");
-        }
-        else if (goal > 1) {
-            System.out.println(goal + " treasures remaining");
-        }
-        else {
-            System.out.println(goal + " treasure remaining");
-        }
-        treasure.destroy();
     }
 }

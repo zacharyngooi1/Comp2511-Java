@@ -18,16 +18,16 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private List<Portal> portals;
+    private List<Treasure> treasures;
     private Player player;
-    private int treasureGoal;
 
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<Entity>();
         this.portals = new ArrayList<Portal>();
+        this.treasures = new ArrayList<Treasure>();
         this.player = null;
-        this.treasureGoal = 0;
     }
 
     public int getWidth() {
@@ -46,18 +46,6 @@ public class Dungeon {
         return portals;
     }
 
-    public int getTreasureGoal() {
-        return this.treasureGoal;
-    }
-
-    public void addToTreasureGoal() {
-        this.treasureGoal ++;
-    }
-
-    public void removeFromTreasureGoal() {
-        this.treasureGoal --;
-    }
-
     /**
      * Find the entities at square (x, y).
      * @return a list of entities.
@@ -74,15 +62,6 @@ public class Dungeon {
         return list;
     }
 
-    public Entity getsingleEntity(int x, int y) {
-        for (Entity entity : entities) {
-            if (entity != null && entity.getX() == x && entity.getY() == y) {
-                return entity;
-            }
-        }
-        return null;
-    }
-
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -95,8 +74,23 @@ public class Dungeon {
         portals.add(portal);
     }
 
+    public void addTreasure(Treasure treasure) {
+        treasures.add(treasure);
+    }
+
     public void removeEntity(Entity entity) {
         entities.remove(entity);
-        portals.remove(entity);
+
+        switch (entity.getTag()) {
+            case PORTAL:
+                portals.remove(entity);
+                break;
+            case TREASURE:
+                treasures.remove(entity);
+                System.out.println(treasures.size() + " treasure(s) remaining");
+                break;
+            default:
+                break;
+        }
     }
 }

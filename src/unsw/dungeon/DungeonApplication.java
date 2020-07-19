@@ -15,7 +15,7 @@ public class DungeonApplication extends Application {
 
         // Initialises the dungeon controller loader's variables
         DungeonControllerLoader dungeonControllerLoader = new DungeonControllerLoader("all.json");
-        
+
         // Actually creates the dungeon
         DungeonController controller = dungeonControllerLoader.loadController();
 

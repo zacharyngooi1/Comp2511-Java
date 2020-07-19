@@ -1,43 +1,42 @@
 package unsw.dungeon;
 
 public class FloorSwitch extends Entity {
-    private boolean status = false;
+    private boolean status;
 
     public FloorSwitch(Dungeon dungeon, int x, int y) {
         super(x, y, Tag.FLOORSWITCH, false, dungeon);
         this.status = false;
     }
 
-    public void setStatus(boolean change) {
-        this.status = change;
+    public boolean getStatus() {
+        return status;
     }
 
-    public boolean getStatus() {
-        return this.status;
+    public void setStatus(boolean status) {
+        System.out.println("Switch status = " + status);
+        this.status = status;
     }
 
     @Override
     public void onEntityEnter(Entity other) {
         super.onEntityEnter(other);
-        switch(other.getTag()){
+
+        switch (other.getTag()) {
             case BOULDER:
-                System.out.println("Switch Activated!");
-                this.setStatus(true);
-                System.out.println("switch status: " + getStatus());
+                setStatus(true);
                 break;
             default:
                 break;
-        }        
+        }
     }
 
     @Override
     public void onEntityExit(Entity other) {
         super.onEntityExit(other);
-        switch(other.getTag()) {
+
+        switch (other.getTag()) {
             case BOULDER:
-                System.out.println("Switch Deactivated!");
-                this.setStatus(false);
-                System.out.println("switch status: " + getStatus());
+                setStatus(false);
                 break;
             default:
                 break;
