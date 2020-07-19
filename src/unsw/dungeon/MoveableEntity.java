@@ -7,8 +7,8 @@ import java.util.List;
  *
  */
 public class MoveableEntity extends Entity {
-    public MoveableEntity(int x, int y, Tag tag, boolean isCollidable, Dungeon dungeon) {
-        super(x, y, tag, isCollidable, dungeon);
+    public MoveableEntity(int x, int y, Tag tag, CollisionLayer collisionLayer, Dungeon dungeon) {
+        super(x, y, tag, collisionLayer, dungeon);
     }
 
     /**
@@ -27,7 +27,7 @@ public class MoveableEntity extends Entity {
         List<Entity> entitiesAtSquare = dungeon.getEntitiesAtSquare(x, y);
 
         for (Entity entity : entitiesAtSquare) {
-            if (entity != null && entity.isCollidable() && entity != this) {
+            if (entity != null && collidesWith(entity) && entity != this) {
                 return false;
             }
         }

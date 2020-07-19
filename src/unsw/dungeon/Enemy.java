@@ -4,7 +4,7 @@ public class Enemy extends MoveableEntity {
     private boolean directionToggle;
 
     public Enemy(Dungeon dungeon, int x, int y) {
-        super(x, y, Tag.ENEMY, false, dungeon);
+        super(x, y, Tag.ENEMY, new CollisionLayer(CollisionLayer.ENEMY), dungeon);
         directionToggle = false;
         dungeon.getPlayer().attachEnemy(this);
     }
@@ -86,8 +86,7 @@ public class Enemy extends MoveableEntity {
      * @return the distance between point 1 and point 2 derived from the
      * Pythagorean Theorem.
      */
-    public double calDis(int x1,int y1,int x2,int y2)
-	{
+    public double calDis(int x1, int y1, int x2, int y2) {
 	    return Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
     }
 }

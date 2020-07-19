@@ -4,7 +4,7 @@ public class FloorSwitch extends Entity {
     private boolean status;
 
     public FloorSwitch(Dungeon dungeon, int x, int y) {
-        super(x, y, Tag.FLOORSWITCH, false, dungeon);
+        super(x, y, Tag.FLOORSWITCH, new CollisionLayer(0), dungeon);
         this.status = false;
     }
 
@@ -13,8 +13,8 @@ public class FloorSwitch extends Entity {
     }
 
     public void setStatus(boolean status) {
-        System.out.println("Switch status = " + status);
         this.status = status;
+        System.out.println("Switch status = " + status + ", sprite should reflect this");
     }
 
     @Override
