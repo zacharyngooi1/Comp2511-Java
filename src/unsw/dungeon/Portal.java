@@ -8,7 +8,7 @@ public class Portal extends Entity {
     private int id;
 
     public Portal(Dungeon dungeon, int x, int y, int id) {
-        super(x, y, Tag.PORTAL, false, dungeon);
+        super(x, y, Tag.PORTAL, new CollisionLayer(0), dungeon);
         this.id = id;
     }
 

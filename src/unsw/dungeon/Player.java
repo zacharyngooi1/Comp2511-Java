@@ -21,7 +21,7 @@ public class Player extends MoveableEntity {
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(x, y, Tag.PLAYER, true, dungeon);
+        super(x, y, Tag.PLAYER, new CollisionLayer(CollisionLayer.PLAYER), dungeon);
         enemies = new ArrayList<Enemy>();
         keys = new ArrayList<Key>();
     }
@@ -123,6 +123,7 @@ public class Player extends MoveableEntity {
         } else {
             System.out.println("Checking keys");
 
+            // Must iterate like this because keys clearly may be modified
             for (int i = 0; i < keys.size(); i++) {
                 if (door.tryUnlock(keys.get(i))) {
                     keys.remove(keys.get(i));
@@ -150,16 +151,11 @@ public class Player extends MoveableEntity {
      * Notifies all enemy listeners that the player has moved.
      */
     private void notifyEnemies() {
-        for (Enemy enemy : enemies) {
-            enemy.playerMoved(getX(), getY(), hasConsumable(Tag.INVINCIBILITY));
+        // Must iterate like this because enemies might be modified if the
+        // enemy enters the player and is killed
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).playerMoved(getX(), getY(), hasConsumable(Tag.INVINCIBILITY));
         }
-    }
-
-    @Override
-    public void removeFromDungeon() {
-        super.removeFromDungeon();
-        System.out.println("Player destroyed, level should restart");
-        // then restart level
     }
 
     @Override

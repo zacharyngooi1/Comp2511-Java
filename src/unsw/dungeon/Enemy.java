@@ -1,11 +1,8 @@
 package unsw.dungeon;
 
 public class Enemy extends MoveableEntity {
-    private boolean directionToggle;
-
     public Enemy(Dungeon dungeon, int x, int y) {
-        super(x, y, Tag.ENEMY, false, dungeon);
-        directionToggle = false;
+        super(x, y, Tag.ENEMY, new CollisionLayer(CollisionLayer.ENEMY), dungeon);
         dungeon.getPlayer().attachEnemy(this);
     }
 
@@ -24,19 +21,18 @@ public class Enemy extends MoveableEntity {
     private void moveTowardsPlayer(int x, int y) {
         double initialDistance = calDis(x, y, getX(), getY());
 
-        for (int xMovement = -1; xMovement <= 1; xMovement++) {
-            double newDistance = calDis(getX() + xMovement, getY(), x, y);
-            if (newDistance < initialDistance) {
-                if (moveTo(getX() + xMovement, getY())) {
+        // If moving left/up/right/down (in that order) would decrease
+        // the distance from the enemy and the player, try moving in that
+        // direction.
+        for (int offset : new int[]{-1, 1}) {
+            if (calDis(getX() + offset, getY(), x, y) < initialDistance) {
+                if (moveTo(getX() + offset, getY())) {
                     return;
                 }
             }
-        }
-
-        for (int yMovement = -1; yMovement <= 1; yMovement++) {
-            double newDistance = calDis(getX(), getY() + yMovement, x, y);
-            if (newDistance < initialDistance) {
-                if (moveTo(getX(), getY() + yMovement)) {
+;
+            if (calDis(getX(), getY() + offset, x, y) < initialDistance) {
+                if (moveTo(getX(), getY() + offset)) {
                     return;
                 }
             }
@@ -50,19 +46,15 @@ public class Enemy extends MoveableEntity {
     private void moveAwayFromPlayer(int x, int y) {
         double initialDistance = calDis(x, y, getX(), getY());
 
-        for (int xMovement = -1; xMovement <= 1; xMovement++) {
-            double newDistance = calDis(getX() + xMovement, getY(), x, y);
-            if (newDistance > initialDistance) {
-                if (moveTo(getX() + xMovement, getY())) {
+        for (int offset : new int[]{-1, 1}) {
+            if (calDis(getX() + offset, getY(), x, y) > initialDistance) {
+                if (moveTo(getX() + offset, getY())) {
                     return;
                 }
             }
-        }
-
-        for (int yMovement = -1; yMovement <= 1; yMovement++) {
-            double newDistance = calDis(getX(), getY() + yMovement, x, y);
-            if (newDistance > initialDistance) {
-                if (moveTo(getX(), getY() + yMovement)) {
+;
+            if (calDis(getX(), getY() + offset, x, y) > initialDistance) {
+                if (moveTo(getX(), getY() + offset)) {
                     return;
                 }
             }
@@ -77,8 +69,7 @@ public class Enemy extends MoveableEntity {
      * @return the distance between point 1 and point 2 derived from the
      * Pythagorean Theorem.
      */
-    public double calDis(int x1,int y1,int x2,int y2)
-	{
+    private double calDis(int x1, int y1, int x2, int y2) {
 	    return Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
     }
 }
