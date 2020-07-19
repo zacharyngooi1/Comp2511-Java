@@ -17,9 +17,9 @@ import java.io.File;
  * Loads the model via DungeonLoader. Implements the functions on the view
  * side of things, which involves taking the model's entities, creating
  * corresponding view/UI elements and tying the two together.
- * 
+ *
  * This class also creates the controller.
- * 
+ *
  * @author Robert Clifton-Everest
  */
 public class DungeonControllerLoader extends DungeonLoader {
