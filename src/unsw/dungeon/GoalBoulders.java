@@ -1,19 +1,23 @@
 package unsw.dungeon;
 
-public class GoalSwitches implements Goal {
+public class GoalBoulders implements Goal {
     private Dungeon dungeon;
 
-    GoalSwitches(Dungeon dungeon) {
+    GoalBoulders(Dungeon dungeon) {
         this.dungeon = dungeon;
     }
 
     public boolean isComplete() {
+        int switchesLeft = 0;
+
         for (FloorSwitch floorSwitch : dungeon.getFloorSwitches()) {
             if (!floorSwitch.getStatus()) {
-                return false;
+                switchesLeft++;
             }
         }
 
-        return true;
+        System.out.println(switchesLeft + " switches left");
+
+        return switchesLeft == 0;
     }
 }

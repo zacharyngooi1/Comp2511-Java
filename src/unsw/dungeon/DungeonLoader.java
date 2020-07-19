@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Loads the model (the dungeon, from a .json file) but not the view.
  *
@@ -39,12 +42,62 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
 
+        // todo
+        // JSONObject goalCondition = json.getJSONObject("goal-condition");
+        // the end goal is to call the below function with a goal that has all the goals
+        // dungeon.setGoal(goal);
+
         return dungeon;
     }
 
     /**
-     * Parses the JSON to create an entity.
-     * @return
+     * Parse a goal's JSON into a goal.
+     * @param parentGoal the goal to append the new goal to. Can be null.
+     * @param json the json of the goal.
+     * @param dungeon the dungeon entity needed for constructing goals.
+     */
+    private void loadGoal(Goal parentGoal, JSONObject json, Dungeon dungeon) {
+        // todo etc etc etc
+        String goal = goalCondition.getString("goal");
+        Goal newGoal;
+        List<Goal> subgoals = new ArrayList<Goal>();
+
+        switch (goal) {
+            case "AND":
+                newGoal = new GoalAnd();
+
+                // todo; something like this, similarly for or etc
+                // will be recursive
+                // consider abstracting GoalAnd and GoalOr into another class
+                // and having that as the parentGoal argument so you can
+                // properly append subgoals etc
+                JSONArray jsonSubgoals = json.getJSONArray("subgoals");
+                for (int i = 0; i < jsonSubgoals.length(); i++) {
+                    loadGoal(newGoal, jsonSubgoals.getJSONObject(i));
+                }
+                break;
+            case "OR":
+                newGoal = new GoalOr();
+                break;
+            case "exit":
+                newGoal = new GoalExit(dungeon);
+                break;
+            case "enemies":
+                newGoal = new GoalEnemies(dungeon);
+                break;
+            case "boulders":
+                newGoal = new GoalBoulders(dungeon);
+                break;
+            case "treasure":
+                newGoal = new GoalTreasure(dungeon);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Parse an entity's JSON into an entity.
      */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");

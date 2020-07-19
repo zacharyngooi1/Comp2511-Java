@@ -8,6 +8,7 @@ public class GoalTreasure implements Goal {
     }
 
     public boolean isComplete() {
+        System.out.println(dungeon.getTreasures().size() + " treasure(s) remaining");
         return dungeon.getTreasures().size() == 0;
     }
 }

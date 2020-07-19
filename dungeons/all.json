@@ -682,7 +682,7 @@
           "goal": "enemies"
         },
         {
-          "goal": "treasure"
+          "goal": "boulders"
         },
         {
           "goal": "exit"
