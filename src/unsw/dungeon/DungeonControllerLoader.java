@@ -23,7 +23,11 @@ import java.io.File;
  * @author Robert Clifton-Everest
  */
 public class DungeonControllerLoader extends DungeonLoader {
-    private List<ImageView> entities;
+    public enum Layer {
+        SWITCHES, OTHERS, PICKUPS, ENEMIES, PLAYER, DOORS
+    }
+
+    private List<List<ImageView>> spritesByLayer;
 
     private Image playerImage;
     private Image wallImage;
@@ -39,10 +43,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image swordImage;
 
 
-    public DungeonControllerLoader(String filename)
-            throws FileNotFoundException {
+    public DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);
-        entities = new ArrayList<>();
+
+        spritesByLayer = new ArrayList<List<ImageView>>();
+        for (int i = 0; i < Layer.values().length; i++) {
+            spritesByLayer.add(new ArrayList<ImageView>());
+        }
+
         playerImage = new Image((new File("images/human_new.png")).toURI().toString());
         wallImage = new Image((new File("images/brick_brown_0.png")).toURI().toString());
         boulderImage = new Image((new File("images/boulder.png")).toURI().toString());
@@ -61,78 +69,89 @@ public class DungeonControllerLoader extends DungeonLoader {
     public void onLoad(Entity player) {
         ImageView view = new ImageView(playerImage);
         connectEntity(player, view);
+        spritesByLayer.get(Layer.PLAYER.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Wall wall) {
         ImageView view = new ImageView(wallImage);
         connectEntity(wall, view);
+        spritesByLayer.get(Layer.OTHERS.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Boulder boulder) {
         ImageView view = new ImageView(boulderImage);
         connectEntity(boulder, view);
+        spritesByLayer.get(Layer.OTHERS.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Enemy enemy) {
         ImageView view = new ImageView(enemyImage);
         connectEntity(enemy, view);
+        spritesByLayer.get(Layer.ENEMIES.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Treasure treasure) {
         ImageView view = new ImageView(treasureImage);
         connectEntity(treasure, view);
+        spritesByLayer.get(Layer.PICKUPS.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Exit exit) {
         ImageView view = new ImageView(exitImage);
         connectEntity(exit, view);
+        spritesByLayer.get(Layer.OTHERS.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Key key) {
         ImageView view = new ImageView(keyImage);
         connectEntity(key, view);
+        spritesByLayer.get(Layer.PICKUPS.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(FloorSwitch floorSwitch) {
         ImageView view = new ImageView(floorSwitchImage);
         connectEntity(floorSwitch, view);
+        spritesByLayer.get(Layer.SWITCHES.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Invincibility invincibility) {
         ImageView view = new ImageView(invincibilityImage);
         connectEntity(invincibility, view);
+        spritesByLayer.get(Layer.PICKUPS.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Door door) {
         ImageView view = new ImageView(doorImage);
         connectEntity(door, view);
+        spritesByLayer.get(Layer.DOORS.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Portal portal) {
         ImageView view = new ImageView(portalImage);
         connectEntity(portal, view);
+        spritesByLayer.get(Layer.OTHERS.ordinal()).add(view);
     }
 
     @Override
     public void onLoad(Sword sword) {
         ImageView view = new ImageView(swordImage);
         connectEntity(sword, view);
+        spritesByLayer.get(Layer.PICKUPS.ordinal()).add(view);
     }
 
     private void connectEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         trackVisibility(entity, view);
-        entities.add(view);
     }
 
     /**
@@ -147,12 +166,12 @@ public class DungeonControllerLoader extends DungeonLoader {
      */
     private void trackPosition(Entity entity, Node node) {
         // Set the entity to the grid square corresponding to its starting
-        // x/y values
+        // x/y values.
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
 
         // Ensure that whenever the entity's x/y values are changed, the
-        // entity's grid square changes to match
+        // entity's grid square changes to match.
         entity.x().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
@@ -180,13 +199,20 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     /**
      * Create a controller that can be attached to the DungeonView with all the
-     * loaded entities.
+     * loaded sprites.
      * @return a dungeon controller.
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
         Dungeon dungeon = load();
 
-        return new DungeonController(dungeon, entities);
+        List<ImageView> spritesByLayerFlattened = new ArrayList<ImageView>();
+        for (List<ImageView> layer : spritesByLayer) {
+            for (ImageView view : layer) {
+                spritesByLayerFlattened.add(view);
+            }
+        }
+
+        return new DungeonController(dungeon, spritesByLayerFlattened);
     }
 }

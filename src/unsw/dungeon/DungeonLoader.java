@@ -120,6 +120,7 @@ public abstract class DungeonLoader {
             default:
                 break;
         }
+
         dungeon.addEntity(entity);
     }
 
