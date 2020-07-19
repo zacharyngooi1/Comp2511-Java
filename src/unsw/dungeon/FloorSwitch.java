@@ -12,6 +12,7 @@ public class FloorSwitch extends AlternatingEntity {
         switch (other.getTag()) {
             case BOULDER:
                 setStatus(true);
+                dungeon.checkGameWon();
                 break;
             default:
                 break;

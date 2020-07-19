@@ -12,6 +12,7 @@ public class Exit extends AlternatingEntity {
         switch (other.getTag()) {
             case PLAYER:
                 setStatus(true);
+                dungeon.checkGameWon();
                 break;
             default:
                 break;

@@ -8,6 +8,7 @@ public class GoalExit implements Goal {
     }
 
     public boolean isComplete() {
+        System.out.println("Player at exit = " + dungeon.getExit().getStatus());
         return dungeon.getExit().getStatus();
     }
 }

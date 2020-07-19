@@ -90,8 +90,10 @@ public class Dungeon {
         this.goal = goal;
     }
 
-    public boolean isGameWon() {
-        return goal.isComplete();
+    public void checkGameWon() {
+        if (goal.isComplete()) {
+            System.out.println("Game won");
+        }
     }
 
     public void addEntity(Entity entity) {
@@ -133,10 +135,11 @@ public class Dungeon {
                 break;
             case TREASURE:
                 treasures.remove(entity);
-                System.out.println(treasures.size() + " treasure(s) remaining");
+                checkGameWon();
                 break;
             case ENEMY:
                 enemies.remove(entity);
+                checkGameWon();
                 break;
             case FLOORSWITCH:
                 floorSwitches.remove(entity);
