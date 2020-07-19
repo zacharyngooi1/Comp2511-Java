@@ -7,9 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Loads the model (the dungeon, from a .json file) but not the view.
  *
@@ -41,36 +38,34 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
-        
-        Goal endGoal = loadGoal(json.getJSONObject("goal-condition"), dungeon);
-        dungeon.setGoal(endGoal);
 
+        dungeon.setGoal(loadGoal(json.getJSONObject("goal-condition"), dungeon));
 
         return dungeon;
     }
 
     /**
      * Parse a goal's JSON into a goal.
-     * @param parentGoal the goal to append the new goal to. Can be null.
      * @param json the json of the goal.
      * @param dungeon the dungeon entity needed for constructing goals.
      */
     private Goal loadGoal(JSONObject json, Dungeon dungeon) {
-        // todo etc etc etc
         String goal = json.getString("goal");
+        JSONArray jsonSubgoals;
+
         switch (goal) {
             case "AND":
                 GoalAnd goalAnd = new GoalAnd();
-                JSONArray jsonSubgoals = json.getJSONArray("subgoals");
+                jsonSubgoals = json.getJSONArray("subgoals");
                 for (int i = 0; i < jsonSubgoals.length(); i++) {
                     goalAnd.addGoal(loadGoal(jsonSubgoals.getJSONObject(i), dungeon));
                 }
                 return goalAnd;
             case "OR":
                 GoalOr goalOr = new GoalOr();
-                JSONArray jsonOrGoals = json.getJSONArray("subgoals");
-                for (int i = 0; i < jsonOrGoals.length(); i++) {
-                    goalOr.addGoal(loadGoal(jsonOrGoals.getJSONObject(i), dungeon));
+                jsonSubgoals = json.getJSONArray("subgoals");
+                for (int i = 0; i < jsonSubgoals.length(); i++) {
+                    goalOr.addGoal(loadGoal(jsonSubgoals.getJSONObject(i), dungeon));
                 }
                 return goalOr;
             case "exit":
@@ -85,6 +80,7 @@ public abstract class DungeonLoader {
                 throw new Error("Unhandled goal type");
         }
     }
+
     /**
      * Parse an entity's JSON into an entity.
      */
