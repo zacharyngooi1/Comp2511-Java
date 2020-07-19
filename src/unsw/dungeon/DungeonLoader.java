@@ -77,7 +77,7 @@ public abstract class DungeonLoader {
             case "treasure":
                 return new GoalTreasure(dungeon);
             default:
-                return null;
+                throw new Error("Unhandled goal type");
         }
     }
 
