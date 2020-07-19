@@ -19,7 +19,7 @@ public class Entity {
     private IntegerProperty x, y;
     private BooleanProperty visible;
     private Tag tag;
-    private boolean isCollidable;
+    private CollisionLayer collisionLayer;
     protected Dungeon dungeon;
 
     /**
@@ -29,12 +29,12 @@ public class Entity {
      * @param tag
      * @param isCollidable
      */
-    public Entity(int x, int y, Tag tag, boolean isCollidable, Dungeon dungeon) {
+    public Entity(int x, int y, Tag tag, CollisionLayer collisionLayer, Dungeon dungeon) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.visible = new SimpleBooleanProperty(true);
         this.tag = tag;
-        this.isCollidable = isCollidable;
+        this.collisionLayer = collisionLayer;
         this.dungeon = dungeon;
     }
 
@@ -62,12 +62,8 @@ public class Entity {
         return tag;
     }
 
-    public boolean isCollidable() {
-        return isCollidable;
-    }
-
-    public void setCollidable(boolean stat) {
-        this.isCollidable = stat;
+    public CollisionLayer getCollisionLayer() {
+        return collisionLayer;
     }
 
     public void setX(int x) {
@@ -82,8 +78,16 @@ public class Entity {
         visible().set(false);
     }
 
+    public void setCollisionLayer(CollisionLayer collisionLayer) {
+        this.collisionLayer = collisionLayer;
+    }
+
+    public boolean collidesWith(Entity other) {
+        return collisionLayer.collidesWith(other.getCollisionLayer());
+    }
+
     public void removeFromDungeon() {
-        System.out.println("Destroying " + getTag());
+        System.out.println("Removing " + getTag());
         setInvisible();
         dungeon.removeEntity(this);
     }

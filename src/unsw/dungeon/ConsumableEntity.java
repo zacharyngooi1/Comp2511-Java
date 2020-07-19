@@ -5,7 +5,7 @@ public class ConsumableEntity extends Entity {
     private int value;
 
     public ConsumableEntity(Dungeon dungeon, int x, int y, Tag tag, int maxValue) {
-        super(x, y, tag, false, dungeon);
+        super(x, y, tag, new CollisionLayer(0), dungeon);
         this.maxValue = maxValue;
         value = maxValue;
     }

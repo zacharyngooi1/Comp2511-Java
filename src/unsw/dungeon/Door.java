@@ -4,12 +4,8 @@ public class Door extends Entity {
     private int id;
 
     public Door(Dungeon dungeon, int x, int y, int id) {
-        super(x, y, Tag.DOOR, true, dungeon);
+        super(x, y, Tag.DOOR, new CollisionLayer(CollisionLayer.PLAYER | CollisionLayer.ENEMY), dungeon);
         this.id = id;
-    }
-
-    public int getId() {
-        return this.id;
     }
 
     /**
@@ -19,8 +15,8 @@ public class Door extends Entity {
      */
     public boolean tryUnlock(Key key) {
         if (id == key.getId()) {
-            System.out.println("Door unlocked");
-            setCollidable(false); // And change sprite
+            setCollisionLayer(new CollisionLayer(0));
+            System.out.println("Door unlocked, sprite should change");
             return true;
         }
 
