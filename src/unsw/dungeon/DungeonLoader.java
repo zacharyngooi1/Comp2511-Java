@@ -58,7 +58,7 @@ public abstract class DungeonLoader {
      */
     private void loadGoal(Goal parentGoal, JSONObject json, Dungeon dungeon) {
         // todo etc etc etc
-        String goal = goalCondition.getString("goal");
+        String goal = json.getString("goal");
         Goal newGoal;
         List<Goal> subgoals = new ArrayList<Goal>();
 
@@ -66,14 +66,14 @@ public abstract class DungeonLoader {
             case "AND":
                 newGoal = new GoalAnd();
 
-                // todo; something like this, similarly for or etc
+                // todo; someth ing like this, similarly for or etc
                 // will be recursive
                 // consider abstracting GoalAnd and GoalOr into another class
                 // and having that as the parentGoal argument so you can
                 // properly append subgoals etc
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
                 for (int i = 0; i < jsonSubgoals.length(); i++) {
-                    loadGoal(newGoal, jsonSubgoals.getJSONObject(i));
+                    loadGoal(newGoal, jsonSubgoals.getJSONObject(i), dungeon);
                 }
                 break;
             case "OR":
@@ -92,8 +92,9 @@ public abstract class DungeonLoader {
                 newGoal = new GoalTreasure(dungeon);
                 break;
             default:
-                break;
+                throw new Error("Unhandled goal type");
         }
+            subgoals.add(newGoal);
     }
 
     /**
