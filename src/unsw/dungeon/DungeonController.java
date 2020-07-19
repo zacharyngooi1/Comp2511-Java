@@ -20,30 +20,30 @@ public class DungeonController {
     @FXML
     private GridPane squares;
 
-    private List<ImageView> initialSprites;
+    private List<ImageView> initialViews;
 
     private Player player;
 
     private Dungeon dungeon;
 
-    public DungeonController(Dungeon dungeon, List<ImageView> initialSprites) {
+    public DungeonController(Dungeon dungeon, List<ImageView> initialViews) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
-        this.initialSprites = new ArrayList<>(initialSprites);
+        this.initialViews = new ArrayList<>(initialViews);
     }
 
     @FXML
     public void initialize() {
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
 
-        // Add the ground first so it is below all other sprites.
+        // Add the ground first so it is below all other views.
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
                 squares.add(new ImageView(ground), x, y);
             }
         }
 
-        for (ImageView entity : initialSprites) {
+        for (ImageView entity : initialViews) {
             squares.getChildren().add(entity);
         }
     }

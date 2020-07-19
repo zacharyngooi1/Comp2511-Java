@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Door extends Entity {
+public class Door extends AlternatingEntity {
     private int id;
 
     public Door(Dungeon dungeon, int x, int y, int id) {
@@ -16,7 +16,7 @@ public class Door extends Entity {
     public boolean tryUnlock(Key key) {
         if (id == key.getId()) {
             setCollisionLayer(new CollisionLayer(0));
-            System.out.println("Door unlocked, sprite should change");
+            setStatus(true);
             return true;
         }
 
