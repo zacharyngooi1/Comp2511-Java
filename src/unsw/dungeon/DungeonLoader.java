@@ -41,11 +41,10 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        Goal endGoal = loadGoal(json.getJSONObject("goal-condition"), dungeon);
+        dungeon.setGoal(endGoal);
 
-        // todo
-        // JSONObject goalCondition = json.getJSONObject("goal-condition");
-        // the end goal is to call the below function with a goal that has all the goals
-        // dungeon.setGoal(goal);
 
         return dungeon;
     }
@@ -56,46 +55,36 @@ public abstract class DungeonLoader {
      * @param json the json of the goal.
      * @param dungeon the dungeon entity needed for constructing goals.
      */
-    private void loadGoal(Goal parentGoal, JSONObject json, Dungeon dungeon) {
+    private Goal loadGoal(JSONObject json, Dungeon dungeon) {
         // todo etc etc etc
-        String goal = goalCondition.getString("goal");
-        Goal newGoal;
-        List<Goal> subgoals = new ArrayList<Goal>();
-
+        String goal = json.getString("goal");
         switch (goal) {
             case "AND":
-                newGoal = new GoalAnd();
-
-                // todo; something like this, similarly for or etc
-                // will be recursive
-                // consider abstracting GoalAnd and GoalOr into another class
-                // and having that as the parentGoal argument so you can
-                // properly append subgoals etc
+                GoalAnd goalAnd = new GoalAnd();
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
                 for (int i = 0; i < jsonSubgoals.length(); i++) {
-                    loadGoal(newGoal, jsonSubgoals.getJSONObject(i));
+                    goalAnd.addGoal(loadGoal(jsonSubgoals.getJSONObject(i), dungeon));
                 }
-                break;
+                return goalAnd;
             case "OR":
-                newGoal = new GoalOr();
-                break;
+                GoalOr goalOr = new GoalOr();
+                JSONArray jsonOrGoals = json.getJSONArray("subgoals");
+                for (int i = 0; i < jsonOrGoals.length(); i++) {
+                    goalOr.addGoal(loadGoal(jsonOrGoals.getJSONObject(i), dungeon));
+                }
+                return goalOr;
             case "exit":
-                newGoal = new GoalExit(dungeon);
-                break;
+                return new GoalExit(dungeon);
             case "enemies":
-                newGoal = new GoalEnemies(dungeon);
-                break;
+                return new GoalEnemies(dungeon);
             case "boulders":
-                newGoal = new GoalBoulders(dungeon);
-                break;
+                return new GoalBoulders(dungeon);
             case "treasure":
-                newGoal = new GoalTreasure(dungeon);
-                break;
+                return new GoalTreasure(dungeon);
             default:
-                break;
+                throw new Error("Unhandled goal type");
         }
     }
-
     /**
      * Parse an entity's JSON into an entity.
      */

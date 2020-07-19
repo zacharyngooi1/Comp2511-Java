@@ -8,7 +8,7 @@ public class GoalEnemies implements Goal {
     }
 
     public boolean isComplete() {
-        System.out.println(dungeon.getEnemies().size() + " treasure(s) remaining");
+        System.out.println(dungeon.getEnemies().size() + " enemy(ies) remaining");
         return dungeon.getEnemies().size() == 0;
     }
 }
