@@ -58,7 +58,6 @@ public abstract class DungeonLoader {
     private Goal loadGoal(JSONObject json, Dungeon dungeon) {
         // todo etc etc etc
         String goal = json.getString("goal");
-        Goal newGoal;
         switch (goal) {
             case "AND":
                 GoalAnd goalAnd = new GoalAnd();
@@ -68,24 +67,23 @@ public abstract class DungeonLoader {
                 }
                 return goalAnd;
             case "OR":
-                newGoal = new GoalOr();
-                break;
+                GoalOr goalOr = new GoalOr();
+                JSONArray jsonOrGoals = json.getJSONArray("subgoals");
+                for (int i = 0; i < jsonOrGoals.length(); i++) {
+                    goalOr.addGoal(loadGoal(jsonOrGoals.getJSONObject(i), dungeon));
+                }
+                return goalOr;
             case "exit":
-                newGoal = new GoalExit(dungeon);
-                break;
+                return new GoalExit(dungeon);
             case "enemies":
-                newGoal = new GoalEnemies(dungeon);
-                break;
+                return new GoalEnemies(dungeon);
             case "boulders":
-                newGoal = new GoalBoulders(dungeon);
-                break;
+                return new GoalBoulders(dungeon);
             case "treasure":
-                newGoal = new GoalTreasure(dungeon);
-                break;
+                return new GoalTreasure(dungeon);
             default:
                 throw new Error("Unhandled goal type");
         }
-        return newGoal;
     }
     /**
      * Parse an entity's JSON into an entity.
