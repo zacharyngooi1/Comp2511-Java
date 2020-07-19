@@ -1,20 +1,8 @@
 package unsw.dungeon;
 
-public class FloorSwitch extends Entity {
-    private boolean status;
-
+public class FloorSwitch extends AlternatingEntity {
     public FloorSwitch(Dungeon dungeon, int x, int y) {
         super(x, y, Tag.FLOORSWITCH, new CollisionLayer(0), dungeon);
-        this.status = false;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-        System.out.println("Switch status = " + status + ", sprite should reflect this");
     }
 
     @Override

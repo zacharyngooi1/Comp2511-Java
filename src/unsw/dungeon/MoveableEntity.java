@@ -37,7 +37,7 @@ public class MoveableEntity extends Entity {
 
         setX(x);
         setY(y);
-        System.out.println(getTag() + " -> (" + x + ", " + y + ")");
+        // System.out.println(getTag() + " -> (" + x + ", " + y + ")");
 
         for (Entity entity : entitiesAtSquare) {
             if (entity != null && entity != this) {
