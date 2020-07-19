@@ -87,7 +87,7 @@ public class Dungeon {
     }
 
     public void setGoal(Goal goal) {
-            this.goal = goal;
+        this.goal = goal;
     }
 
     public void checkGameWon() {
