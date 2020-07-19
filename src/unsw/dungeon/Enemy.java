@@ -22,34 +22,25 @@ public class Enemy extends MoveableEntity {
      * @param y the y co-ordinate of the player.
      */
     private void moveTowardsPlayer(int x, int y) {
-        int xMovement = 0;
-        int yMovement = 0;
+        double initialDistance = calDis(x, y, getX(), getY());
 
-        if (x > getX()) {
-            xMovement = 1;
-        } else if (x < getX()) {
-            xMovement = -1;
-        }
-
-        if (y > getY()) {
-            yMovement = 1;
-        } else if (y < getY()) {
-            yMovement = -1;
-        }
-
-        // Only allow at most one direction of successful movement
-        if (directionToggle) {
-            if (xMovement == 0 || !moveTo(getX() + xMovement, getY())) {
-                moveTo(getX(), getY() + yMovement);
-            }
-        } else {
-            if (yMovement == 0 || !moveTo(getX(), getY() + yMovement)) {
-                moveTo(getX() + xMovement, getY());
+        for (int xMovement = -1; xMovement <= 1; xMovement++) {
+            double newDistance = calDis(getX() + xMovement, getY(), x, y);
+            if (newDistance < initialDistance) {
+                if (moveTo(getX() + xMovement, getY())) {
+                    return;
+                }
             }
         }
 
-        // Flip the boolean
-        directionToggle = !directionToggle;
+        for (int yMovement = -1; yMovement <= 1; yMovement++) {
+            double newDistance = calDis(getX(), getY() + yMovement, x, y);
+            if (newDistance < initialDistance) {
+                if (moveTo(getX(), getY() + yMovement)) {
+                    return;
+                }
+            }
+        }
     }
 
     /**
