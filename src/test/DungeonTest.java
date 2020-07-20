@@ -25,7 +25,6 @@ public class DungeonTest {
                     .put(JSONFactory.goal("exit"))
             )
         ));
-
         assertEquals(dungeon.getHeight(), 16);
     }
     
