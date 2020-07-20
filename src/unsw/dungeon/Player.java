@@ -61,6 +61,18 @@ public class Player extends MoveableEntity {
         }
     }
 
+    public Sword getSword() {
+        return this.sword;
+    }
+
+    public Invincibility getInvincibility() {
+        return this.invincibility;
+    }
+
+    public List<Key> getKeys() {
+        return this.keys;
+    }
+
     /**
      * Called whenever a player's consumable runs out.
      */
