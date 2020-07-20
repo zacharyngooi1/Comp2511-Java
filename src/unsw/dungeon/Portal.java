@@ -29,7 +29,8 @@ public class Portal extends Entity {
             }
         }
 
-        Portal dest = connectedPortals.get((new Random()).nextInt(connectedPortals.size()));
+        // Portal dest = connectedPortals.get((new Random()).nextInt(connectedPortals.size()));
+        Portal dest = connectedPortals.get(0);
 
         moveableEntity.moveTo(dest.getX(), dest.getY(), false);
     }
