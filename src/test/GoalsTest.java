@@ -9,7 +9,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import unsw.dungeon.*;
+import unsw.dungeon.Dungeon;
+import unsw.dungeon.Player;
 
 public class GoalsTest {
     private Dungeon dungeon;
