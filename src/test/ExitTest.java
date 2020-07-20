@@ -85,6 +85,7 @@ public class ExitTest {
                 .put(JSONFactory.entity("sword", 0, 0))
 
                 .put(JSONFactory.entity("exit", 1, 2))
+
                 .put(JSONFactory.entity("key", 1, 2, 1))
                 .put(JSONFactory.entity("door", 1, 2, 1))
                 .put(JSONFactory.entity("treasure", 1, 2))
@@ -99,7 +100,7 @@ public class ExitTest {
         player = dungeon.getPlayer();
         exit = dungeon.getExit();
 
-        // Pickup the key and the sword to open the door and kill the enemy
+        // Pickup a key and a sword to open the door and kill the enemy
         // upon entering the square.
         player.moveTo(0, 0);
 
