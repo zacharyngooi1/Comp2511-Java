@@ -11,7 +11,7 @@ public class CollisionLayer {
      * PLAYER | ENEMY would designate something that is collidable with both
      * the player and enemies.
      */
-    CollisionLayer(int collisionLayer) {
+    public CollisionLayer(int collisionLayer) {
         this.collisionLayer = collisionLayer;
     }
 

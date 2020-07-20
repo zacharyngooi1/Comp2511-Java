@@ -12,11 +12,14 @@ import unsw.dungeon.Player;
 import unsw.dungeon.FloorSwitch;
 import unsw.dungeon.Enemy;
 import unsw.dungeon.Door;
+import unsw.dungeon.Boulder;
+import unsw.dungeon.CollisionLayer;
 
 public class FloorSwitchTest {
     private Dungeon dungeon;
     private Player player;
     private FloorSwitch floorSwitch;
+    private Boulder boulder;
 
     @BeforeEach
     void initialize() {
@@ -32,6 +35,7 @@ public class FloorSwitchTest {
 
         player = dungeon.getPlayer();
         floorSwitch = (FloorSwitch) dungeon.getEntitiesAtSquare(1, 2).get(0);
+        boulder = (Boulder) dungeon.getEntitiesAtSquare(1, 1).get(0);
     }
 
     @Test
@@ -54,22 +58,19 @@ public class FloorSwitchTest {
 
     @Test
     void activatedByBoulder() {
-        player.moveTo(1, 0);
-        player.moveDown();
+        boulder.moveTo(1, 2);
         assertEquals(floorSwitch.getStatus(), true);
     }
 
     @Test
     void toggleable() {
-        player.moveTo(1, 0);
-        player.moveDown();
+        boulder.moveTo(1, 2);
         assertEquals(floorSwitch.getStatus(), true);
 
-        player.moveDown();
+        boulder.moveTo(2, 2);
         assertEquals(floorSwitch.getStatus(), false);
 
-        player.moveTo(player.getX(), player.getY() + 2);
-        player.moveUp();
+        boulder.moveTo(1, 2);
         assertEquals(floorSwitch.getStatus(), true);
     }
 
@@ -96,16 +97,16 @@ public class FloorSwitchTest {
             JSONFactory.goal("treasure")
         ));
 
-        player = dungeon.getPlayer();
         floorSwitch = new FloorSwitch(dungeon, 1, 2);
+        boulder = (Boulder) dungeon.getEntitiesAtSquare(1, 1).get(0);
         dungeon.addEntity(floorSwitch);
 
-        // Add the door manually so it can be easily set to true.
+        // Add the door manually so it can easily be opened.
         Door door = new Door(dungeon, 1, 2, 1);
-        door.setStatus(true);
+        door.setCollisionLayer(new CollisionLayer(0));
+        dungeon.addEntity(door);
 
-        player.moveTo(1, 0);
-        player.moveDown();
+        boulder.moveTo(1, 2);
         assertEquals(floorSwitch.getStatus(), true);
     }
 }

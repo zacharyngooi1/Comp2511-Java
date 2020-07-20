@@ -30,6 +30,7 @@ public class JSONFactory {
             .put("entities", entities)
             .put("goal-condition", goalCondition);
     }
+
     public static JSONObject entity(String type, int x, int y) {
         return new JSONObject()
             .put("type", type)
