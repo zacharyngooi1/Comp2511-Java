@@ -90,10 +90,13 @@ public class Dungeon {
         this.goal = goal;
     }
 
-    public void checkGameWon() {
+    public boolean checkGameWon() {
         if (goal.isComplete()) {
             System.out.println("Game won");
+            return true;
         }
+
+        return false;
     }
 
     public void addEntity(Entity entity) {
@@ -128,8 +131,11 @@ public class Dungeon {
 
         switch (entity.getTag()) {
             case PLAYER:
+                this.player = null;
                 System.out.println("Restart level");
                 break;
+            case EXIT:
+                this.exit = null;
             case PORTAL:
                 portals.remove(entity);
                 break;
