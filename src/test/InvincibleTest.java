@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -165,9 +166,7 @@ class InvincibleTest {
 
     @Test
     void TestPotionKill() {
-        // enemy at (4,1)
-        // player at (1,1)
-        // Potion at (2,1)
+
         // box player and enemy in
         Wall wall1 = new Wall(dungeon, 1,0);
         Wall wall2 = new Wall(dungeon, 2,0);
@@ -192,26 +191,79 @@ class InvincibleTest {
 
         // Player is now boxed in with enemy
         player.moveRight();
-        //(2,1)
-        // enemy(3,1)
         assertTrue(player.hasConsumable(Tag.INVINCIBILITY));
+
         // assert invincibility value
         Invincibility currentInvincibility = player.getInvincibility();
         assertEquals(currentInvincibility.getValue(),19);
         
         // Enemy will only be able to run one square away
+        player.moveRight();
+        player.moveRight();
 
-        player.moveRight();
-        //(3,1)
-        // enemy(4,1)
-        player.moveRight();
         // enemy should now be dead
-
         assertEquals(dungeon.getEntitiesAtSquare(enemy.getX(), enemy.getY()).size() , 1);
+
         // Check that the entity is an enemy
         assertEquals(dungeon.getEntitiesAtSquare(enemy.getX(), enemy.getY()).get(0).getTag(), Tag.PLAYER);
+
         // Ensure the player has been killed
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).get(0).getTag(), Tag.PLAYER);
         assertEquals(dungeon.getEnemies().size(), 0);
+    }
+
+    @Test
+    void TestPotionRefill() { 
+        Invincibility potion = new Invincibility(dungeon, 2, 3);
+        dungeon.addEntity(potion);
+        player.moveRight();
+        assertTrue(player.hasConsumable(Tag.INVINCIBILITY));
+        // assert invincibility value
+        Invincibility currentInvincibility = player.getInvincibility();
+        assertEquals(currentInvincibility.getValue(),19);
+
+        player.moveDown();
+        assertTrue(player.hasConsumable(Tag.INVINCIBILITY));
+        // assert invincibility value
+        currentInvincibility = player.getInvincibility();
+        assertEquals(currentInvincibility.getValue(),18);
+
+        // Player will move to another potion and refill his potion value
+        player.moveDown();
+        assertTrue(player.hasConsumable(Tag.INVINCIBILITY));
+        // assert invincibility value
+        currentInvincibility = player.getInvincibility();
+        assertEquals(currentInvincibility.getValue(),19);
+
+        // Have player completely reduce count of invincibility
+        player.moveDown();
+        player.moveDown();
+        player.moveDown();
+        player.moveDown();
+        player.moveDown();
+        player.moveDown();
+        player.moveRight();
+        player.moveRight();
+        player.moveRight();
+        player.moveRight();
+        player.moveRight();
+        player.moveRight();
+        player.moveRight();
+        player.moveUp();
+        player.moveUp();
+        player.moveUp();
+        player.moveUp();
+        player.moveUp();
+        player.moveUp();
+        player.moveLeft();
+        player.moveLeft();
+        player.moveLeft();
+        player.moveLeft();
+        player.moveLeft();
+        player.moveLeft();
+        player.moveLeft();
+
+        // Check player's invincibility has run out.
+        assertFalse(player.hasConsumable(Tag.INVINCIBILITY));
     }
 }
