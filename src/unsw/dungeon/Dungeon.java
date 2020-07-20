@@ -145,6 +145,13 @@ public class Dungeon {
                 break;
             case ENEMY:
                 enemies.remove(entity);
+
+                // This is here rather than in the player or enemy because
+                // enemies may be removed in various ways. In every case,
+                // the enemy should be detatched from the player, however
+                // the only way to gaurantee that without duplicating
+                // code is to put the detatchment here.
+                player.detatchEnemy((Enemy) entity);
                 checkGameWon();
                 break;
             case FLOORSWITCH:
