@@ -90,10 +90,13 @@ public class Dungeon {
         this.goal = goal;
     }
 
-    public void checkGameWon() {
+    public boolean checkGameWon() {
         if (goal.isComplete()) {
             System.out.println("Game won");
+            return true;
         }
+
+        return false;
     }
 
     public void addEntity(Entity entity) {
@@ -128,8 +131,11 @@ public class Dungeon {
 
         switch (entity.getTag()) {
             case PLAYER:
+                this.player = null;
                 System.out.println("Restart level");
                 break;
+            case EXIT:
+                this.exit = null;
             case PORTAL:
                 portals.remove(entity);
                 break;
@@ -139,6 +145,13 @@ public class Dungeon {
                 break;
             case ENEMY:
                 enemies.remove(entity);
+
+                // This is here rather than in the player or enemy because
+                // enemies may be removed in various ways. In every case,
+                // the enemy should be detatched from the player, however
+                // the only way to gaurantee that without duplicating
+                // code is to put the detatchment here.
+                player.detatchEnemy((Enemy) entity);
                 checkGameWon();
                 break;
             case FLOORSWITCH:

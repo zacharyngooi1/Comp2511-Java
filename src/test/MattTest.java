@@ -13,7 +13,7 @@ public class MattTest {
     public void blahTest() {
         assertEquals("a", "a");
     }
-    
+
     @Test
     public void blahTest2() {
         Dungeon d = new Dungeon(1, 2);

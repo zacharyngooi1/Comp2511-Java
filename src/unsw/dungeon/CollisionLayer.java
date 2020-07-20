@@ -20,6 +20,6 @@ public class CollisionLayer {
     }
 
     public boolean collidesWith(CollisionLayer other) {
-        return (collisionLayer & other.getCollisionLayer()) != 0 ? true : false;
+        return (collisionLayer & other.getCollisionLayer()) != 0;
     }
 }
