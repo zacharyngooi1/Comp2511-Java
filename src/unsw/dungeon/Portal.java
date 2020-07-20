@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Random; 
+// import java.util.Random; 
 
 public class Portal extends Entity {
     private int id;
@@ -29,7 +29,8 @@ public class Portal extends Entity {
             }
         }
 
-        Portal dest = connectedPortals.get((new Random()).nextInt(connectedPortals.size()));
+        // Portal dest = connectedPortals.get((new Random()).nextInt(connectedPortals.size()));
+        Portal dest = connectedPortals.get(0);
 
         moveableEntity.moveTo(dest.getX(), dest.getY(), false);
     }
