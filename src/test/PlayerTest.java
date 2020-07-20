@@ -76,12 +76,13 @@ class PlayerTest {
     
     @Test
 	void collisionTest() {
-		// Player at (1,1)
         Door door = new Door(dungeon, 2, 1, 0);
         dungeon.addEntity(door);
+
         assertEquals(dungeon.getEntitiesAtSquare(2, 1).size(), 1);
 
         player.moveTo(2, 1);
+
         // Player should not be able to move to (2,1)
 		assertEquals(player.getX(), 1);
 		assertEquals(player.getY(), 1);
@@ -94,13 +95,15 @@ class PlayerTest {
         
         player.moveUp();
         assertEquals(player.getY(), 0);
+
         player.moveUp();
         assertEquals(player.getY(), 0);
-        player.moveLeft();
-        assertEquals(player.getX(), 0);
+
         player.moveLeft();
         assertEquals(player.getX(), 0);
 
+        player.moveLeft();
+        assertEquals(player.getX(), 0);
     }
 
     @Test
@@ -185,9 +188,9 @@ class PlayerTest {
         for (int x= 0; x < 50; x ++) {
             player.moveUp();
         }
+
         assertEquals(player.getX(), 0);
         assertEquals(player.getY(), 0);
-
         assertEquals(dungeon.getEntitiesAtSquare(0, 0).size(), 1);
     }
 }

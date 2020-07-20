@@ -54,25 +54,28 @@ class WallTest {
         enemy = dungeon.getEnemies().get(0);
     }
 
-
     @Test
     void TestMovement() {
-        // Enemy is encased and thus cannot move either even though enemy is trying to move to player.
+        // Enemy is encased in walls and cannot move either even though 
+        // The enemy is trying to move to the player.
         player.moveDown();
         assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);   
         assertEquals(enemy.getX(), 5);
-        assertEquals(enemy.getY(), 5);     
+        assertEquals(enemy.getY(), 5);   
+
         player.moveLeft();
         assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
         assertEquals(enemy.getX(), 5);
         assertEquals(enemy.getY(), 5);
+
         player.moveRight();
         assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
         assertEquals(enemy.getX(), 5);
         assertEquals(enemy.getY(), 5);
+
         player.moveUp();
         assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
@@ -82,20 +85,25 @@ class WallTest {
 
     @Test
     void TestBoulderWall() {
-        // Remove wall to the right of player
+        // Remove wall to the right of player.
         dungeon.removeEntity(dungeon.getEntitiesAtSquare(2, 1).get(0));
-        // Add boulder
+
+        // Add boulder.
         Boulder boulder = new Boulder(dungeon, 2, 1);
         dungeon.addEntity(boulder);
-        // add wall to the right of boulder
+
+        // aAd wall to the right of boulder.
         dungeon.addEntity(new Wall(dungeon, 3, 1));
-        // Attempt to move player to the right to move boulder at the same time but should fail as wall is blocking boulder
+
+        // Attempt to move player to the right to move boulder at 
+        // the same time but should fail as wall is blocking boulder.
         player.moveRight();
         assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
         assertEquals(boulder.getX(),2);
         assertEquals(boulder.getY(), 1);
-        // Enemy should not move either as player is unable to move
+
+        // Enemy should not move either as player is unable to move.
         assertEquals(enemy.getX(), 5);
         assertEquals(enemy.getY(), 5);
     }

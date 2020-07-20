@@ -44,7 +44,6 @@ class SwordTest {
         assertEquals(dungeon.getEntitiesAtSquare(2, 1).get(0).getClass(), Sword.class);
     }
 
-
     @Test
     void TestExistence() {
         assertEquals(dungeon.getEntitiesAtSquare(1, 1).size(), 1);
@@ -54,23 +53,23 @@ class SwordTest {
 
     @Test
     void TestSimpleKill() {
-        // pick up sword
+        // Pick up sword
         player.moveRight();
-        // assert player has sword
-        assertTrue(player.hasConsumable(Tag.SWORD));
-        // assert sword value
-        Sword currentSword = player.getSword();
-        assertEquals(currentSword.getValue(), 5);
 
+        // Assert player has sword
+        assertTrue(player.hasConsumable(Tag.SWORD));
+
+        // Assert sword value
+        Sword currentSword = player.getSword();
+
+        assertEquals(currentSword.getValue(), 5);
         assertEquals(dungeon.getEntitiesAtSquare(enemy.getX(), enemy.getY()).get(0).getTag(), Tag.ENEMY);
 
         // Move player to enemy
         player.moveRight();
 
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).get(0).getTag(), Tag.PLAYER);
-
         assertEquals(dungeon.getEntitiesAtSquare(enemy.getX(), enemy.getY()).get(0).getTag(), Tag.PLAYER);
 
         // Check value of sword
@@ -100,24 +99,18 @@ class SwordTest {
 
         // Move player to enemy 1
         player.moveRight();      
-        
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).get(0).getTag(), Tag.PLAYER);
-
         assertEquals(dungeon.getEntitiesAtSquare(enemy.getX(), enemy.getY()).get(0).getTag(), Tag.PLAYER);
-
         assertEquals(currentSword.getValue(), 4);
 
+        // Move player to enemy 2
         player.moveRight();      
-        
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).get(0).getTag(), Tag.PLAYER);
-
         assertEquals(dungeon.getEntitiesAtSquare(enemy2.getX(), enemy2.getY()).get(0).getTag(), Tag.PLAYER);
-
         assertEquals(currentSword.getValue(), 3);
+
         assertEquals(dungeon.getEnemies().size(), 0);
     }   
 
@@ -159,14 +152,18 @@ class SwordTest {
         player.moveLeft();
         assertTrue(player.hasConsumable(Tag.SWORD));
         assertEquals(newSword.getValue(), 5);
+
         Enemy enemy6 = new Enemy(dungeon, player.getX() -1, player.getY());
         dungeon.addEntity(enemy6);
+
         player.moveLeft();
         assertEquals(newSword.getValue(), 4);
+
         Sword refill = new Sword(dungeon, player.getX() - 1, player.getY());
         dungeon.addEntity(refill);
+
+        // Player will pick up new sword and refill old sword.
         player.moveLeft();
         assertEquals(newSword.getValue(), 5);
     }
-
 }

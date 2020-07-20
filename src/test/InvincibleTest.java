@@ -65,9 +65,10 @@ class InvincibleTest {
             check = true;
         }
         assertTrue(check);
-        check = false;
         assertTrue(player.hasConsumable(Tag.INVINCIBILITY));
-        // assert invincibility value
+        check = false;
+
+        // Assert invincibility value
         Invincibility currentInvincibility = player.getInvincibility();
         assertEquals(currentInvincibility.getValue(),19);
 
@@ -115,9 +116,10 @@ class InvincibleTest {
             check = true;
         }
         assertTrue(check);
-        check = false;
         assertTrue(player.hasConsumable(Tag.INVINCIBILITY));
-        // assert invincibility value
+
+        check = false;
+        // Assert invincibility value
         Invincibility currentInvincibility = player.getInvincibility();
         assertEquals(currentInvincibility.getValue(),19);
         diff = enemy.calDis(player.getX(), player.getY(), enemy.getX(), enemy.getY());
@@ -216,22 +218,26 @@ class InvincibleTest {
     void TestPotionRefill() { 
         Invincibility potion = new Invincibility(dungeon, 2, 3);
         dungeon.addEntity(potion);
+
         player.moveRight();
         assertTrue(player.hasConsumable(Tag.INVINCIBILITY));
-        // assert invincibility value
+
+        // Assert invincibility value
         Invincibility currentInvincibility = player.getInvincibility();
         assertEquals(currentInvincibility.getValue(),19);
 
         player.moveDown();
         assertTrue(player.hasConsumable(Tag.INVINCIBILITY));
-        // assert invincibility value
+
+        // Assert invincibility value
         currentInvincibility = player.getInvincibility();
         assertEquals(currentInvincibility.getValue(),18);
 
         // Player will move to another potion and refill his potion value
         player.moveDown();
         assertTrue(player.hasConsumable(Tag.INVINCIBILITY));
-        // assert invincibility value
+
+        // Assert invincibility value
         currentInvincibility = player.getInvincibility();
         assertEquals(currentInvincibility.getValue(),19);
 

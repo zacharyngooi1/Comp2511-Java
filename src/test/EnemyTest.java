@@ -61,6 +61,7 @@ class EnemyTest {
         }
         assertTrue(check);
         check = false;
+
         player.moveRight();
         compare = enemy.calDis(player.getX(), player.getY(), enemy.getX(), enemy.getY());
         if (compare <= diff) {
@@ -68,6 +69,7 @@ class EnemyTest {
         }
         assertTrue(check);
         check = false;
+
         player.moveRight();
         compare = enemy.calDis(player.getX(), player.getY(), enemy.getX(), enemy.getY());
         if (compare <= diff) {
@@ -115,7 +117,6 @@ class EnemyTest {
         assertTrue(check);
         check = false;
 
-
         player.moveRight();
         compare = enemy.calDis(player.getX(), player.getY(), enemy.getX(), enemy.getY());
         if (compare <= diff) {
@@ -150,9 +151,7 @@ class EnemyTest {
         assertEquals(dungeon.getEntitiesAtSquare(enemy.getX(), enemy.getY()).size() , 1);
         // Check that the entity is an enemy
         assertEquals(dungeon.getEntitiesAtSquare(enemy.getX(), enemy.getY()).get(0).getTag(), Tag.ENEMY);
-
         // Ensure the player has been killed
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).get(0).getTag(), Tag.ENEMY);
     }
-
 }

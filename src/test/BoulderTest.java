@@ -40,16 +40,12 @@ class BoulderTest {
     @Test
     void TestSimplePush() {
         assertEquals(dungeon.getEntitiesAtSquare(2, 1).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(2, 1).get(0).getTag(), Tag.BOULDER);
-
         assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
 
         player.moveRight();
-
         assertEquals(dungeon.getEntitiesAtSquare(3, 1).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(3, 1).get(0).getTag(), Tag.BOULDER);
     }
 
@@ -60,38 +56,25 @@ class BoulderTest {
 
         assertEquals(dungeon.getEntitiesAtSquare(2, 1).size(), 1);
         assertEquals(dungeon.getEntitiesAtSquare(4, 1).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(2, 1).get(0).getTag(), Tag.BOULDER);
-
         assertEquals(dungeon.getEntitiesAtSquare(4, 1).get(0).getTag(), Tag.BOULDER);
-
         assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
 
         player.moveRight();
-
         assertEquals(dungeon.getEntitiesAtSquare(3, 1).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(3, 1).get(0).getTag(), Tag.BOULDER);
-
         assertEquals(dungeon.getEntitiesAtSquare(4, 1).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(4, 1).get(0).getTag(), Tag.BOULDER);
-
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
 
         player.moveRight();
-
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(3, 1).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(3, 1).get(0).getTag(), Tag.BOULDER);
-
         assertEquals(dungeon.getEntitiesAtSquare(4, 1).size(), 1);
-
         assertEquals(dungeon.getEntitiesAtSquare(4, 1).get(0).getTag(), Tag.BOULDER);
 
     }

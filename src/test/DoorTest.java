@@ -37,8 +37,9 @@ class DoorTest {
         player.moveRight();
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
-        player.moveRight();
+        
         // Player blocked by door to the right
+        player.moveRight();
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
 
@@ -47,6 +48,7 @@ class DoorTest {
         player.moveRight();
         assertEquals(player.getX(), 3);
         assertEquals(player.getY(), 2);
+
         // Player blocked by door above him
         player.moveUp();
         assertEquals(player.getX(), 3);
@@ -57,6 +59,7 @@ class DoorTest {
         player.moveUp();
         assertEquals(player.getX(), 4);
         assertEquals(player.getY(), 1);
+
         // Player blocked by door to the left of himself
         player.moveLeft();
         assertEquals(player.getX(), 4);
@@ -67,6 +70,7 @@ class DoorTest {
         player.moveLeft();
         assertEquals(player.getX(), 3);
         assertEquals(player.getY(), 0);
+
         // Player blocked by door below him   
         player.moveDown();
         assertEquals(player.getX(), 3);
@@ -94,9 +98,11 @@ class DoorTest {
         ));
         player = dungeon.getPlayer();
         player.moveRight();
+
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
         assertEquals(player.getKeys().size(),1);
+
         // Unlock door
         player.moveRight();
         assertEquals(player.getX(), 3);
@@ -126,9 +132,11 @@ class DoorTest {
         ));
         player = dungeon.getPlayer();
         player.moveRight();
+
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
         assertEquals(player.getKeys().size(),1);
+        
         // Fail to Unlock door
         player.moveRight();
         assertEquals(player.getX(), 2);
@@ -162,13 +170,16 @@ class DoorTest {
         assertEquals(player.getX(), 0);
         assertEquals(player.getY(), 1);
         assertEquals(player.getKeys().size(),1);
+
         player.moveRight();
         assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
+
         player.moveRight();
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
         assertEquals(player.getKeys().size(),2);
+        
         // Fail to Unlock door even with 2 keys
         player.moveRight();
         assertEquals(player.getX(), 2);

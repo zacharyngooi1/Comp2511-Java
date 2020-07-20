@@ -50,7 +50,6 @@ class TreasureTest {
 
         // Treasure is gone
         assertEquals(dungeon.getEntitiesAtSquare(2, 1).size(), 0);
-
     }
 
     @Test
@@ -68,11 +67,14 @@ class TreasureTest {
 
         assertEquals(player.getX(), 8);
         assertEquals(player.getY(), 1);
+
         // Player is on exit but is unable to win as one treasure still remains
         assertFalse(dungeon.checkGameWon());
+
         // Move player to remaining treasure
         player.moveTo(0, 1);
         player.moveTo(8, 1);
+        
         assertTrue(dungeon.checkGameWon());
     }
 }
