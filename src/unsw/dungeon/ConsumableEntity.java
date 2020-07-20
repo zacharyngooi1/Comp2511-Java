@@ -25,7 +25,6 @@ public class ConsumableEntity extends Entity {
 
         if (value <= 0) {
             dungeon.getPlayer().consumableDepleted(getTag());
-            removeFromDungeon();
         }
     }
 
