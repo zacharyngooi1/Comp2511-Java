@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import unsw.dungeon.*;
 
