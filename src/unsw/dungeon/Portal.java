@@ -1,9 +1,5 @@
 package unsw.dungeon;
 
-import java.util.List;
-import java.util.ArrayList;
-// import java.util.Random;
-
 public class Portal extends Entity {
     private int id;
 
