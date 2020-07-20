@@ -95,7 +95,8 @@ class WallTest {
         assertEquals(player.getY(), 1);
         assertEquals(boulder.getX(),2);
         assertEquals(boulder.getY(), 1);
-
-
+        // Enemy should not move either as player is unable to move
+        assertEquals(enemy.getX(), 5);
+        assertEquals(enemy.getY(), 5);
     }
 }
