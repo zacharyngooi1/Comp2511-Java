@@ -21,17 +21,11 @@ public class Portal extends Entity {
         super.onEntityEnter(other);
         MoveableEntity moveableEntity = (MoveableEntity) other;
 
-        List<Portal> connectedPortals = new ArrayList<Portal>();
-
-        for (Portal portal : this.dungeon.getPortals()) {
+        for (Portal portal : dungeon.getPortals()) {
             if (portal != null && portal != this && portal.getID() == getID()) {
-                connectedPortals.add(portal);
+                moveableEntity.moveTo(portal.getX(), portal.getY(), false);
+                return;
             }
         }
-
-        // Portal dest = connectedPortals.get((new Random()).nextInt(connectedPortals.size()));
-        Portal dest = connectedPortals.get(0);
-
-        moveableEntity.moveTo(dest.getX(), dest.getY(), false);
     }
 }
