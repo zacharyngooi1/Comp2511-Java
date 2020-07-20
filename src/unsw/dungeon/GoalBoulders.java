@@ -16,7 +16,7 @@ public class GoalBoulders implements Goal {
             }
         }
 
-        System.out.println(switchesLeft + " switches left");
+        System.out.println(switchesLeft + " switch(es) left");
 
         return switchesLeft == 0;
     }
