@@ -75,6 +75,7 @@ class SwordTest {
 
         // Check value of sword
         assertEquals(currentSword.getValue(), 4);
+        assertEquals(dungeon.getEnemies().size(), 0);
     }
 
     @Test
@@ -117,6 +118,7 @@ class SwordTest {
         assertEquals(dungeon.getEntitiesAtSquare(enemy2.getX(), enemy2.getY()).get(0).getTag(), Tag.PLAYER);
 
         assertEquals(currentSword.getValue(), 3);
+        assertEquals(dungeon.getEnemies().size(), 0);
     }   
 
     @Test
@@ -146,6 +148,8 @@ class SwordTest {
         player.moveRight();
         assertEquals(currentSword.getValue(), 0);
         assertFalse(player.hasConsumable(Tag.SWORD));
+
+        assertEquals(player.getSword(), null);
 
         // Make a new sword
         Sword newSword = new Sword(dungeon, player.getX() - 1, player.getY());

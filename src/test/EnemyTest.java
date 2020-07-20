@@ -81,6 +81,8 @@ class EnemyTest {
     void TestMulipleChase() {
         enemy.moveTo(9, 9);
         Enemy enemy2 = new Enemy(dungeon, 0, 9);
+        dungeon.addEntity(enemy2);
+
         Double diff = enemy.calDis(player.getX(), player.getY(), enemy.getX(), enemy.getY());
         Double compare;
         boolean check = false;
