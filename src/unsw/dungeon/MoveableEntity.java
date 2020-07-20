@@ -39,6 +39,13 @@ public class MoveableEntity extends Entity {
         setY(y);
         // System.out.println(getTag() + " -> (" + x + ", " + y + ")");
 
+        for (Entity entity : dungeon.getEntitiesAtSquare(prevX, prevY)) {
+            if (entity != null && entity != this) {
+                entity.onEntityExit(this);
+                this.onEntityExit(entity);
+            }
+        }
+
         for (Entity entity : entitiesAtSquare) {
             if (entity != null && entity != this) {
                 if (entity.getTag() == Tag.PORTAL && !considerPortals) {
@@ -47,13 +54,6 @@ public class MoveableEntity extends Entity {
 
                 entity.onEntityEnter(this);
                 this.onEntityEnter(entity);
-            }
-        }
-
-        for (Entity entity : dungeon.getEntitiesAtSquare(prevX, prevY)) {
-            if (entity != null && entity != this) {
-                entity.onEntityExit(this);
-                this.onEntityExit(entity);
             }
         }
 

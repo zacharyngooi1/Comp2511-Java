@@ -207,10 +207,8 @@ public class Player extends MoveableEntity {
     private void onEnemyEnter(Enemy enemy) {
         if (sword != null) {
             sword.setValue(sword.getValue() - 1);
-            detatchEnemy(enemy);
             enemy.removeFromDungeon();
         } else if (invincibility != null) {
-            detatchEnemy(enemy);
             enemy.removeFromDungeon();
         } else {
             removeFromDungeon();
