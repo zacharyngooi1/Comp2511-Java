@@ -9,6 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
+
+
 import java.io.File;
 
 /**
@@ -26,6 +28,9 @@ public class DungeonController {
 
     private Dungeon dungeon;
 
+    private StartScreen startScreen;
+
+    
     public DungeonController(Dungeon dungeon, List<ImageView> initialViews) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
@@ -35,7 +40,6 @@ public class DungeonController {
     @FXML
     public void initialize() {
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
-
         // Add the ground first so it is below all other views.
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
@@ -46,6 +50,7 @@ public class DungeonController {
         for (ImageView entity : initialViews) {
             squares.getChildren().add(entity);
         }
+
     }
 
     @FXML
@@ -67,4 +72,9 @@ public class DungeonController {
                 break;
         }
     }
+
+    public void setStartScreen(StartScreen startScreen) {
+        this.startScreen = startScreen;
+    }
+
 }
