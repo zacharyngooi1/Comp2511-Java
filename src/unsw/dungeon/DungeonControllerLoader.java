@@ -54,31 +54,31 @@ public class DungeonControllerLoader extends DungeonLoader {
             viewsByLayer.add(new ArrayList<ImageView>());
         }
 
-        playerImage = createImage("images/human_new.png");
+        playerImage = createImage("images/player.png");
 
-        wallImage = createImage("images/brick_brown_0.png");
+        wallImage = createImage("images/wall.png");
 
         boulderImage = createImage("images/boulder.png");
 
-        enemyImage = createImage("images/deep_elf_master_archer.png");
+        enemyImage = createImage("images/enemy.png");
 
-        treasureImage = createImage("images/gold_pile.png");
+        treasureImage = createImage("images/treasure.png");
 
         exitImage = createImage("images/exit.png");
 
         keyImage = createImage("images/key.png");
 
-        floorSwitchOnImage = createImage("images/pressure_plate.png");
-        floorSwitchOffImage = createImage("images/pressure_plate.png");
+        floorSwitchOnImage = createImage("images/floorswitch.png");
+        floorSwitchOffImage = createImage("images/floorswitch.png");
 
-        invincibilityImage = createImage("images/brilliant_blue_new.png");
+        invincibilityImage = createImage("images/invincibility.png");
 
         doorOpenImage = createImage("images/open_door.png");
         doorCloseImage = createImage("images/closed_door.png");
 
         portalImage = createImage("images/portal.png");
 
-        swordImage = createImage("images/greatsword_1_new.png");
+        swordImage = createImage("images/sword.png");
     }
 
     /**
