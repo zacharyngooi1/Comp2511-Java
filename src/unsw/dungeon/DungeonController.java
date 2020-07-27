@@ -34,7 +34,7 @@ public class DungeonController {
 
     @FXML
     public void initialize() {
-        Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
+        Image ground = DungeonControllerLoader.createImage("images/dirt_0_new.png");
 
         // Add the ground first so it is below all other views.
         for (int x = 0; x < dungeon.getWidth(); x++) {

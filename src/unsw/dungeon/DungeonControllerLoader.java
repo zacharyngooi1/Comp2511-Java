@@ -27,6 +27,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         SWITCHES, OTHERS, PICKUPS, ENEMIES, PLAYER, DOORS
     }
 
+    private static float spriteSize = 32;
     private List<List<ImageView>> viewsByLayer;
 
     private Image playerImage;
@@ -53,31 +54,39 @@ public class DungeonControllerLoader extends DungeonLoader {
             viewsByLayer.add(new ArrayList<ImageView>());
         }
 
-        playerImage = new Image((new File("images/human_new.png")).toURI().toString());
+        playerImage = createImage("images/human_new.png");
 
-        wallImage = new Image((new File("images/brick_brown_0.png")).toURI().toString());
+        wallImage = createImage("images/brick_brown_0.png");
 
-        boulderImage = new Image((new File("images/boulder.png")).toURI().toString());
+        boulderImage = createImage("images/boulder.png");
 
-        enemyImage = new Image((new File("images/deep_elf_master_archer.png")).toURI().toString());
+        enemyImage = createImage("images/deep_elf_master_archer.png");
 
-        treasureImage = new Image((new File("images/gold_pile.png")).toURI().toString());
+        treasureImage = createImage("images/gold_pile.png");
 
-        exitImage = new Image((new File("images/exit.png")).toURI().toString());
+        exitImage = createImage("images/exit.png");
 
-        keyImage = new Image((new File("images/key.png")).toURI().toString());
+        keyImage = createImage("images/key.png");
 
-        floorSwitchOnImage = new Image((new File("images/pressure_plate.png")).toURI().toString());
-        floorSwitchOffImage = new Image((new File("images/pressure_plate.png")).toURI().toString());
+        floorSwitchOnImage = createImage("images/pressure_plate.png");
+        floorSwitchOffImage = createImage("images/pressure_plate.png");
 
-        invincibilityImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
+        invincibilityImage = createImage("images/brilliant_blue_new.png");
 
-        doorOpenImage = new Image((new File("images/open_door.png")).toURI().toString());
-        doorCloseImage = new Image((new File("images/closed_door.png")).toURI().toString());
+        doorOpenImage = createImage("images/open_door.png");
+        doorCloseImage = createImage("images/closed_door.png");
 
-        portalImage = new Image((new File("images/portal.png")).toURI().toString());
+        portalImage = createImage("images/portal.png");
 
-        swordImage = new Image((new File("images/greatsword_1_new.png")).toURI().toString());
+        swordImage = createImage("images/greatsword_1_new.png");
+    }
+
+    /**
+     * Creates an image of the size specified within this class by 'spriteSize'
+     * given its filepath.
+     */
+    public static Image createImage(String filePath) {
+        return new Image((new File(filePath)).toURI().toString(), spriteSize, spriteSize, true, false);
     }
 
     @Override
