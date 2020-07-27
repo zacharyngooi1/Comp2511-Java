@@ -62,25 +62,25 @@ public class DungeonController {
         switch (event.getCode()) {
             case UP:
                 player.moveUp();
-                if (!player.getALiveStatus()) {
+                if (!player.getALiveStatus() || dungeon.checkGameWon()){
                     resetScreen.start();
                 }
                 break;
             case DOWN:
                 player.moveDown();
-                if (!player.getALiveStatus()) {
+                if (!player.getALiveStatus() || dungeon.checkGameWon()) {
                     resetScreen.start();
                 }
                 break;
             case LEFT:
                 player.moveLeft();
-                if (!player.getALiveStatus()) {
+                if (!player.getALiveStatus() || dungeon.checkGameWon()) {
                     resetScreen.start();
                 }
                 break;
             case RIGHT:
                 player.moveRight();
-                if (!player.getALiveStatus()) {
+                if (!player.getALiveStatus() || dungeon.checkGameWon()) {
                     resetScreen.start();
                 }
                 break;
