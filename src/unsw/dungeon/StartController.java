@@ -34,6 +34,4 @@ public class StartController{
     public void setDungeonScreen(DungeonScreen dungeonscreen) {
         this.DungeonScreen = dungeonscreen;
     }
-
-    
 }

@@ -30,6 +30,10 @@ public class DungeonController {
 
     private StartScreen startScreen;
 
+    private DungeonScreen dungeonscreen;
+
+    private ResetScreen resetScreen;
+
     
     public DungeonController(Dungeon dungeon, List<ImageView> initialViews) {
         this.dungeon = dungeon;
@@ -58,15 +62,27 @@ public class DungeonController {
         switch (event.getCode()) {
             case UP:
                 player.moveUp();
+                if (!player.getALiveStatus()) {
+                    resetScreen.start();
+                }
                 break;
             case DOWN:
                 player.moveDown();
+                if (!player.getALiveStatus()) {
+                    resetScreen.start();
+                }
                 break;
             case LEFT:
                 player.moveLeft();
+                if (!player.getALiveStatus()) {
+                    resetScreen.start();
+                }
                 break;
             case RIGHT:
                 player.moveRight();
+                if (!player.getALiveStatus()) {
+                    resetScreen.start();
+                }
                 break;
             default:
                 break;
@@ -75,6 +91,14 @@ public class DungeonController {
 
     public void setStartScreen(StartScreen startScreen) {
         this.startScreen = startScreen;
+    }
+
+    public void setDungeonScreen(DungeonScreen newScreen) {
+        this.dungeonscreen = newScreen;
+    }
+
+    public void setResetScreen(ResetScreen screen) {
+        this.resetScreen = screen;
     }
 
 }
