@@ -27,7 +27,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         SWITCHES, OTHERS, PICKUPS, ENEMIES, PLAYER, DOORS
     }
 
-    private static float spriteSize = 32;
+    private static float spriteSize = 42;
     private List<List<ImageView>> viewsByLayer;
 
     private Image playerImage;
@@ -54,13 +54,13 @@ public class DungeonControllerLoader extends DungeonLoader {
             viewsByLayer.add(new ArrayList<ImageView>());
         }
 
-        playerImage = createImage("images/player.png");
+        playerImage = createImage("images/player_idle1.png");
 
         wallImage = createImage("images/wall.png");
 
         boulderImage = createImage("images/boulder.png");
 
-        enemyImage = createImage("images/enemy.png");
+        enemyImage = createImage("images/enemy_idle1.png");
 
         treasureImage = createImage("images/treasure.png");
 
@@ -68,13 +68,13 @@ public class DungeonControllerLoader extends DungeonLoader {
 
         keyImage = createImage("images/key.png");
 
-        floorSwitchOnImage = createImage("images/floorswitch.png");
-        floorSwitchOffImage = createImage("images/floorswitch.png");
+        floorSwitchOnImage = createImage("images/floorswitch_down.png");
+        floorSwitchOffImage = createImage("images/floorswitch_up.png");
 
         invincibilityImage = createImage("images/invincibility.png");
 
-        doorOpenImage = createImage("images/open_door.png");
-        doorCloseImage = createImage("images/closed_door.png");
+        doorOpenImage = createImage("images/door_open.png");
+        doorCloseImage = createImage("images/door_closed.png");
 
         portalImage = createImage("images/portal.png");
 
@@ -86,7 +86,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * given its filepath.
      */
     public static Image createImage(String filePath) {
-        return new Image((new File(filePath)).toURI().toString(), spriteSize, spriteSize, true, false);
+        return new Image((new File(filePath)).toURI().toString(), spriteSize, spriteSize, true, true);
     }
 
     @Override
@@ -140,7 +140,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(FloorSwitch floorSwitch) {
-        ImageView view = new ImageView(floorSwitchOnImage);
+        ImageView view = new ImageView(floorSwitchOffImage);
         connectEntity(floorSwitch, view);
         trackStatus(floorSwitch, view, floorSwitchOnImage, floorSwitchOffImage);
         viewsByLayer.get(Layer.SWITCHES.ordinal()).add(view);
