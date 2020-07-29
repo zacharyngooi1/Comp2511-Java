@@ -21,8 +21,6 @@ public class ConsumableEntity extends Entity {
     public void setValue(int value) {
         this.value = value;
 
-        System.out.println(getTag() + ".value = " + value);
-
         if (value <= 0) {
             dungeon.getPlayer().consumableDepleted(getTag());
         }

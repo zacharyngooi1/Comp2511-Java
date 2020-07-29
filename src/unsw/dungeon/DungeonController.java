@@ -8,6 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -18,10 +24,26 @@ public class DungeonController {
     @FXML
     private GridPane squares;
 
+    @FXML
+    private ProgressBar swordProgress;
+
+    @FXML
+    private Label swordLabel;
+
+    @FXML
+    private ProgressBar invincibilityProgress;
+
+    @FXML
+    private Label invincibilityLabel;
+
+    @FXML
+    private GridPane inventory;
+
+    @FXML
+    private TextArea goalText;
+
     private List<ImageView> initialViews;
-
     private Player player;
-
     private Dungeon dungeon;
 
     public DungeonController(Dungeon dungeon, List<ImageView> initialViews) {
@@ -44,6 +66,8 @@ public class DungeonController {
         for (ImageView entity : initialViews) {
             squares.getChildren().add(entity);
         }
+
+        updatePlayerUI();
     }
 
     @FXML
@@ -64,5 +88,28 @@ public class DungeonController {
             default:
                 break;
         }
+
+        updatePlayerUI();
+    }
+
+    private void updatePlayerUI() {
+        updateConsumable(player.getSword(), swordProgress, swordLabel);
+        updateConsumable(player.getInvincibility(), invincibilityProgress, invincibilityLabel);
+    }
+
+    private void updateConsumable(ConsumableEntity consumable, ProgressBar progressBar, Label label) {
+        if (consumable == null) {
+            label.setText("");
+            progressBar.setProgress(0);
+        } else {
+            progressBar.setProgress((float) consumable.getValue() / consumable.getMaxValue());
+            label.setText(consumable.getValue() + "/" + consumable.getMaxValue());
+        }
+    }
+
+    // public void updateInventory
+
+    private void updateGoalText(String goalString) {
+        goalText.setText(goalString);
     }
 }
