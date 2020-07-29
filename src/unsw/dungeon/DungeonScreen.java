@@ -19,7 +19,7 @@ public class DungeonScreen {
         this.stage = stage;
         title = "dungeon";
 
-        dungeonControllerLoader = new DungeonControllerLoader("all.json");
+        dungeonControllerLoader = new DungeonControllerLoader("maze.json");
 
         // Actually creates the dungeon
         controller = dungeonControllerLoader.loadController();
@@ -33,10 +33,11 @@ public class DungeonScreen {
     }
 
     public void start() {
-        stage.setTitle(title);
-        stage.setScene(scene);
-        stage.show();
+        this.stage.setTitle(title);
+        this.stage.setScene(scene);
+        this.stage.show();
     }
+    
 
     public DungeonController getController() {
         return controller;
@@ -45,4 +46,35 @@ public class DungeonScreen {
     public Stage getStage() {
         return this.stage;
     }
+
+    public void SetStage(int i) throws IOException{
+        title = "dungeon";
+        String level;
+        if (i == 1) {
+            level = "maze.json";
+        }
+        else if (i == 2) {
+            level = "advanced.json";
+        }
+        else if (i == 3) {
+            level = "all.json";
+        }
+        else level = "maze.json";
+
+        dungeonControllerLoader = new DungeonControllerLoader(level);
+
+        // Actually creates the dungeon
+        controller = dungeonControllerLoader.loadController();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
+        loader.setController(controller);
+
+        Parent root = loader.load();
+        scene = new Scene(root);    
+        root.requestFocus(); 
+
+        this.stage.setTitle(title);
+        this.stage.setScene(scene);
+    }
+
 }

@@ -27,15 +27,31 @@ public class ResetController{
     
     private DungeonScreen dungeonScreen;
 
-    private ResetScreen ResetScreen;
+    private ResetScreen resetScreen;
+
+    private StartScreen startScreen;
+
+    private LevelSelectScreen levelSelect;
 
     @FXML
     public void ResetAction(ActionEvent event) throws IOException {
+        
     	if (dungeonScreen != null) {
             DungeonScreen newDungeon = new DungeonScreen(dungeonScreen.getStage());
-            newDungeon.getController().setDungeonScreen(newDungeon);
-            newDungeon.getController().setResetScreen(ResetScreen);
-    		newDungeon.start();
+            StartScreen newstart = new StartScreen(startScreen.getStage());
+            LevelSelectScreen newlevelselect = new LevelSelectScreen(levelSelect.getStage());
+
+            newlevelselect.getController().setStartScreen(newstart);
+            newlevelselect.getController().setDungeonScreen(newDungeon);
+            newlevelselect.getController().setResetScreen(resetScreen);
+
+            newDungeon.getController().setResetScreen(resetScreen);
+            newDungeon.getController().setStartScreen(newstart);
+
+            newstart.getController().setDungeonScreen(newDungeon);
+            newstart.getController().setLevelSelect(newlevelselect);
+
+            newstart.start();
         	System.out.println("!!!!!!DUNGEON RESET!!!!!!");
     	} else System.out.println("!!!!!!DUNGEON UNABLE TO RESET!!!!!!");
     }
@@ -47,8 +63,16 @@ public class ResetController{
 		this.dungeonScreen = dungeonScreen;
     }
     
+    public void setLevelSelect(LevelSelectScreen screen) {
+        this.levelSelect = screen;
+    }
+
+    public void setStartScreen(StartScreen startscreen) {
+        this.startScreen = startscreen;
+    }
+
     public void setResetScreen(ResetScreen screen) {
-        this.ResetScreen = screen;
+		this.resetScreen = screen;
     }
 
 }
