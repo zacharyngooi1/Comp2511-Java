@@ -57,7 +57,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <TextArea fx:id="goalText" layoutX="11.0" layoutY="172.0" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: white;" text="[ ] Complete all of the following:  [ ] Kill all enemies (1 left)  [ ] Activate all switches (2 left)  [ ] Get to the exit  [ ] Collect all treasure (2 left)" wrapText="true" />
+            <TextArea fx:id="goalText" editable="false" layoutX="11.0" layoutY="172.0" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: white;" text="[ ] Complete all of the following:  [ ] Kill all enemies (1 left)  [ ] Activate all switches (2 left)  [ ] Get to the exit  [ ] Collect all treasure (2 left)" />
          </children>
       </Pane>
       <Pane layoutX="170.0" minHeight="0.0" style="-fx-background-color: grey;">

@@ -2,15 +2,17 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -42,24 +44,32 @@ public class DungeonController {
     @FXML
     private TextArea goalText;
 
-    private List<ImageView> initialViews;
-    private Player player;
     private Dungeon dungeon;
+    private Player player;
+    private List<ImageView> initialViews;
 
-    public DungeonController(Dungeon dungeon, List<ImageView> initialViews) {
+    // A map between entities and their views that should always be 1:1.
+    private HashMap<Entity, ImageView> entitiesViews;
+
+    // Maps between IDs and hues for various entities.
+    private HashMap<Integer, Double> doorKeyIDsHues;
+    private HashMap<Integer, Double> portalIDsHues;
+
+    public DungeonController(Dungeon dungeon, List<ImageView> initialViews, HashMap<Entity, ImageView> entitiesViews) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialViews = new ArrayList<>(initialViews);
+        this.doorKeyIDsHues = new HashMap<>();
+        this.portalIDsHues = new HashMap<>();
+        this.entitiesViews = new HashMap<>(entitiesViews);
     }
 
     @FXML
     public void initialize() {
-        Image ground = DungeonControllerLoader.createImage("dirt.png");
-
         // Add the ground first so it is below all other views.
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
-                squares.add(new ImageView(ground), x, y);
+                squares.add(new ImageView(Images.dirtImage), x, y);
             }
         }
 
@@ -67,7 +77,9 @@ public class DungeonController {
             squares.getChildren().add(entity);
         }
 
-        updatePlayerUI();
+        setupHueMaps();
+        applyHueMaps();
+        updateUI();
     }
 
     @FXML
@@ -89,10 +101,78 @@ public class DungeonController {
                 break;
         }
 
-        updatePlayerUI();
+        updateUI();
     }
 
-    private void updatePlayerUI() {
+    /**
+     * Setup doorKeyIDsHues and portalIDsHues by evenly distributing
+     * hue values across the number of unique door/key IDs and portal IDs
+     * respectively.
+     */
+    private void setupHueMaps() {
+        double hueOffset = 0;
+        HashSet<Integer> keyIDs = new HashSet<>();
+
+        for (Key key : dungeon.getKeys()) {
+            keyIDs.add(key.getID());
+        }
+
+        for (Integer keyID : keyIDs) {
+            doorKeyIDsHues.put(keyID, hueOffset);
+            hueOffset += 1.0 / keyIDs.size();
+        }
+
+        hueOffset = 0;
+        HashSet<Integer> portalIDs = new HashSet<>();
+
+        for (Portal portal : dungeon.getPortals()) {
+            portalIDs.add(portal.getID());
+        }
+
+        for (Integer portalID : portalIDs) {
+            portalIDsHues.put(portalID, hueOffset);
+            hueOffset += 1.0 / portalIDs.size();
+        }
+    }
+
+    private void applyHueMaps() {
+        for (Entity entity : entitiesViews.keySet()) {
+            switch (entity.getTag()) {
+                case KEY:
+                    Key key = (Key) entity;
+                    setHue(entitiesViews.get(entity), doorKeyIDsHues.get(key.getID()));
+                    System.out.println(doorKeyIDsHues.get(key.getID()));
+                    break;
+                case DOOR:
+                    Door door = (Door) entity;
+                    setHue(entitiesViews.get(entity), doorKeyIDsHues.get(door.getID()));
+                    break;
+                case PORTAL:
+                    Portal portal = (Portal) entity;
+                    setHue(entitiesViews.get(entity), portalIDsHues.get(portal.getID()));
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Sets the hue of a given ImageView.
+     */
+    private void setHue(ImageView imageView, double hue) {
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setHue(hue);
+        imageView.setEffect(colorAdjust);
+    }
+
+    private void updateUI() {
+        updateConsumableUI();
+        updateInventoryUI();
+        updateGoalUI();
+    }
+
+    private void updateConsumableUI() {
         updateConsumable(player.getSword(), swordProgress, swordLabel);
         updateConsumable(player.getInvincibility(), invincibilityProgress, invincibilityLabel);
     }
@@ -107,9 +187,16 @@ public class DungeonController {
         }
     }
 
-    // public void updateInventory
+    private void updateInventoryUI() {
+        // clear inventory
 
-    private void updateGoalText(String goalString) {
-        goalText.setText(goalString);
+        // At the moment the inventory only consists of keys.
+        for (Key key : player.getKeys()) {
+            ;
+        }
+    }
+
+    private void updateGoalUI() {
+        goalText.setText(dungeon.getGoalString());
     }
 }

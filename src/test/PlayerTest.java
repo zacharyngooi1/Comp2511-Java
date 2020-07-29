@@ -38,7 +38,7 @@ class PlayerTest {
     void TestExistece() {
         assertEquals(dungeon.getEntitiesAtSquare(1, 1).size(), 1);
     }
-    
+
 
     @Test
 	void movingPlayer() {
@@ -52,7 +52,7 @@ class PlayerTest {
 		player.moveRight();
 		assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
-        
+
         player.moveUp();
 		assertEquals(player.getX(), 1);
 		assertEquals(player.getY(), 0);
@@ -60,20 +60,20 @@ class PlayerTest {
 		player.moveDown();
 		assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
-        
+
         player.moveDown();
 		assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 2);
-        
+
         player.moveDown();
 		assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 3);
-        
+
         player.moveRight();
 		assertEquals(player.getX(), 2);
 		assertEquals(player.getY(), 3);
     }
-    
+
     @Test
 	void collisionTest() {
 		// Player at (1,1)
@@ -86,12 +86,12 @@ class PlayerTest {
 		assertEquals(player.getX(), 1);
 		assertEquals(player.getY(), 1);
     }
-    
+
     @Test
 	void testBoundary() {
 		assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
-        
+
         player.moveUp();
         assertEquals(player.getY(), 0);
         player.moveUp();

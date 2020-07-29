@@ -198,7 +198,7 @@ class InvincibleTest {
         // assert invincibility value
         Invincibility currentInvincibility = player.getInvincibility();
         assertEquals(currentInvincibility.getValue(),19);
-        
+
         // Enemy will only be able to run one square away
 
         player.moveRight();

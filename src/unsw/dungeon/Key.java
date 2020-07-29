@@ -8,7 +8,7 @@ public class Key extends Entity {
         this.id = id;
     }
 
-    public int getId() {
+    public int getID() {
         return this.id;
     }
 }

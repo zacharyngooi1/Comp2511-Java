@@ -8,13 +8,17 @@ public class Door extends AlternatingEntity {
         this.id = id;
     }
 
+    public int getID() {
+        return id;
+    }
+
     /**
      * Try to unlock this door given a key.
      * @param key the key to try with this door.
      * @return whether or not this door was successfully unlocked.
      */
     public boolean tryUnlock(Key key) {
-        if (id == key.getId()) {
+        if (id == key.getID()) {
             setCollisionLayer(new CollisionLayer(0));
             setStatus(true);
             return true;

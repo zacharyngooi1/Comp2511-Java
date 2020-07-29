@@ -3,6 +3,7 @@ package unsw.dungeon;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -10,8 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-
-import java.io.File;
 
 /**
  * Loads the model via DungeonLoader. Implements the functions on the view
@@ -27,152 +26,119 @@ public class DungeonControllerLoader extends DungeonLoader {
         SWITCHES, OTHERS, PICKUPS, ENEMIES, PLAYER, DOORS
     }
 
-    private static float spriteSize = 42;
     private List<List<ImageView>> viewsByLayer;
 
-    private Image playerImage;
-    private Image wallImage;
-    private Image boulderImage;
-    private Image enemyImage;
-    private Image treasureImage;
-    private Image exitImage;
-    private Image keyImage;
-    private Image floorSwitchOnImage;
-    private Image floorSwitchOffImage;
-    private Image invincibilityImage;
-    private Image doorOpenImage;
-    private Image doorCloseImage;
-    private Image portalImage;
-    private Image swordImage;
-
+    // A map between entities and their views that should always be 1:1.
+    private HashMap<Entity, ImageView> entitiesViews;
 
     public DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);
 
         viewsByLayer = new ArrayList<List<ImageView>>();
+
         for (int i = 0; i < Layer.values().length; i++) {
             viewsByLayer.add(new ArrayList<ImageView>());
         }
 
-        playerImage = createImage("player_idle1.png");
-
-        wallImage = createImage("wall.png");
-
-        boulderImage = createImage("boulder.png");
-
-        enemyImage = createImage("enemy_idle1.png");
-
-        treasureImage = createImage("treasure.png");
-
-        exitImage = createImage("exit.png");
-
-        keyImage = createImage("key.png");
-
-        floorSwitchOnImage = createImage("floorswitch_down.png");
-        floorSwitchOffImage = createImage("floorswitch_up.png");
-
-        invincibilityImage = createImage("invincibility.png");
-
-        doorOpenImage = createImage("door_open.png");
-        doorCloseImage = createImage("door_closed.png");
-
-        portalImage = createImage("portal.png");
-
-        swordImage = createImage("sword.png");
-    }
-
-    /**
-     * Creates an image of the size specified within this class by 'spriteSize'
-     * given its file name in src/resources/images.
-     */
-    public static Image createImage(String fileName) {
-        return new Image((new File("src/resources/images/" + fileName)).toURI().toString(), spriteSize, spriteSize, true, true);
+        entitiesViews = new HashMap<>();
     }
 
     @Override
     public void onLoad(Entity player) {
-        ImageView view = new ImageView(playerImage);
+        ImageView view = new ImageView(Images.playerIdle1Image);
         connectEntity(player, view);
         viewsByLayer.get(Layer.PLAYER.ordinal()).add(view);
+        entitiesViews.put(player, view);
     }
 
     @Override
     public void onLoad(Wall wall) {
-        ImageView view = new ImageView(wallImage);
+        ImageView view = new ImageView(Images.wallImage);
         connectEntity(wall, view);
         viewsByLayer.get(Layer.OTHERS.ordinal()).add(view);
+        entitiesViews.put(wall, view);
     }
 
     @Override
     public void onLoad(Boulder boulder) {
-        ImageView view = new ImageView(boulderImage);
+        ImageView view = new ImageView(Images.boulderImage);
         connectEntity(boulder, view);
         viewsByLayer.get(Layer.OTHERS.ordinal()).add(view);
+        entitiesViews.put(boulder, view);
     }
 
     @Override
     public void onLoad(Enemy enemy) {
-        ImageView view = new ImageView(enemyImage);
+        ImageView view = new ImageView(Images.enemyIdle1Image);
         connectEntity(enemy, view);
         viewsByLayer.get(Layer.ENEMIES.ordinal()).add(view);
+        entitiesViews.put(enemy, view);
     }
 
     @Override
     public void onLoad(Treasure treasure) {
-        ImageView view = new ImageView(treasureImage);
+        ImageView view = new ImageView(Images.treasureImage);
         connectEntity(treasure, view);
         viewsByLayer.get(Layer.PICKUPS.ordinal()).add(view);
+        entitiesViews.put(treasure, view);
     }
 
     @Override
     public void onLoad(Exit exit) {
-        ImageView view = new ImageView(exitImage);
+        ImageView view = new ImageView(Images.exitImage);
         connectEntity(exit, view);
         viewsByLayer.get(Layer.OTHERS.ordinal()).add(view);
+        entitiesViews.put(exit, view);
     }
 
     @Override
     public void onLoad(Key key) {
-        ImageView view = new ImageView(keyImage);
+        ImageView view = new ImageView(Images.keyImage);
         connectEntity(key, view);
         viewsByLayer.get(Layer.PICKUPS.ordinal()).add(view);
+        entitiesViews.put(key, view);
     }
 
     @Override
     public void onLoad(FloorSwitch floorSwitch) {
-        ImageView view = new ImageView(floorSwitchOffImage);
+        ImageView view = new ImageView(Images.floorSwitchOffImage);
         connectEntity(floorSwitch, view);
-        trackStatus(floorSwitch, view, floorSwitchOnImage, floorSwitchOffImage);
+        trackStatus(floorSwitch, view, Images.floorSwitchOnImage, Images.floorSwitchOffImage);
         viewsByLayer.get(Layer.SWITCHES.ordinal()).add(view);
+        entitiesViews.put(floorSwitch, view);
     }
 
     @Override
     public void onLoad(Invincibility invincibility) {
-        ImageView view = new ImageView(invincibilityImage);
+        ImageView view = new ImageView(Images.invincibilityImage);
         connectEntity(invincibility, view);
         viewsByLayer.get(Layer.PICKUPS.ordinal()).add(view);
+        entitiesViews.put(invincibility, view);
     }
 
     @Override
     public void onLoad(Door door) {
-        ImageView view = new ImageView(doorCloseImage);
+        ImageView view = new ImageView(Images.doorCloseImage);
         connectEntity(door, view);
-        trackStatus(door, view, doorOpenImage, doorCloseImage);
+        trackStatus(door, view, Images.doorOpenImage, Images.doorCloseImage);
         viewsByLayer.get(Layer.DOORS.ordinal()).add(view);
+        entitiesViews.put(door, view);
     }
 
     @Override
     public void onLoad(Portal portal) {
-        ImageView view = new ImageView(portalImage);
+        ImageView view = new ImageView(Images.portalImage);
         connectEntity(portal, view);
         viewsByLayer.get(Layer.OTHERS.ordinal()).add(view);
+        entitiesViews.put(portal, view);
     }
 
     @Override
     public void onLoad(Sword sword) {
-        ImageView view = new ImageView(swordImage);
+        ImageView view = new ImageView(Images.swordImage);
         connectEntity(sword, view);
         viewsByLayer.get(Layer.PICKUPS.ordinal()).add(view);
+        entitiesViews.put(sword, view);
     }
 
     private void connectEntity(Entity entity, ImageView view) {
@@ -260,6 +226,6 @@ public class DungeonControllerLoader extends DungeonLoader {
             }
         }
 
-        return new DungeonController(dungeon, viewsByLayerFlattened);
+        return new DungeonController(dungeon, viewsByLayerFlattened, entitiesViews);
     }
 }

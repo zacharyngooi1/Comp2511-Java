@@ -24,6 +24,7 @@ public class Dungeon {
     private List<Treasure> treasures;
     private List<Enemy> enemies;
     private List<FloorSwitch> floorSwitches;
+    private List<Key> keys;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -31,11 +32,12 @@ public class Dungeon {
         this.goal = null;
         this.player = null;
         this.exit = null;
-        this.entities = new ArrayList<Entity>();
-        this.portals = new ArrayList<Portal>();
-        this.treasures = new ArrayList<Treasure>();
-        this.enemies = new ArrayList<Enemy>();
-        this.floorSwitches = new ArrayList<FloorSwitch>();
+        this.entities = new ArrayList<>();
+        this.portals = new ArrayList<>();
+        this.treasures = new ArrayList<>();
+        this.enemies = new ArrayList<>();
+        this.floorSwitches = new ArrayList<>();
+        this.keys = new ArrayList<>();
     }
 
     public int getWidth() {
@@ -70,6 +72,10 @@ public class Dungeon {
         return floorSwitches;
     }
 
+    public List<Key> getKeys() {
+        return keys;
+    }
+
     /**
      * Find the entities at square (x, y).
      * @return a list of entities.
@@ -91,14 +97,16 @@ public class Dungeon {
     }
 
     public boolean checkGameWon() {
-        System.out.println(goal.decorateGoalString(""));
-
         if (goal.isComplete()) {
             System.out.println("Game won");
             return true;
         }
 
         return false;
+    }
+
+    public String getGoalString() {
+        return goal.decorateGoalString("");
     }
 
     public void addEntity(Entity entity) {
@@ -122,6 +130,9 @@ public class Dungeon {
                 break;
             case FLOORSWITCH:
                 floorSwitches.add((FloorSwitch) entity);
+                break;
+            case KEY:
+                keys.add((Key) entity);
                 break;
             default:
                 break;
@@ -158,6 +169,9 @@ public class Dungeon {
                 break;
             case FLOORSWITCH:
                 floorSwitches.remove(entity);
+                break;
+            case KEY:
+                keys.remove(entity);
                 break;
             default:
                 break;

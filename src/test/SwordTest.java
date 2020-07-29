@@ -99,8 +99,8 @@ class SwordTest {
         assertEquals(dungeon.getEntitiesAtSquare(enemy2.getX(), enemy2.getY()).get(0).getTag(), Tag.ENEMY);
 
         // Move player to enemy 1
-        player.moveRight();      
-        
+        player.moveRight();
+
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).size(), 1);
 
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).get(0).getTag(), Tag.PLAYER);
@@ -109,8 +109,8 @@ class SwordTest {
 
         assertEquals(currentSword.getValue(), 4);
 
-        player.moveRight();      
-        
+        player.moveRight();
+
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).size(), 1);
 
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).get(0).getTag(), Tag.PLAYER);
@@ -119,7 +119,7 @@ class SwordTest {
 
         assertEquals(currentSword.getValue(), 3);
         assertEquals(dungeon.getEnemies().size(), 0);
-    }   
+    }
 
     @Test
     void TestSwordValue() {
