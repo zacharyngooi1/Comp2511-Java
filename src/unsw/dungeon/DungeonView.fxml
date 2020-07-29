@@ -47,7 +47,7 @@
                   </Label>
                </children>
             </Group>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="11.0" layoutY="95.0" prefHeight="81.0" prefWidth="150.0" vbarPolicy="ALWAYS">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="11.0" layoutY="95.0" onKeyPressed="#handleKeyPress" prefHeight="81.0" prefWidth="150.0" vbarPolicy="ALWAYS">
               <content>
                 <AnchorPane>
                      <children>
@@ -66,7 +66,7 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <TextArea fx:id="goalText" editable="false" layoutX="11.0" layoutY="193.0" prefHeight="193.0" prefWidth="150.0" style="-fx-background-color: white;" text="text">
+            <TextArea fx:id="goalText" editable="false" layoutX="11.0" layoutY="193.0" onKeyPressed="#handleKeyPress" prefHeight="193.0" prefWidth="150.0" style="-fx-background-color: white;" text="text">
                <font>
                   <Font size="11.0" />
                </font>
@@ -75,7 +75,7 @@
       </Pane>
       <Pane layoutX="170.0" minHeight="0.0" style="-fx-background-color: grey;">
          <children>
-            <GridPane fx:id="squares" alignment="CENTER" onKeyPressed="#handleKeyPress" prefHeight="0.0" prefWidth="0.0">
+            <GridPane fx:id="squares" alignment="CENTER" prefHeight="0.0" prefWidth="0.0">
                <columnConstraints>
                   <ColumnConstraints />
                </columnConstraints>

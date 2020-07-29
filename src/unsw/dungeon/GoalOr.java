@@ -27,7 +27,7 @@ public class GoalOr extends Goal {
 
     @Override
     public String decorateGoalString(String goalString) {
-        goalString += createCheckbox() + " Complete one of the following:\n";
+        goalString += createCheckbox() + " Complete one:\n";
 
         for (Goal goal : subgoals) {
             goalString += "  ";
