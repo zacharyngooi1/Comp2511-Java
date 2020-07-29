@@ -13,9 +13,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.scene.Node;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -188,11 +186,20 @@ public class DungeonController {
     }
 
     private void updateInventoryUI() {
-        // clear inventory
+        for (Node node : new ArrayList<Node>(inventory.getChildren())) {
+            inventory.getChildren().remove(node);
+        }
+
+        List<Key> keys = new ArrayList<>(player.getKeys());
 
         // At the moment the inventory only consists of keys.
-        for (Key key : player.getKeys()) {
-            ;
+        for (int y = 0; y < inventory.getHeight() && !keys.isEmpty(); y++) {
+            for (int x = 0; x < inventory.getWidth() && !keys.isEmpty(); x++) {
+                ImageView imageView = new ImageView(Images.keyImage);
+                Key nextKey = keys.remove(0);
+                setHue(imageView, doorKeyIDsHues.get(nextKey.getID()));
+                inventory.add(imageView, x, y);
+            }
         }
     }
 
