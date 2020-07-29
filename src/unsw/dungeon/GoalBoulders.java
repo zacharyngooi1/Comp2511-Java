@@ -1,13 +1,25 @@
 package unsw.dungeon;
 
-public class GoalBoulders implements Goal {
+public class GoalBoulders extends Goal {
     private Dungeon dungeon;
 
     GoalBoulders(Dungeon dungeon) {
         this.dungeon = dungeon;
     }
 
+    @Override
     public boolean isComplete() {
+        for (FloorSwitch floorSwitch : dungeon.getFloorSwitches()) {
+            if (!floorSwitch.getStatus()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public String decorateGoalString(String goalString) {
         int switchesLeft = 0;
 
         for (FloorSwitch floorSwitch : dungeon.getFloorSwitches()) {
@@ -16,8 +28,7 @@ public class GoalBoulders implements Goal {
             }
         }
 
-        System.out.println(switchesLeft + " switch(es) left");
-
-        return switchesLeft == 0;
+        goalString += createCheckbox() + " Activate all switches (" + switchesLeft + " left)\n";
+        return goalString;
     }
 }

@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoalOr implements Goal {
+public class GoalOr extends Goal {
     private List<Goal> subgoals;
 
     GoalOr() {
@@ -14,6 +14,7 @@ public class GoalOr implements Goal {
         subgoals.add(goal);
     }
 
+    @Override
     public boolean isComplete() {
         for (Goal goal : subgoals) {
             if (goal.isComplete()) {
@@ -22,5 +23,17 @@ public class GoalOr implements Goal {
         }
 
         return false;
+    }
+
+    @Override
+    public String decorateGoalString(String goalString) {
+        goalString += createCheckbox() + " Complete one of the following:\n";
+
+        for (Goal goal : subgoals) {
+            goalString += "  ";
+            goalString = goal.decorateGoalString(goalString);
+        }
+
+        return goalString;
     }
 }

@@ -91,6 +91,8 @@ public class Dungeon {
     }
 
     public boolean checkGameWon() {
+        System.out.println(goal.decorateGoalString(""));
+
         if (goal.isComplete()) {
             System.out.println("Game won");
             return true;

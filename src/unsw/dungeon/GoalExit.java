@@ -1,14 +1,20 @@
 package unsw.dungeon;
 
-public class GoalExit implements Goal {
+public class GoalExit extends Goal {
     private Dungeon dungeon;
 
     GoalExit(Dungeon dungeon) {
         this.dungeon = dungeon;
     }
 
+    @Override
     public boolean isComplete() {
-        System.out.println("Player at exit = " + dungeon.getExit().getStatus());
         return dungeon.getExit().getStatus();
+    }
+
+    @Override
+    public String decorateGoalString(String goalString) {
+        goalString += createCheckbox() + " Get to the exit\n";
+        return goalString;
     }
 }
