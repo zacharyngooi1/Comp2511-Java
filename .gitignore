@@ -5,4 +5,4 @@ hs_err_pid*
 /lib/
 /build/
 /.gradle/
-/images/src.psd
+/src/resources/images/src.psd

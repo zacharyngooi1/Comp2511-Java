@@ -9,8 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
-import java.io.File;
-
 /**
  * A JavaFX controller for the dungeon.
  *
@@ -34,7 +32,7 @@ public class DungeonController {
 
     @FXML
     public void initialize() {
-        Image ground = DungeonControllerLoader.createImage("images/dirt.png");
+        Image ground = DungeonControllerLoader.createImage("dirt.png");
 
         // Add the ground first so it is below all other views.
         for (int x = 0; x < dungeon.getWidth(); x++) {

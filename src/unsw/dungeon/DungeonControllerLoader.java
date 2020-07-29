@@ -54,39 +54,39 @@ public class DungeonControllerLoader extends DungeonLoader {
             viewsByLayer.add(new ArrayList<ImageView>());
         }
 
-        playerImage = createImage("images/player_idle1.png");
+        playerImage = createImage("player_idle1.png");
 
-        wallImage = createImage("images/wall.png");
+        wallImage = createImage("wall.png");
 
-        boulderImage = createImage("images/boulder.png");
+        boulderImage = createImage("boulder.png");
 
-        enemyImage = createImage("images/enemy_idle1.png");
+        enemyImage = createImage("enemy_idle1.png");
 
-        treasureImage = createImage("images/treasure.png");
+        treasureImage = createImage("treasure.png");
 
-        exitImage = createImage("images/exit.png");
+        exitImage = createImage("exit.png");
 
-        keyImage = createImage("images/key.png");
+        keyImage = createImage("key.png");
 
-        floorSwitchOnImage = createImage("images/floorswitch_down.png");
-        floorSwitchOffImage = createImage("images/floorswitch_up.png");
+        floorSwitchOnImage = createImage("floorswitch_down.png");
+        floorSwitchOffImage = createImage("floorswitch_up.png");
 
-        invincibilityImage = createImage("images/invincibility.png");
+        invincibilityImage = createImage("invincibility.png");
 
-        doorOpenImage = createImage("images/door_open.png");
-        doorCloseImage = createImage("images/door_closed.png");
+        doorOpenImage = createImage("door_open.png");
+        doorCloseImage = createImage("door_closed.png");
 
-        portalImage = createImage("images/portal.png");
+        portalImage = createImage("portal.png");
 
-        swordImage = createImage("images/sword.png");
+        swordImage = createImage("sword.png");
     }
 
     /**
      * Creates an image of the size specified within this class by 'spriteSize'
-     * given its filepath.
+     * given its file name in src/resources/images.
      */
-    public static Image createImage(String filePath) {
-        return new Image((new File(filePath)).toURI().toString(), spriteSize, spriteSize, true, true);
+    public static Image createImage(String fileName) {
+        return new Image((new File("src/resources/images/" + fileName)).toURI().toString(), spriteSize, spriteSize, true, true);
     }
 
     @Override
