@@ -47,6 +47,7 @@ public class DungeonController {
     private List<ImageView> initialViews;
 
     private final int inventoryWidth = 4;
+    private final int inventoryMaxHeight = 20;
 
     // A map between entities and their views that should always be 1:1.
     private HashMap<Entity, ImageView> entitiesViews;
@@ -141,7 +142,6 @@ public class DungeonController {
                 case KEY:
                     Key key = (Key) entity;
                     setHue(entitiesViews.get(entity), doorKeyIDsHues.get(key.getID()));
-                    System.out.println(doorKeyIDsHues.get(key.getID()));
                     break;
                 case DOOR:
                     Door door = (Door) entity;
@@ -179,9 +179,11 @@ public class DungeonController {
 
     private void updateConsumable(ConsumableEntity consumable, ProgressBar progressBar, Label label) {
         if (consumable == null) {
+            progressBar.setDisable(true);
             label.setText("");
             progressBar.setProgress(0);
         } else {
+            progressBar.setDisable(false);
             progressBar.setProgress((float) consumable.getValue() / consumable.getMaxValue());
             label.setText(consumable.getValue() + "/" + consumable.getMaxValue());
         }
@@ -196,8 +198,7 @@ public class DungeonController {
         List<Key> keys = new ArrayList<>(player.getKeys());
         List<Treasure> treasures = new ArrayList<>(player.getTreasures());
 
-        // At the moment the inventory only consists of keys.
-        for (int y = 0; y < inventory.getHeight(); y++) {
+        for (int y = 0; y < inventoryMaxHeight; y++) {
             for (int x = 0; x < inventoryWidth; x++) {
                 if (!keys.isEmpty()) {
                     ImageView imageView = new ImageView(Images.keyImage);
