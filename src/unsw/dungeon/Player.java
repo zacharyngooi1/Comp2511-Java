@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Player extends MoveableEntity {
     private List<Enemy> enemies;
     private List<Key> keys;
+    private List<Treasure> treasures;
     private Sword sword;
     private Invincibility invincibility;
 
@@ -22,8 +23,9 @@ public class Player extends MoveableEntity {
      */
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, Tag.PLAYER, new CollisionLayer(CollisionLayer.PLAYER), dungeon);
-        enemies = new ArrayList<Enemy>();
-        keys = new ArrayList<Key>();
+        enemies = new ArrayList<>();
+        keys = new ArrayList<>();
+        treasures = new ArrayList<>();
     }
 
     public void moveUp() {
@@ -71,6 +73,10 @@ public class Player extends MoveableEntity {
 
     public List<Key> getKeys() {
         return this.keys;
+    }
+
+    public List<Treasure> getTreasures() {
+        return this.treasures;
     }
 
     /**
@@ -197,6 +203,7 @@ public class Player extends MoveableEntity {
 
     private void onTreasureEnter(Treasure treasure) {
         treasure.removeFromDungeon();
+        treasures.add(treasure);
     }
 
     private void onKeyEnter(Key key) {

@@ -46,6 +46,8 @@ public class DungeonController {
     private Player player;
     private List<ImageView> initialViews;
 
+    private final int inventoryWidth = 4;
+
     // A map between entities and their views that should always be 1:1.
     private HashMap<Entity, ImageView> entitiesViews;
 
@@ -186,19 +188,27 @@ public class DungeonController {
     }
 
     private void updateInventoryUI() {
+        // Clear the inventory.
         for (Node node : new ArrayList<Node>(inventory.getChildren())) {
             inventory.getChildren().remove(node);
         }
 
         List<Key> keys = new ArrayList<>(player.getKeys());
+        List<Treasure> treasures = new ArrayList<>(player.getTreasures());
 
         // At the moment the inventory only consists of keys.
-        for (int y = 0; y < inventory.getHeight() && !keys.isEmpty(); y++) {
-            for (int x = 0; x < inventory.getWidth() && !keys.isEmpty(); x++) {
-                ImageView imageView = new ImageView(Images.keyImage);
-                Key nextKey = keys.remove(0);
-                setHue(imageView, doorKeyIDsHues.get(nextKey.getID()));
-                inventory.add(imageView, x, y);
+        for (int y = 0; y < inventory.getHeight(); y++) {
+            for (int x = 0; x < inventoryWidth; x++) {
+                if (!keys.isEmpty()) {
+                    ImageView imageView = new ImageView(Images.keyImage);
+                    Key nextKey = keys.remove(0);
+                    setHue(imageView, doorKeyIDsHues.get(nextKey.getID()));
+                    inventory.add(imageView, x, y);
+                } else if (!treasures.isEmpty()) {
+                    ImageView imageView = new ImageView(Images.treasureImage);
+                    treasures.remove(0);
+                    inventory.add(imageView, x, y);
+                }
             }
         }
     }
