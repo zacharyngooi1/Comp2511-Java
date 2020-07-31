@@ -17,17 +17,22 @@ public class DungeonApplication extends Application {
         DungeonScreen dungeonScreen = new DungeonScreen(primaryStage);
         ResetScreen resetScreen = new ResetScreen(primaryStage);
         LevelSelectScreen levelSelectScreen = new LevelSelectScreen(primaryStage);
+        HowToPlayScreen howToPlayScreen = new HowToPlayScreen(primaryStage);
+
+        howToPlayScreen.getController().setStartScreen(startScreen);
 
         resetScreen.getController().setResetScreen(resetScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
         resetScreen.getController().setStartScreen(startScreen);
         resetScreen.getController().setLevelSelect(levelSelectScreen);
+        resetScreen.getController().setHowToPlayScreen(howToPlayScreen);
 
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setResetScreen(resetScreen);
 
         startScreen.getController().setDungeonScreen(dungeonScreen);
         startScreen.getController().setLevelSelect(levelSelectScreen);
+        startScreen.getController().setHowToPlayScreen(howToPlayScreen);
 
         levelSelectScreen.getController().setDungeonScreen(dungeonScreen);
         levelSelectScreen.getController().setStartScreen(startScreen);

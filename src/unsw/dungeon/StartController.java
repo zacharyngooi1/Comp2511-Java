@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
@@ -37,6 +38,8 @@ public class StartController{
 
     private LevelSelectScreen levelSelectScreen;
 
+    private HowToPlayScreen howToPlayScreen;
+
     @FXML
 	public void handlePlay(ActionEvent event) throws IOException {
         System.out.println("Play pressed!");
@@ -52,11 +55,13 @@ public class StartController{
     @FXML
 	public void HandleHowToPlay(ActionEvent event) {
         System.out.println("how to play pressed!");
+        howToPlayScreen.start();
     }
 
     @FXML
 	public void HandleExit(ActionEvent event) {
         System.out.println("exit pressed!");
+        Platform.exit();
     }
 
     public void setDungeonScreen(DungeonScreen dungeonscreen) {
@@ -65,5 +70,9 @@ public class StartController{
 
     public void setLevelSelect(LevelSelectScreen levelSelectScreen) {
         this.levelSelectScreen = levelSelectScreen;
+    }
+
+    public void setHowToPlayScreen(HowToPlayScreen howToPlay) {
+        this.howToPlayScreen = howToPlay;
     }
 }

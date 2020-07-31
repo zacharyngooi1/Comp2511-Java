@@ -45,6 +45,7 @@ public class LevelSelectController {
         System.out.println("level 1 pressed!");
         dungeonScreen.SetStage(1);
         dungeonScreen.getController().setResetScreen(resetScreen);
+        dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.start();
     }
 
@@ -53,6 +54,7 @@ public class LevelSelectController {
         System.out.println("Level 2 pressed!");
         dungeonScreen.SetStage(2);
         dungeonScreen.getController().setResetScreen(resetScreen);
+        dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.start();
     }
 
@@ -61,6 +63,7 @@ public class LevelSelectController {
         System.out.println("Level 3 pressed!");
         dungeonScreen.SetStage(3);
         dungeonScreen.getController().setResetScreen(resetScreen);
+        dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.start();
     }
 
