@@ -14,10 +14,12 @@ public class DungeonScreen {
     private DungeonController controller;
     private DungeonControllerLoader dungeonControllerLoader;
     private Scene scene;
+    private int current_stage;
 
     public DungeonScreen(Stage stage) throws IOException {
         this.stage = stage;
         title = "dungeon";
+        this.current_stage = 1;
 
         dungeonControllerLoader = new DungeonControllerLoader("maze.json");
 
@@ -47,19 +49,29 @@ public class DungeonScreen {
         return this.stage;
     }
 
+    public int getInt() {
+        return this.current_stage;
+    }
+
     public void SetStage(int i) throws IOException{
         title = "dungeon";
         String level;
         if (i == 1) {
             level = "maze.json";
+            this.current_stage = 1;
         }
         else if (i == 2) {
             level = "advanced.json";
+            this.current_stage = 2;
         }
         else if (i == 3) {
             level = "all.json";
+            this.current_stage = 3;
         }
-        else level = "maze.json";
+        else {
+            level = "maze.json";
+            current_stage = 1;
+        }
 
         dungeonControllerLoader = new DungeonControllerLoader(level);
 

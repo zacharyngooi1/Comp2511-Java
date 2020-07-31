@@ -24,6 +24,9 @@ import java.io.File;
 public class ResetController{
     @FXML
     private Button Tryagain;
+
+    @FXML
+    private Button retry;
     
     private DungeonScreen dungeonScreen;
 
@@ -32,6 +35,32 @@ public class ResetController{
     private StartScreen startScreen;
 
     private LevelSelectScreen levelSelect;
+
+
+
+    @FXML void RetryAction(ActionEvent event) throws IOException {
+
+        if (dungeonScreen != null) {
+            DungeonScreen newDungeon = new DungeonScreen(dungeonScreen.getStage());
+            StartScreen newstart = new StartScreen(startScreen.getStage());
+            LevelSelectScreen newlevelselect = new LevelSelectScreen(levelSelect.getStage());
+
+            newDungeon.SetStage(dungeonScreen.getInt());
+
+            newlevelselect.getController().setStartScreen(newstart);
+            newlevelselect.getController().setDungeonScreen(newDungeon);
+            newlevelselect.getController().setResetScreen(resetScreen);
+
+            newDungeon.getController().setResetScreen(resetScreen);
+            newDungeon.getController().setStartScreen(newstart);
+
+            newstart.getController().setDungeonScreen(newDungeon);
+            newstart.getController().setLevelSelect(newlevelselect);
+
+            newDungeon.start();
+        	System.out.println("!!!!!!DUNGEON RESET!!!!!!");
+    	} else System.out.println("!!!!!!DUNGEON UNABLE TO RESET!!!!!!");
+    }
 
     @FXML
     public void ResetAction(ActionEvent event) throws IOException {

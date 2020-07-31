@@ -31,10 +31,8 @@ public class MoveableEntity extends Entity {
                 return false;
             }
         }
-
         int prevX = getX();
         int prevY = getY();
-
         setX(x);
         setY(y);
         // System.out.println(getTag() + " -> (" + x + ", " + y + ")");
@@ -56,7 +54,6 @@ public class MoveableEntity extends Entity {
                 this.onEntityEnter(entity);
             }
         }
-
         return true;
     }
 

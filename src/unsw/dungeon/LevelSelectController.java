@@ -66,7 +66,7 @@ public class LevelSelectController {
 
     @FXML
 	public void HandleBack(ActionEvent event) {
-        System.out.println("Play pressed!");
+        System.out.println("Back pressed!");
         startScreen.start();
     }
 
