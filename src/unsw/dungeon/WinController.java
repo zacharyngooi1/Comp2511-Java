@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
@@ -21,18 +22,12 @@ import java.io.File;
  *
  * @author Robert Clifton-Everest
  */
-public class LevelSelectController {
+public class WinController {
     @FXML
-    private Button Level1;
+    private Button nextLevel;
 
     @FXML
-    private Button Level2;
-
-    @FXML
-    private Button Level3;
-
-    @FXML
-    private Button Back;
+    private Button mainMenu;
     
     private DungeonScreen dungeonScreen;
 
@@ -43,9 +38,15 @@ public class LevelSelectController {
     private WinScreen winScreen;
 
     @FXML
-	public void HandleLevel1(ActionEvent event) throws IOException {
-        System.out.println("level 1 pressed!");
-        dungeonScreen.SetStage(1);
+	public void HandleNextLevel(ActionEvent event) throws IOException {
+        System.out.println("next level pressed!");
+        if (dungeonScreen.getInt() == 3) {
+            // Create a new scene for a all levek completed.
+            System.out.println("All levels complete");
+            startScreen.start();
+            return;
+        }
+        dungeonScreen.SetStage(dungeonScreen.getInt() + 1);
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
@@ -53,27 +54,7 @@ public class LevelSelectController {
     }
 
     @FXML
-	public void HandleLevel2(ActionEvent event) throws IOException {
-        System.out.println("Level 2 pressed!");
-        dungeonScreen.SetStage(2);
-        dungeonScreen.getController().setResetScreen(resetScreen);
-        dungeonScreen.getController().setStartScreen(startScreen);
-        dungeonScreen.getController().setWinScreen(winScreen);
-        dungeonScreen.start();
-    }
-
-    @FXML
-	public void HandleLevel3(ActionEvent event) throws IOException {
-        System.out.println("Level 3 pressed!");
-        dungeonScreen.SetStage(3);
-        dungeonScreen.getController().setResetScreen(resetScreen);
-        dungeonScreen.getController().setStartScreen(startScreen);
-        dungeonScreen.getController().setWinScreen(winScreen);
-        dungeonScreen.start();
-    }
-
-    @FXML
-	public void HandleBack(ActionEvent event) {
+	public void HandleMainMenu(ActionEvent event) {
         System.out.println("Back pressed!");
         startScreen.start();
     }

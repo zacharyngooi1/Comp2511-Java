@@ -34,6 +34,8 @@ public class DungeonController {
 
     private ResetScreen resetScreen;
 
+    private WinScreen winScreen;
+
     
     public DungeonController(Dungeon dungeon, List<ImageView> initialViews) {
         this.dungeon = dungeon;
@@ -62,26 +64,38 @@ public class DungeonController {
         switch (event.getCode()) {
             case UP:
                 player.moveUp();
-                if (!player.getALiveStatus() || dungeon.checkGameWon()){
+                if (!player.getALiveStatus()){
                     resetScreen.start();
+                }
+                else if (dungeon.checkGameWon()) {
+                    winScreen.start();
                 }
                 break;
             case DOWN:
                 player.moveDown();
-                if (!player.getALiveStatus() || dungeon.checkGameWon()) {
+                if (!player.getALiveStatus()) {
                     resetScreen.start();
+                }
+                else if (dungeon.checkGameWon()) {
+                    winScreen.start();
                 }
                 break;
             case LEFT:
                 player.moveLeft();
-                if (!player.getALiveStatus() || dungeon.checkGameWon()) {
+                if (!player.getALiveStatus()) {
                     resetScreen.start();
+                }
+                else if (dungeon.checkGameWon()) {
+                    winScreen.start();
                 }
                 break;
             case RIGHT:
                 player.moveRight();
-                if (!player.getALiveStatus() || dungeon.checkGameWon()) {
+                if (!player.getALiveStatus()) {
                     resetScreen.start();
+                }
+                else if (dungeon.checkGameWon()) {
+                    winScreen.start();
                 }
                 break;
             case ESCAPE:
@@ -102,6 +116,10 @@ public class DungeonController {
 
     public void setResetScreen(ResetScreen screen) {
         this.resetScreen = screen;
+    }
+
+    public void setWinScreen(WinScreen winscreen) {
+        this.winScreen = winscreen;
     }
 
 }

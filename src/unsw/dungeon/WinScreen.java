@@ -7,19 +7,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class ResetScreen {
+public class WinScreen {
 
     private Stage stage;
     private String title;
-    private ResetController controller;
+    private WinController controller;
     private Scene scene;
 
-    public ResetScreen(Stage stage) throws IOException {
+    public WinScreen(Stage stage) throws IOException {
         this.stage = stage;
         title = "Retry Screen";
 
-        controller = new ResetController();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOverView.fxml"));
+        controller = new WinController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameWonView.fxml"));
         loader.setController(controller);
 
         // load into a Parent node called root
@@ -33,7 +33,7 @@ public class ResetScreen {
         stage.show();
     }
 
-    public ResetController getController() {
+    public WinController getController() {
         return controller;
     }
 

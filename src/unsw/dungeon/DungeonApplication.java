@@ -18,6 +18,12 @@ public class DungeonApplication extends Application {
         ResetScreen resetScreen = new ResetScreen(primaryStage);
         LevelSelectScreen levelSelectScreen = new LevelSelectScreen(primaryStage);
         HowToPlayScreen howToPlayScreen = new HowToPlayScreen(primaryStage);
+        WinScreen winScreen = new WinScreen(primaryStage);
+
+        winScreen.getController().setDungeonScreen(dungeonScreen);
+        winScreen.getController().setStartScreen(startScreen);
+        winScreen.getController().setResetScreen(resetScreen);
+        winScreen.getController().setWinScreen(winScreen);
 
         howToPlayScreen.getController().setStartScreen(startScreen);
 
@@ -26,9 +32,11 @@ public class DungeonApplication extends Application {
         resetScreen.getController().setStartScreen(startScreen);
         resetScreen.getController().setLevelSelect(levelSelectScreen);
         resetScreen.getController().setHowToPlayScreen(howToPlayScreen);
+        resetScreen.getController().setWinScreen(winScreen);
 
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setResetScreen(resetScreen);
+        dungeonScreen.getController().setWinScreen(winScreen);
 
         startScreen.getController().setDungeonScreen(dungeonScreen);
         startScreen.getController().setLevelSelect(levelSelectScreen);
@@ -37,6 +45,7 @@ public class DungeonApplication extends Application {
         levelSelectScreen.getController().setDungeonScreen(dungeonScreen);
         levelSelectScreen.getController().setStartScreen(startScreen);
         levelSelectScreen.getController().setResetScreen(resetScreen);
+        levelSelectScreen.getController().setWinScreen(winScreen);
         
         startScreen.start();
     }

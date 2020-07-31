@@ -38,21 +38,26 @@ public class ResetController{
 
     private HowToPlayScreen howToPlayScreen;
 
+    private WinScreen winScreen;
+
     @FXML void RetryAction(ActionEvent event) throws IOException {
 
         if (dungeonScreen != null) {
             DungeonScreen newDungeon = new DungeonScreen(dungeonScreen.getStage());
             StartScreen newstart = new StartScreen(startScreen.getStage());
             LevelSelectScreen newlevelselect = new LevelSelectScreen(levelSelect.getStage());
+            WinScreen newWinScreen = new WinScreen(winScreen.getStage());
 
             newDungeon.SetStage(dungeonScreen.getInt());
 
             newlevelselect.getController().setStartScreen(newstart);
             newlevelselect.getController().setDungeonScreen(newDungeon);
             newlevelselect.getController().setResetScreen(resetScreen);
+            newlevelselect.getController().setWinScreen(newWinScreen);
 
             newDungeon.getController().setResetScreen(resetScreen);
             newDungeon.getController().setStartScreen(newstart);
+            newDungeon.getController().setWinScreen(newWinScreen);
 
             newstart.getController().setDungeonScreen(newDungeon);
             newstart.getController().setLevelSelect(newlevelselect);
@@ -69,15 +74,18 @@ public class ResetController{
             StartScreen newstart = new StartScreen(startScreen.getStage());
             LevelSelectScreen newlevelselect = new LevelSelectScreen(levelSelect.getStage());
             HowToPlayScreen newHowToPlay = new HowToPlayScreen(howToPlayScreen.getStage());
+            WinScreen newWinScreen = new WinScreen(winScreen.getStage());
 
             newHowToPlay.getController().setStartScreen(newstart);
-
+        
             newlevelselect.getController().setStartScreen(newstart);
             newlevelselect.getController().setDungeonScreen(newDungeon);
             newlevelselect.getController().setResetScreen(resetScreen);
+            newlevelselect.getController().setWinScreen(newWinScreen);
 
             newDungeon.getController().setResetScreen(resetScreen);
             newDungeon.getController().setStartScreen(newstart);
+            newDungeon.getController().setWinScreen(newWinScreen);
 
             newstart.getController().setDungeonScreen(newDungeon);
             newstart.getController().setLevelSelect(newlevelselect);
@@ -110,4 +118,7 @@ public class ResetController{
         this.howToPlayScreen = howToPlay;
     }
 
+    public void setWinScreen(WinScreen winscreen) {
+        this.winScreen = winscreen;
+    }
 }
