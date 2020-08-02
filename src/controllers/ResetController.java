@@ -40,16 +40,21 @@ public class ResetController{
             WinScreen newWinScreen = new WinScreen(winScreen.getStage());
             AllLevelCompleteScreen newEndingScreen = new AllLevelCompleteScreen(allLevelCompleteScreen.getStage());
 
-            newWinScreen.getController().setAllLevelComplete(newEndingScreen);
-
             newDungeon.SetStage(dungeonScreen.getInt());
+
+            newEndingScreen.getController().setStartScreen(newstart);
+
+            newWinScreen.getController().setAllLevelComplete(newEndingScreen);
+            newWinScreen.getController().setDungeonScreen(newDungeon);
+            newWinScreen.getController().setResetScreen(resetScreen);
+            newWinScreen.getController().setStartScreen(newstart);
 
             newlevelselect.getController().setStartScreen(newstart);
             newlevelselect.getController().setDungeonScreen(newDungeon);
             newlevelselect.getController().setResetScreen(resetScreen);
             newlevelselect.getController().setWinScreen(newWinScreen);
 
-            newDungeon.getController().setResetScreen(resetScreen);
+            newDungeon.getController().setResetScreen(this.resetScreen);
             newDungeon.getController().setStartScreen(newstart);
             newDungeon.getController().setWinScreen(newWinScreen);
 
@@ -70,10 +75,10 @@ public class ResetController{
             WinScreen newWinScreen = new WinScreen(winScreen.getStage());
             AllLevelCompleteScreen newEndingScreen = new AllLevelCompleteScreen(allLevelCompleteScreen.getStage());
 
-            newWinScreen.getController().setAllLevelComplete(newEndingScreen);
-
             newHowToPlay.getController().setStartScreen(newstart);
 
+            newEndingScreen.getController().setStartScreen(newstart);
+        
             newlevelselect.getController().setStartScreen(newstart);
             newlevelselect.getController().setDungeonScreen(newDungeon);
             newlevelselect.getController().setResetScreen(resetScreen);
@@ -82,6 +87,10 @@ public class ResetController{
             newDungeon.getController().setResetScreen(resetScreen);
             newDungeon.getController().setStartScreen(newstart);
             newDungeon.getController().setWinScreen(newWinScreen);
+
+            newWinScreen.getController().setAllLevelComplete(newEndingScreen);
+            newWinScreen.getController().setDungeonScreen(newDungeon);
+            newWinScreen.getController().setStartScreen(newstart);
 
             newstart.getController().setDungeonScreen(newDungeon);
             newstart.getController().setLevelSelect(newlevelselect);
