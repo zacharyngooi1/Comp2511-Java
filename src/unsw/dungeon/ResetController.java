@@ -40,6 +40,8 @@ public class ResetController{
 
     private WinScreen winScreen;
 
+    private AllLevelCompleteScreen allLevelCompleteScreen;
+
     @FXML void RetryAction(ActionEvent event) throws IOException {
 
         if (dungeonScreen != null) {
@@ -47,6 +49,9 @@ public class ResetController{
             StartScreen newstart = new StartScreen(startScreen.getStage());
             LevelSelectScreen newlevelselect = new LevelSelectScreen(levelSelect.getStage());
             WinScreen newWinScreen = new WinScreen(winScreen.getStage());
+            AllLevelCompleteScreen newEndingScreen = new AllLevelCompleteScreen(allLevelCompleteScreen.getStage());
+
+            newWinScreen.getController().setAllLevelComplete(newEndingScreen);
 
             newDungeon.SetStage(dungeonScreen.getInt());
 
@@ -75,6 +80,9 @@ public class ResetController{
             LevelSelectScreen newlevelselect = new LevelSelectScreen(levelSelect.getStage());
             HowToPlayScreen newHowToPlay = new HowToPlayScreen(howToPlayScreen.getStage());
             WinScreen newWinScreen = new WinScreen(winScreen.getStage());
+            AllLevelCompleteScreen newEndingScreen = new AllLevelCompleteScreen(allLevelCompleteScreen.getStage());
+
+            newWinScreen.getController().setAllLevelComplete(newEndingScreen);
 
             newHowToPlay.getController().setStartScreen(newstart);
         
@@ -120,5 +128,9 @@ public class ResetController{
 
     public void setWinScreen(WinScreen winscreen) {
         this.winScreen = winscreen;
+    }
+
+    public void setAllLevelComplete(AllLevelCompleteScreen endingscreen) {
+        this.allLevelCompleteScreen = endingscreen;
     }
 }

@@ -37,13 +37,15 @@ public class WinController {
 
     private WinScreen winScreen;
 
+    private AllLevelCompleteScreen allLevelComplete;
+
     @FXML
 	public void HandleNextLevel(ActionEvent event) throws IOException {
         System.out.println("next level pressed!");
         if (dungeonScreen.getInt() == 3) {
             // Create a new scene for a all levek completed.
             System.out.println("All levels complete");
-            startScreen.start();
+            allLevelComplete.start();
             return;
         }
         dungeonScreen.SetStage(dungeonScreen.getInt() + 1);
@@ -73,6 +75,10 @@ public class WinController {
 
     public void setWinScreen(WinScreen winscreen) {
         this.winScreen = winscreen;
+    }
+
+    public void setAllLevelComplete(AllLevelCompleteScreen endingscreen) {
+        this.allLevelComplete = endingscreen;
     }
 
 }
