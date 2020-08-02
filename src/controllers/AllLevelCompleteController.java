@@ -11,12 +11,12 @@ import javafx.scene.control.Button;
  */
 public class AllLevelCompleteController{
     @FXML
-    private Button MainMenu;
+    private Button mainMenu;
 
     private StartScreen startScreen;
 
     @FXML
-    public void HandleMainMenu(ActionEvent event) {
+    public void handleMainMenu(ActionEvent event) {
         startScreen.start();
     }
 

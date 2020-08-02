@@ -30,9 +30,9 @@
          <font>
             <Font name="System Bold" size="19.0" />
          </font></Label>
-      <Button fx:id="HowToPlay" layoutX="159.0" layoutY="256.0" mnemonicParsing="false" onAction="#HandleHowToPlay" text="How To Play" />
-      <Button fx:id="LevelSelect" layoutX="161.0" layoutY="202.0" mnemonicParsing="false" onAction="#HandleLevelSelect" text="Level Select" />
-      <Button fx:id="Exit" layoutX="183.0" layoutY="312.0" mnemonicParsing="false" onAction="#HandleExit" text="Exit" />
+      <Button fx:id="howToPlay" layoutX="159.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleHowToPlay" text="How To Play" />
+      <Button fx:id="levelSelect" layoutX="161.0" layoutY="202.0" mnemonicParsing="false" onAction="#handleLevelSelect" text="Level Select" />
+      <Button fx:id="exit" layoutX="183.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />

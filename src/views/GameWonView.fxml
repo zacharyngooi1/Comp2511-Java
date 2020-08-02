@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="mainMenu" layoutX="262.0" layoutY="246.0" mnemonicParsing="false" onAction="#HandleMainMenu" text="Main Menu" />
-      <Button fx:id="nextLevel" layoutX="266.0" layoutY="165.0" mnemonicParsing="false" onAction="#HandleNextLevel" text="Next level" />
+      <Button fx:id="mainMenu" layoutX="262.0" layoutY="246.0" mnemonicParsing="false" onAction="#handleMainMenu" text="Main Menu" />
+      <Button fx:id="nextLevel" layoutX="266.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleNextLevel" text="Next level" />
    </children>
 </AnchorPane>

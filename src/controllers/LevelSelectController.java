@@ -12,16 +12,16 @@ import java.io.IOException;
  */
 public class LevelSelectController {
     @FXML
-    private Button Level1;
+    private Button level1;
 
     @FXML
-    private Button Level2;
+    private Button level2;
 
     @FXML
-    private Button Level3;
+    private Button level3;
 
     @FXML
-    private Button Back;
+    private Button back;
 
     private DungeonScreen dungeonScreen;
 
@@ -32,7 +32,7 @@ public class LevelSelectController {
     private WinScreen winScreen;
 
     @FXML
-    public void HandleLevel1(ActionEvent event) throws IOException {
+    public void handleLevel1(ActionEvent event) throws IOException {
         dungeonScreen.SetStage(1);
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
@@ -42,7 +42,7 @@ public class LevelSelectController {
     }
 
     @FXML
-    public void HandleLevel2(ActionEvent event) throws IOException {
+    public void handleLevel2(ActionEvent event) throws IOException {
         dungeonScreen.SetStage(2);
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
@@ -52,7 +52,7 @@ public class LevelSelectController {
     }
 
     @FXML
-    public void HandleLevel3(ActionEvent event) throws IOException {
+    public void handleLevel3(ActionEvent event) throws IOException {
         dungeonScreen.SetStage(3);
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
@@ -62,7 +62,7 @@ public class LevelSelectController {
     }
 
     @FXML
-    public void HandleBack(ActionEvent event) {
+    public void handleBack(ActionEvent event) {
         startScreen.start();
     }
 

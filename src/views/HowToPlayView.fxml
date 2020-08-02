@@ -45,7 +45,7 @@
                </image>
             </ImageView>
             <Text layoutX="177.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to the main menu" />
-            <Button fx:id="GoBack" layoutX="39.0" layoutY="345.0" mnemonicParsing="false" onAction="#HandleGoBack" text="Back" />
+            <Button fx:id="back" layoutX="39.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleBack" text="Back" />
             <ScrollPane layoutX="360.0" layoutY="15.0" prefHeight="355.0" prefWidth="413.0">
               <content>
                 <AnchorPane>

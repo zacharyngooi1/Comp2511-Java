@@ -15,7 +15,7 @@
             <Image url="@../../ice_and_fire_web_background.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="MainMenu" layoutX="261.0" layoutY="262.0" mnemonicParsing="false" onAction="#HandleMainMenu" text="Main Menu" />
+      <Button fx:id="mainMenu" layoutX="261.0" layoutY="262.0" mnemonicParsing="false" onAction="#handleMainMenu" text="Main Menu" />
       <Text fill="#ff0d00" layoutX="196.0" layoutY="194.0" stroke="#080808" strokeType="OUTSIDE" strokeWidth="2.0" text="ALL LEVELS COMPLETED">
          <font>
             <Font name="System Bold" size="18.0" />

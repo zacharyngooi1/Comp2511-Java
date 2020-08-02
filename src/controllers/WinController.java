@@ -29,7 +29,7 @@ public class WinController {
     private AllLevelCompleteScreen allLevelComplete;
 
     @FXML
-    public void HandleNextLevel(ActionEvent event) throws IOException {
+    public void handleNextLevel(ActionEvent event) throws IOException {
         if (dungeonScreen.getInt() == 3) {
             allLevelComplete.start();
             return;
@@ -43,7 +43,7 @@ public class WinController {
     }
 
     @FXML
-    public void HandleMainMenu(ActionEvent event) {
+    public void handleMainMenu(ActionEvent event) {
         startScreen.start();
     }
 

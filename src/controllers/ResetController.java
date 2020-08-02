@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
  */
 public class ResetController{
     @FXML
-    private Button Tryagain;
+    private Button mainMenu;
 
     @FXML
     private Button retry;
@@ -32,7 +32,8 @@ public class ResetController{
 
     private AllLevelCompleteScreen allLevelCompleteScreen;
 
-    @FXML void RetryAction(ActionEvent event) throws IOException {
+    @FXML
+    public void handleRetry(ActionEvent event) throws IOException {
         if (dungeonScreen != null) {
             DungeonScreen newDungeon = new DungeonScreen(dungeonScreen.getStage());
             StartScreen newstart = new StartScreen(startScreen.getStage());
@@ -66,7 +67,7 @@ public class ResetController{
     }
 
     @FXML
-    public void ResetAction(ActionEvent event) throws IOException {
+    public void handleMainMenu(ActionEvent event) throws IOException {
         if (dungeonScreen != null) {
             DungeonScreen newDungeon = new DungeonScreen(dungeonScreen.getStage());
             StartScreen newstart = new StartScreen(startScreen.getStage());

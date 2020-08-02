@@ -11,12 +11,12 @@ import javafx.scene.control.Button;
  */
 public class HowToPlayController{
     @FXML
-    private Button GoBack;
+    private Button back;
 
     private StartScreen startScreen;
 
     @FXML
-    public void HandleGoBack(ActionEvent event) {
+    public void handleBack(ActionEvent event) {
         startScreen.start();
     }
 

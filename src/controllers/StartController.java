@@ -17,13 +17,13 @@ public class StartController{
     private Button play;
 
     @FXML
-    private Button LevelSelect;
+    private Button levelSelect;
 
     @FXML
-    private Button HowToPlay;
+    private Button howToPlay;
 
     @FXML
-    private Button Exit;
+    private Button exit;
 
     private DungeonScreen DungeonScreen;
 
@@ -37,17 +37,17 @@ public class StartController{
     }
 
     @FXML
-    public void HandleLevelSelect(ActionEvent event) {
+    public void handleLevelSelect(ActionEvent event) {
         levelSelectScreen.start();
     }
 
     @FXML
-    public void HandleHowToPlay(ActionEvent event) {
+    public void handleHowToPlay(ActionEvent event) {
         howToPlayScreen.start();
     }
 
     @FXML
-    public void HandleExit(ActionEvent event) {
+    public void handleExit(ActionEvent event) {
         Platform.exit();
     }
 
