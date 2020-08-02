@@ -39,7 +39,6 @@ public class DungeonScreen {
         this.stage.show();
     }
 
-
     public DungeonController getController() {
         return controller;
     }
@@ -56,7 +55,7 @@ public class DungeonScreen {
         this.current_stage = newStageInt;
     }
 
-    public void SetStage(int i) throws IOException{
+    public void setStage(int i) throws IOException{
         title = "dungeon";
         String level;
         if (i == 1) {

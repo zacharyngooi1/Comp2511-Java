@@ -35,7 +35,7 @@ public class WinController {
             return;
         }
 
-        dungeonScreen.SetStage(dungeonScreen.getInt() + 1);
+        dungeonScreen.setStage(dungeonScreen.getInt() + 1);
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);

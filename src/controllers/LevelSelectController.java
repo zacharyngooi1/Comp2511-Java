@@ -33,7 +33,7 @@ public class LevelSelectController {
 
     @FXML
     public void handleLevel1(ActionEvent event) throws IOException {
-        dungeonScreen.SetStage(1);
+        dungeonScreen.setStage(1);
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
@@ -43,7 +43,7 @@ public class LevelSelectController {
 
     @FXML
     public void handleLevel2(ActionEvent event) throws IOException {
-        dungeonScreen.SetStage(2);
+        dungeonScreen.setStage(2);
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
@@ -53,7 +53,7 @@ public class LevelSelectController {
 
     @FXML
     public void handleLevel3(ActionEvent event) throws IOException {
-        dungeonScreen.SetStage(3);
+        dungeonScreen.setStage(3);
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
