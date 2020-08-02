@@ -14,6 +14,7 @@ public class Player extends MoveableEntity {
     private List<Key> keys;
     private Sword sword;
     private Invincibility invincibility;
+    private boolean aliveStatus;
 
     /**
      * Create a player positioned in square (x, y).
@@ -24,6 +25,7 @@ public class Player extends MoveableEntity {
         super(x, y, Tag.PLAYER, new CollisionLayer(CollisionLayer.PLAYER), dungeon);
         enemies = new ArrayList<Enemy>();
         keys = new ArrayList<Key>();
+        this.aliveStatus = true;
     }
 
     public void moveUp() {
@@ -212,6 +214,7 @@ public class Player extends MoveableEntity {
             enemy.removeFromDungeon();
         } else {
             removeFromDungeon();
+            aliveStatus = false;
         }
     }
 
@@ -229,5 +232,9 @@ public class Player extends MoveableEntity {
         } else {
             this.invincibility.setValue(this.invincibility.getMaxValue());
         }
+    }
+
+    public boolean getALiveStatus() {
+        return this.aliveStatus;
     }
 }

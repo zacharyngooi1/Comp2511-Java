@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0">
+         <children>
+            <ImageView fitHeight="420.0" fitWidth="800.0" layoutX="-20.0" layoutY="-10.0">
+               <image>
+                  <Image url="@../../How-Play.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="41.0" layoutY="210.0">
+               <image>
+                  <Image url="@../../keyboard-key-pointing-to-right.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="41.0" layoutY="165.0">
+               <image>
+                  <Image url="@../../left-arrow-variant-key-on-keyboard.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="41.0" layoutY="72.0">
+               <image>
+                  <Image url="@../../keyboard-key-arrow-up.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="41.0" layoutY="119.0">
+               <image>
+                  <Image url="@../../keyboard.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutX="34.0" layoutY="262.0">
+               <image>
+                  <Image url="@../../icons8-esc-50.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="95.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Moves player up" />
+            <Text layoutX="95.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Moves player left" />
+            <Text layoutX="95.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Moves player down" />
+            <Text layoutX="95.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Moves player right" />
+            <Text layoutX="97.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exits To Main Menu" />
+            <Text layoutX="41.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How To Play">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
+            <Button fx:id="GoBack" layoutX="33.0" layoutY="341.0" mnemonicParsing="false" onAction="#HandleGoBack" text="Back To Main Menu" />
+            <ScrollPane layoutX="300.0" prefHeight="400.0" prefWidth="503.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="453.0">
+                     <children>
+                        <ImageView fitHeight="420.0" fitWidth="800.0" layoutX="-307.0">
+                           <image>
+                              <Image url="@../../How-Play.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="550.0" fitWidth="620.0" layoutX="-117.0" layoutY="-18.0">
+                           <image>
+                              <Image url="@../../How-Play.jpg" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="101.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entities">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Text>
+                        <ImageView layoutX="33.0" layoutY="111.0">
+                           <image>
+                              <Image url="@../../boulder.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="33.0" layoutY="152.0">
+                           <image>
+                              <Image url="@../../pressure_plate.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="33.0" layoutY="185.0">
+                           <image>
+                              <Image url="@../../key.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="33.0" layoutY="225.0">
+                           <image>
+                              <Image url="@../../closed_door.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="33.0" layoutY="68.0">
+                           <image>
+                              <Image url="@../../human_new.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="33.0" layoutY="268.0">
+                           <image>
+                              <Image url="@../../gold_pile.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="36.0" layoutY="357.0">
+                           <image>
+                              <Image url="@../../brilliant_blue_new.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="36.0" layoutY="401.0">
+                           <image>
+                              <Image url="@../../deep_elf_master_archer.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="35.0" layoutY="314.0">
+                           <image>
+                              <Image url="@../../greatsword_1_new.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="35.0" layoutY="446.0">
+                           <image>
+                              <Image url="@../../exit.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="78.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player" />
+                        <Text layoutX="77.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Key - Used to unlock doors" />
+                        <Text layoutX="77.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Door - Unlocked using keys found aroung the dungeon" />
+                        <Text layoutX="77.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Treasure - Can be picked up by player" />
+                        <Text layoutX="77.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sword - Allows player to kill an enemy (5 Uses)" />
+                        <Text layoutX="77.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invincibility Potion - Makes player nvincible for up to 30 moves" />
+                        <Text layoutX="78.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enemy - Chases player unless player is invincible" />
+                        <Text layoutX="78.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit - Player can only enter once all objectives have been complete" />
+                        <Text layoutX="77.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Switch - Activated only when a boulder is placed on top" />
+                        <Text layoutX="78.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Boulder - Only one can be pushed at a time" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
