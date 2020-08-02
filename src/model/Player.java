@@ -197,6 +197,9 @@ public class Player extends MoveableEntity {
             case INVINCIBILITY:
                 onInvincibilityEnter((Invincibility) other);
                 break;
+            case PORTAL:
+                onPortalEnter((Portal) other);
+                break;
             default:
                 break;
         }
@@ -205,11 +208,13 @@ public class Player extends MoveableEntity {
     private void onTreasureEnter(Treasure treasure) {
         treasure.removeFromDungeon();
         treasures.add(treasure);
+        animationController.transition("pickup");
     }
 
     private void onKeyEnter(Key key) {
         keys.add(key);
         key.removeFromDungeon();
+        animationController.transition("pickup");
     }
 
     private void onEnemyEnter(Enemy enemy) {
@@ -231,6 +236,8 @@ public class Player extends MoveableEntity {
         } else {
             this.sword.setValue(this.sword.getMaxValue());
         }
+
+        animationController.transition("pickup");
     }
 
     private void onInvincibilityEnter(Invincibility invincibility) {
@@ -239,5 +246,11 @@ public class Player extends MoveableEntity {
         } else {
             this.invincibility.setValue(this.invincibility.getMaxValue());
         }
+
+        animationController.transition("pickup");
+    }
+
+    private void onPortalEnter(Portal portal) {
+        animationController.transition("teleport");
     }
 }

@@ -52,7 +52,26 @@ public class DungeonControllerLoader extends DungeonLoader {
         viewsByLayer.get(Layer.PLAYER.ordinal()).add(view);
         entitiesViews.put(player, view);
 
-        AnimationController animationController = setupAnimationController(view, Images.playerAttackImage, Images.playerIdle1Image, Images.playerIdle2Image);
+        AnimationController animationController = new AnimationController(view);
+
+        List<Image> animationCycleImages = new ArrayList<>();
+        animationCycleImages.add(Images.playerIdle1Image);
+        animationCycleImages.add(Images.playerIdle2Image);
+        AnimationCycle animationCycle = new AnimationCycle(animationController, 250, animationCycleImages);
+
+        AnimationStatic attack = new AnimationStatic(animationController, 500, Images.playerAttackImage);
+        AnimationStatic pickup = new AnimationStatic(animationController, 500, Images.playerPickupImage);
+        AnimationStatic teleport = new AnimationStatic(animationController, 1000, Images.playerTeleportImage);
+
+        attack.setNext(animationCycle);
+        pickup.setNext(animationCycle);
+        teleport.setNext(animationCycle);
+
+        animationController.registerTransition("attack", attack);
+        animationController.registerTransition("pickup", pickup);
+        animationController.registerTransition("teleport", teleport);
+
+        animationController.start(animationCycle);
         player.setAnimationController(animationController);
     }
 
@@ -79,7 +98,23 @@ public class DungeonControllerLoader extends DungeonLoader {
         viewsByLayer.get(Layer.ENEMIES.ordinal()).add(view);
         entitiesViews.put(enemy, view);
 
-        AnimationController animationController = setupAnimationController(view, Images.enemyAttackImage, Images.enemyIdle1Image, Images.enemyIdle2Image);
+        AnimationController animationController = new AnimationController(view);
+
+        List<Image> animationCycleImages = new ArrayList<>();
+        animationCycleImages.add(Images.enemyIdle1Image);
+        animationCycleImages.add(Images.enemyIdle2Image);
+        AnimationCycle animationCycle = new AnimationCycle(animationController, 250, animationCycleImages);
+
+        AnimationStatic attack = new AnimationStatic(animationController, 500, Images.enemyAttackImage);
+        AnimationStatic teleport = new AnimationStatic(animationController, 1000, Images.enemyTeleportImage);
+
+        attack.setNext(animationCycle);
+        teleport.setNext(animationCycle);
+
+        animationController.registerTransition("attack", attack);
+        animationController.registerTransition("teleport", teleport);
+
+        animationController.start(animationCycle);
         enemy.setAnimationController(animationController);
     }
 
@@ -216,34 +251,6 @@ public class DungeonControllerLoader extends DungeonLoader {
                 }
             }
         });
-    }
-
-    /**
-     * Construct an animation controller with two animations; an AnimationCycle
-     * containing cycle1Image and cycle2Image, and an AnimationStatic containing
-     * staticImage.
-     * Link the static animation to the cycle animation.
-     * Register a transition called 'attack' that enters the static animation.
-     * Attach the animation controller to imageView.
-     * Start the animation controller.
-     * @return the animation controller.
-     */
-    private AnimationController setupAnimationController(ImageView imageView, Image staticImage, Image cycle1Image, Image cycle2Image) {
-        AnimationController animationController = new AnimationController(imageView);
-
-        AnimationStatic animationStatic = new AnimationStatic(animationController, 500, staticImage);
-        List<Image> animationCycleImages = new ArrayList<>();
-        animationCycleImages.add(cycle1Image);
-        animationCycleImages.add(cycle2Image);
-        AnimationCycle animationCycle = new AnimationCycle(animationController, 250, animationCycleImages);
-
-        animationStatic.setNext(animationCycle);
-
-        animationController.registerTransition("attack", animationStatic);
-
-        animationController.start(animationCycle);
-
-        return animationController;
     }
 
     /**

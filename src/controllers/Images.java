@@ -1,4 +1,4 @@
-package model;
+package controllers;
 
 import javafx.scene.image.Image;
 
@@ -10,11 +10,14 @@ public class Images {
     public static final Image playerIdle1Image = createImage("player_idle1.png");
     public static final Image playerIdle2Image = createImage("player_idle2.png");
     public static final Image playerAttackImage = createImage("player_attack.png");
+    public static final Image playerPickupImage = createImage("player_pickup.png");
+    public static final Image playerTeleportImage = createImage("player_teleport.png");
     public static final Image wallImage = createImage("wall.png");
     public static final Image boulderImage = createImage("boulder.png");
     public static final Image enemyIdle1Image = createImage("enemy_idle1.png");
     public static final Image enemyIdle2Image = createImage("enemy_idle2.png");
     public static final Image enemyAttackImage = createImage("enemy_attack.png");
+    public static final Image enemyTeleportImage = createImage("enemy_teleport.png");
     public static final Image treasureImage = createImage("treasure.png");
     public static final Image exitImage = createImage("exit.png");
     public static final Image keyImage = createImage("key.png");
