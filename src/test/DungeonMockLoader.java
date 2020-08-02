@@ -2,7 +2,8 @@ package test;
 
 import org.json.JSONObject;
 
-import unsw.dungeon.*;
+import controllers.DungeonLoader;
+import model.*;
 
 /**
  * Provides a thin wrapper around DungeonLoader that omits any implementation

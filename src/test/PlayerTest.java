@@ -7,15 +7,15 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.*;
+import model.*;
 
 class PlayerTest {
 
     private Dungeon dungeon;
     private Player player;
 
-	@BeforeEach
-	void initializeTest() {
+    @BeforeEach
+    void initializeTest() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
@@ -41,71 +41,74 @@ class PlayerTest {
 
 
     @Test
-	void movingPlayer() {
-		assertEquals(player.getX(), 1);
-		assertEquals(player.getY(), 1);
+    void movingPlayer() {
+        assertEquals(player.getX(), 1);
+        assertEquals(player.getY(), 1);
 
-		player.moveLeft();
-		assertEquals(player.getX(), 0);
-		assertEquals(player.getY(), 1);
+        player.moveLeft();
+        assertEquals(player.getX(), 0);
+        assertEquals(player.getY(), 1);
 
-		player.moveRight();
-		assertEquals(player.getX(), 1);
+        player.moveRight();
+        assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
 
         player.moveUp();
-		assertEquals(player.getX(), 1);
-		assertEquals(player.getY(), 0);
+        assertEquals(player.getX(), 1);
+        assertEquals(player.getY(), 0);
 
-		player.moveDown();
-		assertEquals(player.getX(), 1);
+        player.moveDown();
+        assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
 
         player.moveDown();
-		assertEquals(player.getX(), 1);
+        assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 2);
 
         player.moveDown();
-		assertEquals(player.getX(), 1);
+        assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 3);
 
         player.moveRight();
-		assertEquals(player.getX(), 2);
-		assertEquals(player.getY(), 3);
+        assertEquals(player.getX(), 2);
+        assertEquals(player.getY(), 3);
     }
 
     @Test
-	void collisionTest() {
-		// Player at (1,1)
+    void collisionTest() {
         Door door = new Door(dungeon, 2, 1, 0);
         dungeon.addEntity(door);
+
         assertEquals(dungeon.getEntitiesAtSquare(2, 1).size(), 1);
 
         player.moveTo(2, 1);
+
         // Player should not be able to move to (2,1)
-		assertEquals(player.getX(), 1);
-		assertEquals(player.getY(), 1);
+        assertEquals(player.getX(), 1);
+        assertEquals(player.getY(), 1);
     }
 
     @Test
-	void testBoundary() {
-		assertEquals(player.getX(), 1);
+    void testBoundary() {
+        assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
 
         player.moveUp();
         assertEquals(player.getY(), 0);
+
         player.moveUp();
         assertEquals(player.getY(), 0);
-        player.moveLeft();
-        assertEquals(player.getX(), 0);
+
         player.moveLeft();
         assertEquals(player.getX(), 0);
 
+        player.moveLeft();
+        assertEquals(player.getX(), 0);
     }
 
     @Test
-	void testBoundaryComprehensive() {
-		assertEquals(player.getX(), 1);
+    void testBoundaryComprehensive() {
+        assertEquals(player.getX(), 1);
         assertEquals(player.getY(), 1);
 
         player.moveTo(0, 0);
@@ -185,9 +188,9 @@ class PlayerTest {
         for (int x= 0; x < 50; x ++) {
             player.moveUp();
         }
+
         assertEquals(player.getX(), 0);
         assertEquals(player.getY(), 0);
-
         assertEquals(dungeon.getEntitiesAtSquare(0, 0).size(), 1);
     }
 }

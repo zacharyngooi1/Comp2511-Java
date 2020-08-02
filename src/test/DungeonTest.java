@@ -10,8 +10,8 @@ import org.json.JSONArray;
 
 import java.util.Random;
 
-import unsw.dungeon.Dungeon;
-import unsw.dungeon.Entity;
+import model.Dungeon;
+import model.Entity;
 
 public class DungeonTest {
     private Random random = new Random();
