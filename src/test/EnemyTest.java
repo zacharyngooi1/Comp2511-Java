@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.*;
-import unsw.dungeon.Entity.Tag;
+import model.*;
+import model.Entity.Tag;
 
 class EnemyTest {
 
@@ -17,8 +17,8 @@ class EnemyTest {
     private Player player;
     private Enemy enemy;
 
-	@BeforeEach
-	void initializeTest() {
+    @BeforeEach
+    void initializeTest() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,

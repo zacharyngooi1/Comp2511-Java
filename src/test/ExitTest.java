@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.Dungeon;
-import unsw.dungeon.Player;
-import unsw.dungeon.Exit;
-import unsw.dungeon.Enemy;
+import model.Dungeon;
+import model.Player;
+import model.Exit;
+import model.Enemy;
 
 public class ExitTest {
     private Dungeon dungeon;

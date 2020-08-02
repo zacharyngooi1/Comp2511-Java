@@ -7,16 +7,16 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.*;
-import unsw.dungeon.Entity.Tag;
+import model.*;
+import model.Entity.Tag;
 
 class BoulderTest {
 
     private Dungeon dungeon;
     private Player player;
-    
+
     @BeforeEach
-	void initializeTest() {
+    void initializeTest() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
