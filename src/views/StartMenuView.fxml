@@ -8,6 +8,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -26,10 +28,18 @@
             <Font name="Apple Braille" size="13.0" />
          </font>
       </Button>
-      <Label layoutX="149.0" layoutY="50.0" text="Main Menu" textFill="WHITE">
+      <Label layoutX="149.0" layoutY="50.0" text="Main Menu">
          <font>
             <Font name="System Bold" size="19.0" />
-         </font></Label>
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
       <Button fx:id="howToPlay" layoutX="159.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleHowToPlay" text="How To Play" />
       <Button fx:id="levelSelect" layoutX="161.0" layoutY="202.0" mnemonicParsing="false" onAction="#handleLevelSelect" text="Level Select" />
       <Button fx:id="exit" layoutX="183.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
