@@ -7,10 +7,10 @@ import java.util.HashMap;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Node;
 
 /**
  * Loads the model via DungeonLoader. Implements the functions on the view
@@ -44,11 +44,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Entity player) {
+    public void onLoad(Player player) {
         ImageView view = new ImageView(Images.playerIdle1Image);
         connectEntity(player, view);
         viewsByLayer.get(Layer.PLAYER.ordinal()).add(view);
         entitiesViews.put(player, view);
+
+        AnimationController animationController = setupAnimationController(view, Images.playerAttackImage, Images.playerIdle1Image, Images.playerIdle2Image);
+        player.setAnimationController(animationController);
     }
 
     @Override
@@ -73,6 +76,9 @@ public class DungeonControllerLoader extends DungeonLoader {
         connectEntity(enemy, view);
         viewsByLayer.get(Layer.ENEMIES.ordinal()).add(view);
         entitiesViews.put(enemy, view);
+
+        AnimationController animationController = setupAnimationController(view, Images.enemyAttackImage, Images.enemyIdle1Image, Images.enemyIdle2Image);
+        enemy.setAnimationController(animationController);
     }
 
     @Override
@@ -208,6 +214,36 @@ public class DungeonControllerLoader extends DungeonLoader {
                 }
             }
         });
+    }
+
+    /**
+     * Construct an animation controller with two animations; an AnimationCycle
+     * containing cycle1Image and cycle2Image, and an AnimationStatic containing
+     * staticImage.
+     * Link these two animations to each other.
+     * Register a transition called 'attack' to enter the static animation. 
+     * Attach the animation controller to imageView.
+     * Start the animation controller.
+     * @return the animation controller.
+     */
+    private AnimationController setupAnimationController(ImageView imageView, Image staticImage, Image cycle1Image, Image cycle2Image) {
+        AnimationController animationController = new AnimationController(imageView);
+
+        AnimationStatic animationStatic = new AnimationStatic(animationController, 500, staticImage);
+
+        List<Image> animationCycleImages = new ArrayList<>();
+        animationCycleImages.add(cycle1Image);
+        animationCycleImages.add(cycle2Image);
+        AnimationCycle animationCycle = new AnimationCycle(animationController, 250, animationCycleImages);
+
+        animationStatic.setNext(animationCycle);
+        animationCycle.setNext(animationStatic); 
+
+        animationController.start(animationCycle);
+
+        animationController.registerTransition("attack", animationStatic);
+
+        return animationController;
     }
 
     /**

@@ -23,7 +23,7 @@ public class DungeonMockLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Entity player) {
+    public void onLoad(Player player) {
         ;
     }
 

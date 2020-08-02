@@ -1,9 +1,15 @@
 package unsw.dungeon;
 
 public class Enemy extends MoveableEntity {
+    private AnimationController animationController;
+
     public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y, Tag.ENEMY, new CollisionLayer(CollisionLayer.ENEMY), dungeon);
         dungeon.getPlayer().attachEnemy(this);
+    }
+
+    public void setAnimationController(AnimationController animationController) {
+        this.animationController = animationController;
     }
 
     public void playerMoved(int x, int y, boolean isInvincible) {
@@ -71,5 +77,18 @@ public class Enemy extends MoveableEntity {
      */
     public double calDis(int x1, int y1, int x2, int y2) {
 	    return Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+    }
+
+    @Override
+    public void onEntityEnter(Entity other) {
+        super.onEntityEnter(other);
+
+        switch (other.getTag()) {
+            case PLAYER:
+                animationController.transition("attack");
+                break;
+            default:
+                break;
+        }
     }
 }

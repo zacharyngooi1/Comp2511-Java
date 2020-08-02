@@ -15,6 +15,7 @@ public class Player extends MoveableEntity {
     private List<Treasure> treasures;
     private Sword sword;
     private Invincibility invincibility;
+    private AnimationController animationController;
 
     /**
      * Create a player positioned in square (x, y).
@@ -77,6 +78,10 @@ public class Player extends MoveableEntity {
 
     public List<Treasure> getTreasures() {
         return this.treasures;
+    }
+
+    public void setAnimationController(AnimationController animationController) {
+        this.animationController = animationController;
     }
 
     /**
@@ -212,11 +217,13 @@ public class Player extends MoveableEntity {
     }
 
     private void onEnemyEnter(Enemy enemy) {
-        if (sword != null) {
-            sword.setValue(sword.getValue() - 1);
+        if (sword != null || invincibility != null) {
+            if (sword != null && invincibility == null) {
+                sword.setValue(sword.getValue() - 1);
+            }
+
             enemy.removeFromDungeon();
-        } else if (invincibility != null) {
-            enemy.removeFromDungeon();
+            animationController.transition("attack");
         } else {
             removeFromDungeon();
         }
