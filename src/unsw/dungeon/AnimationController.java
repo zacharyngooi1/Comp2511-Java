@@ -4,6 +4,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import java.util.HashMap;
 
+/**
+ * A state machine that transitions between animations.
+ */
 public class AnimationController {
     private ImageView imageView;
     private Animation currentAnimation;

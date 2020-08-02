@@ -141,16 +141,10 @@ public class Player extends MoveableEntity {
     }
 
     private void attemptDoorOpen(Door door) {
-        if (keys.isEmpty()) {
-            System.out.println("No keys");
-        } else {
-            System.out.println("Checking keys");
-
-            // Must iterate like this because keys clearly may be modified
-            for (int i = 0; i < keys.size(); i++) {
-                if (door.tryUnlock(keys.get(i))) {
-                    keys.remove(keys.get(i));
-                }
+        // Must iterate like this because keys clearly may be modified
+        for (int i = 0; i < keys.size(); i++) {
+            if (door.tryUnlock(keys.get(i))) {
+                keys.remove(keys.get(i));
             }
         }
     }

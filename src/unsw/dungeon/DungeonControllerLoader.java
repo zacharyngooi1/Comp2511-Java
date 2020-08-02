@@ -220,8 +220,8 @@ public class DungeonControllerLoader extends DungeonLoader {
      * Construct an animation controller with two animations; an AnimationCycle
      * containing cycle1Image and cycle2Image, and an AnimationStatic containing
      * staticImage.
-     * Link these two animations to each other.
-     * Register a transition called 'attack' to enter the static animation. 
+     * Link the static animation to the cycle animation.
+     * Register a transition called 'attack' that enters the static animation.
      * Attach the animation controller to imageView.
      * Start the animation controller.
      * @return the animation controller.
@@ -230,18 +230,16 @@ public class DungeonControllerLoader extends DungeonLoader {
         AnimationController animationController = new AnimationController(imageView);
 
         AnimationStatic animationStatic = new AnimationStatic(animationController, 500, staticImage);
-
         List<Image> animationCycleImages = new ArrayList<>();
         animationCycleImages.add(cycle1Image);
         animationCycleImages.add(cycle2Image);
         AnimationCycle animationCycle = new AnimationCycle(animationController, 250, animationCycleImages);
 
         animationStatic.setNext(animationCycle);
-        animationCycle.setNext(animationStatic); 
-
-        animationController.start(animationCycle);
 
         animationController.registerTransition("attack", animationStatic);
+
+        animationController.start(animationCycle);
 
         return animationController;
     }
