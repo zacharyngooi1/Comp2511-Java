@@ -52,6 +52,10 @@ public class DungeonScreen {
         return this.current_stage;
     }
 
+    public void setInt(int newStageInt) {
+        this.current_stage = newStageInt;
+    }
+
     public void SetStage(int i) throws IOException{
         title = "dungeon";
         String level;

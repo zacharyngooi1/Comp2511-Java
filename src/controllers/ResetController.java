@@ -42,7 +42,7 @@ public class ResetController{
             AllLevelCompleteScreen newEndingScreen = new AllLevelCompleteScreen(allLevelCompleteScreen.getStage());
 
             newDungeon.SetStage(dungeonScreen.getInt());
-
+            
             newEndingScreen.getController().setStartScreen(newstart);
 
             newWinScreen.getController().setAllLevelComplete(newEndingScreen);
