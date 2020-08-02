@@ -7,13 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.Dungeon;
-import unsw.dungeon.Player;
-import unsw.dungeon.FloorSwitch;
-import unsw.dungeon.Enemy;
-import unsw.dungeon.Door;
-import unsw.dungeon.Boulder;
-import unsw.dungeon.CollisionLayer;
+import model.*;
 
 public class FloorSwitchTest {
     private Dungeon dungeon;

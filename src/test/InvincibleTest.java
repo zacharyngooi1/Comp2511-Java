@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.*;
-import unsw.dungeon.Entity.Tag;
+import model.*;
+import model.Entity.Tag;
 
 class InvincibleTest {
 
@@ -18,8 +18,8 @@ class InvincibleTest {
     private Player player;
     private Enemy enemy;
 
-	@BeforeEach
-	void initializeTest() {
+    @BeforeEach
+    void initializeTest() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
@@ -198,7 +198,7 @@ class InvincibleTest {
         // assert invincibility value
         Invincibility currentInvincibility = player.getInvincibility();
         assertEquals(currentInvincibility.getValue(),19);
-        
+
         // Enemy will only be able to run one square away
         player.moveRight();
         player.moveRight();
@@ -215,7 +215,7 @@ class InvincibleTest {
     }
 
     @Test
-    void TestPotionRefill() { 
+    void TestPotionRefill() {
         Invincibility potion = new Invincibility(dungeon, 2, 3);
         dungeon.addEntity(potion);
 

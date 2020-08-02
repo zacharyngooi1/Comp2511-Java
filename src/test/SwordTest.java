@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.*;
-import unsw.dungeon.Entity.Tag;
+import model.*;
+import model.Entity.Tag;
 
 class SwordTest {
 
@@ -18,8 +18,8 @@ class SwordTest {
     private Player player;
     private Enemy enemy;
 
-	@BeforeEach
-	void initializeTest() {
+    @BeforeEach
+    void initializeTest() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
@@ -98,21 +98,22 @@ class SwordTest {
         assertEquals(dungeon.getEntitiesAtSquare(enemy2.getX(), enemy2.getY()).get(0).getTag(), Tag.ENEMY);
 
         // Move player to enemy 1
-        player.moveRight();      
+        player.moveRight();
+
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).size(), 1);
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).get(0).getTag(), Tag.PLAYER);
         assertEquals(dungeon.getEntitiesAtSquare(enemy.getX(), enemy.getY()).get(0).getTag(), Tag.PLAYER);
         assertEquals(currentSword.getValue(), 4);
 
-        // Move player to enemy 2
-        player.moveRight();      
+        player.moveRight();
+
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).size(), 1);
         assertEquals(dungeon.getEntitiesAtSquare(player.getX(), player.getY()).get(0).getTag(), Tag.PLAYER);
         assertEquals(dungeon.getEntitiesAtSquare(enemy2.getX(), enemy2.getY()).get(0).getTag(), Tag.PLAYER);
         assertEquals(currentSword.getValue(), 3);
 
         assertEquals(dungeon.getEnemies().size(), 0);
-    }   
+    }
 
     @Test
     void TestSwordValue() {

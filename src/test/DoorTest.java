@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.*;
-import unsw.dungeon.Entity.Tag;
+import model.*;
+import model.Entity.Tag;
 
 class DoorTest {
 
     private Dungeon dungeon;
     private Player player;
-    
+
     @Test
-	void SimpleDoorTest() {
+    void SimpleDoorTest() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
@@ -37,7 +37,7 @@ class DoorTest {
         player.moveRight();
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
-        
+
         // Player blocked by door to the right
         player.moveRight();
         assertEquals(player.getX(), 2);
@@ -71,7 +71,7 @@ class DoorTest {
         assertEquals(player.getX(), 3);
         assertEquals(player.getY(), 0);
 
-        // Player blocked by door below him   
+        // Player blocked by door below him
         player.moveDown();
         assertEquals(player.getX(), 3);
         assertEquals(player.getY(), 0);
@@ -79,7 +79,7 @@ class DoorTest {
 
 
     @Test
-	void DoorUnlockTest() {
+    void DoorUnlockTest() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
@@ -109,11 +109,11 @@ class DoorTest {
         assertEquals(player.getY(), 1);
         assertEquals(player.getKeys().size(),0);
         assertEquals(dungeon.getEntitiesAtSquare(3, 1).size(), 2);
-        
+
     }
 
     @Test
-	void DoorUnlockFailTest() {
+    void DoorUnlockFailTest() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
@@ -136,7 +136,7 @@ class DoorTest {
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
         assertEquals(player.getKeys().size(),1);
-        
+
         // Fail to Unlock door
         player.moveRight();
         assertEquals(player.getX(), 2);
@@ -147,7 +147,7 @@ class DoorTest {
     }
 
     @Test
-	void DoorUnlockFailTest2() {
+    void DoorUnlockFailTest2() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
@@ -179,7 +179,7 @@ class DoorTest {
         assertEquals(player.getX(), 2);
         assertEquals(player.getY(), 1);
         assertEquals(player.getKeys().size(),2);
-        
+
         // Fail to Unlock door even with 2 keys
         player.moveRight();
         assertEquals(player.getX(), 2);

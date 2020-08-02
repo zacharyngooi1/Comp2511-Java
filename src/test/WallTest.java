@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.*;
+import model.*;
 
 class WallTest {
 
@@ -15,8 +15,8 @@ class WallTest {
     private Player player;
     private Enemy enemy;
 
-	@BeforeEach
-	void initializeTest() {
+    @BeforeEach
+    void initializeTest() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
@@ -56,13 +56,13 @@ class WallTest {
 
     @Test
     void TestMovement() {
-        // Enemy is encased in walls and cannot move either even though 
+        // Enemy is encased in walls and cannot move either even though
         // The enemy is trying to move to the player.
         player.moveDown();
         assertEquals(player.getX(), 1);
-        assertEquals(player.getY(), 1);   
+        assertEquals(player.getY(), 1);
         assertEquals(enemy.getX(), 5);
-        assertEquals(enemy.getY(), 5);   
+        assertEquals(enemy.getY(), 5);
 
         player.moveLeft();
         assertEquals(player.getX(), 1);
@@ -95,7 +95,7 @@ class WallTest {
         // aAd wall to the right of boulder.
         dungeon.addEntity(new Wall(dungeon, 3, 1));
 
-        // Attempt to move player to the right to move boulder at 
+        // Attempt to move player to the right to move boulder at
         // the same time but should fail as wall is blocking boulder.
         player.moveRight();
         assertEquals(player.getX(), 1);

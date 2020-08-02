@@ -9,16 +9,16 @@ import org.junit.jupiter.api.Test;
 
 import org.json.JSONArray;
 
-import unsw.dungeon.*;
-import unsw.dungeon.Entity.Tag;
+import model.*;
+import model.Entity.Tag;
 
 class TreasureTest {
 
     private Dungeon dungeon;
     private Player player;
-    
+
     @BeforeEach
-	void Initialize() {
+    void Initialize() {
         dungeon = DungeonMockLoader.parseDungeon(JSONFactory.dungeon(
             10,
             10,
@@ -74,7 +74,7 @@ class TreasureTest {
         // Move player to remaining treasure
         player.moveTo(0, 1);
         player.moveTo(8, 1);
-        
+
         assertTrue(dungeon.checkGameWon());
     }
 }
