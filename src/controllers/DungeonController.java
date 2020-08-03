@@ -119,7 +119,6 @@ public class DungeonController {
             default:
                 break;
         }
-
         if (dungeon.getPlayer() == null) {
             restarting = true;
             resetScreen.start();
@@ -261,4 +260,5 @@ public class DungeonController {
     public void setPauseScreen(PauseScreen pausescreen) {
         this.pauseScreen = pausescreen;
     }
+
 }
