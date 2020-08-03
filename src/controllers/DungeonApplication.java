@@ -24,7 +24,6 @@ public class DungeonApplication extends Application {
         winScreen.getController().setResetScreen(resetScreen);
         winScreen.getController().setWinScreen(winScreen);
         winScreen.getController().setAllLevelComplete(allLevelComplete);
-        winScreen.getController().setPauseScreen(pauseScreen);
 
         howToPlayScreen.getController().setStartScreen(startScreen);
 
