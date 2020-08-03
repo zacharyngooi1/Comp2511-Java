@@ -116,6 +116,9 @@ public class DungeonController {
             case P:
                 pauseScreen.start();
                 break;
+            case E:
+                resetScreen.start();
+                break;
             default:
                 break;
         }

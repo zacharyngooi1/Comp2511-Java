@@ -17,7 +17,14 @@ public class DungeonApplication extends Application {
         AllLevelCompleteScreen allLevelComplete = new AllLevelCompleteScreen(primaryStage);
         PauseScreen pauseScreen = new PauseScreen(primaryStage);
 
+        allLevelComplete.getController().setResetScreen(resetScreen);
+        allLevelComplete.getController().setDungeonScreen(dungeonScreen);
         allLevelComplete.getController().setStartScreen(startScreen);
+        allLevelComplete.getController().setLevelSelect(levelSelectScreen);
+        allLevelComplete.getController().setHowToPlayScreen(howToPlayScreen);
+        allLevelComplete.getController().setWinScreen(winScreen);
+        allLevelComplete.getController().setAllLevelComplete(allLevelComplete);
+        allLevelComplete.getController().setPauseScreen(pauseScreen);
 
         howToPlayScreen.getController().setStartScreen(startScreen);
 
