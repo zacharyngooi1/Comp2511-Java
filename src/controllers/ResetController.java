@@ -32,6 +32,8 @@ public class ResetController{
 
     private AllLevelCompleteScreen allLevelCompleteScreen;
 
+    private PauseScreen pauseScreen;
+
     @FXML
     public void handleRetry(ActionEvent event) throws IOException {
         if (dungeonScreen != null) {
@@ -40,6 +42,7 @@ public class ResetController{
             LevelSelectScreen newlevelselect = new LevelSelectScreen(levelSelect.getStage());
             WinScreen newWinScreen = new WinScreen(winScreen.getStage());
             AllLevelCompleteScreen newEndingScreen = new AllLevelCompleteScreen(allLevelCompleteScreen.getStage());
+            PauseScreen newPause = new PauseScreen(pauseScreen.getStage());
 
             newDungeon.setStage(dungeonScreen.getInt());
             
@@ -55,13 +58,18 @@ public class ResetController{
             newlevelselect.getController().setDungeonScreen(newDungeon);
             newlevelselect.getController().setResetScreen(resetScreen);
             newlevelselect.getController().setWinScreen(newWinScreen);
+            newlevelselect.getController().setPauseScreen(newPause);
 
             newDungeon.getController().setResetScreen(this.resetScreen);
             newDungeon.getController().setStartScreen(newstart);
             newDungeon.getController().setWinScreen(newWinScreen);
+            newDungeon.getController().setPauseScreen(newPause);
 
             newstart.getController().setDungeonScreen(newDungeon);
             newstart.getController().setLevelSelect(newlevelselect);
+
+            newPause.setDungeonScreen(newDungeon);
+            newPause.setStartScreen(newstart);
 
             newDungeon.start();
         }
@@ -78,6 +86,7 @@ public class ResetController{
             HowToPlayScreen newHowToPlay = new HowToPlayScreen(howToPlayScreen.getStage());
             WinScreen newWinScreen = new WinScreen(winScreen.getStage());
             AllLevelCompleteScreen newEndingScreen = new AllLevelCompleteScreen(allLevelCompleteScreen.getStage());
+            PauseScreen newPause = new PauseScreen(pauseScreen.getStage());
 
             newHowToPlay.getController().setStartScreen(newstart);
 
@@ -87,15 +96,20 @@ public class ResetController{
             newlevelselect.getController().setDungeonScreen(newDungeon);
             newlevelselect.getController().setResetScreen(resetScreen);
             newlevelselect.getController().setWinScreen(newWinScreen);
+            newlevelselect.getController().setPauseScreen(newPause);
 
             newDungeon.getController().setResetScreen(resetScreen);
             newDungeon.getController().setStartScreen(newstart);
             newDungeon.getController().setWinScreen(newWinScreen);
+            newDungeon.getController().setPauseScreen(newPause);
 
             newWinScreen.getController().setAllLevelComplete(newEndingScreen);
             newWinScreen.getController().setDungeonScreen(newDungeon);
             newWinScreen.getController().setStartScreen(newstart);
             newWinScreen.getController().setPauseScreen(newPause);
+
+            newPause.setDungeonScreen(newDungeon);
+            newPause.setStartScreen(newstart);
 
             newstart.getController().setDungeonScreen(newDungeon);
             newstart.getController().setLevelSelect(newlevelselect);
@@ -136,5 +150,9 @@ public class ResetController{
 
     public void setAllLevelComplete(AllLevelCompleteScreen endingscreen) {
         this.allLevelCompleteScreen = endingscreen;
+    }
+
+    public void setPauseScreen(PauseScreen pausescreen) {
+        this.pauseScreen = pausescreen;
     }
 }

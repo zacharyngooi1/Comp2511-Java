@@ -15,6 +15,7 @@ public class DungeonApplication extends Application {
         HowToPlayScreen howToPlayScreen = new HowToPlayScreen(primaryStage);
         WinScreen winScreen = new WinScreen(primaryStage);
         AllLevelCompleteScreen allLevelComplete = new AllLevelCompleteScreen(primaryStage);
+        PauseScreen pauseScreen = new PauseScreen(primaryStage);
 
         allLevelComplete.getController().setStartScreen(startScreen);
 
@@ -34,10 +35,12 @@ public class DungeonApplication extends Application {
         resetScreen.getController().setHowToPlayScreen(howToPlayScreen);
         resetScreen.getController().setWinScreen(winScreen);
         resetScreen.getController().setAllLevelComplete(allLevelComplete);
+        resetScreen.getController().setPauseScreen(pauseScreen);
 
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
+        dungeonScreen.getController().setPauseScreen(pauseScreen);
 
         startScreen.getController().setDungeonScreen(dungeonScreen);
         startScreen.getController().setLevelSelect(levelSelectScreen);
@@ -47,6 +50,11 @@ public class DungeonApplication extends Application {
         levelSelectScreen.getController().setStartScreen(startScreen);
         levelSelectScreen.getController().setResetScreen(resetScreen);
         levelSelectScreen.getController().setWinScreen(winScreen);
+        levelSelectScreen.getController().setPauseScreen(pauseScreen);
+
+        pauseScreen.setDungeonScreen(dungeonScreen);
+        pauseScreen.setStartScreen(startScreen);
+        pauseScreen.setPauseScreen(pauseScreen);
 
         startScreen.start();
         Audio.playSound(Audio.bgm, true);
