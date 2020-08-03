@@ -40,6 +40,7 @@ public class LevelSelectController {
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
+        resetScreen.getController().setPauseScreen(pauseScreen);
         dungeonScreen.getController().setPauseScreen(pauseScreen);
         pauseScreen.setDungeonScreen(dungeonScreen);
         pauseScreen.setStartScreen(startScreen);
@@ -54,6 +55,7 @@ public class LevelSelectController {
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
+        resetScreen.getController().setPauseScreen(pauseScreen);
         dungeonScreen.getController().setPauseScreen(pauseScreen);
         pauseScreen.setDungeonScreen(dungeonScreen);
         pauseScreen.setStartScreen(startScreen);
@@ -69,6 +71,7 @@ public class LevelSelectController {
         dungeonScreen.getController().setWinScreen(winScreen);
         dungeonScreen.getController().setPauseScreen(pauseScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
+        resetScreen.getController().setPauseScreen(pauseScreen);
         pauseScreen.setDungeonScreen(dungeonScreen);
         pauseScreen.setStartScreen(startScreen);
         dungeonScreen.start();
