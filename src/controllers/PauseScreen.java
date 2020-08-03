@@ -60,5 +60,8 @@ public class PauseScreen {
         this.startScreen = screen;
     }
 
+    public void setPauseScreen(PauseScreen pausescreen) {
+        this.pauseScreen = pausescreen;
+    }
 
 }
