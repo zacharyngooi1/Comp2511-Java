@@ -65,6 +65,7 @@ public class AllLevelCompleteController{
             newWinScreen.getController().setAllLevelComplete(newEndingScreen);
             newWinScreen.getController().setDungeonScreen(newDungeon);
             newWinScreen.getController().setStartScreen(newstart);
+            newWinScreen.getController().setPauseScreen(newPause);
 
             newPause.setDungeonScreen(newDungeon);
             newPause.setStartScreen(newstart);
