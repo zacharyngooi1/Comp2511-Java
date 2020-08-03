@@ -34,14 +34,14 @@ public class Audio {
 
         if (infinite) {
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        } else {
+            mediaPlayer.setOnEndOfMedia(new Thread() {
+                @Override
+                public void run() {
+                    mediaPlayer.dispose();
+                }
+            });
         }
-
-        mediaPlayer.setOnEndOfMedia(new Thread() {
-            @Override
-            public void run() {
-                mediaPlayer.dispose();
-            }
-        });
 
         mediaPlayer.play();
     }
