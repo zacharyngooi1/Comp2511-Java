@@ -49,6 +49,7 @@ public class ResetController{
             newWinScreen.getController().setDungeonScreen(newDungeon);
             newWinScreen.getController().setResetScreen(resetScreen);
             newWinScreen.getController().setStartScreen(newstart);
+            newWinScreen.getController().setPauseScreen(newPause);
 
             newlevelselect.getController().setStartScreen(newstart);
             newlevelselect.getController().setDungeonScreen(newDungeon);
@@ -94,6 +95,7 @@ public class ResetController{
             newWinScreen.getController().setAllLevelComplete(newEndingScreen);
             newWinScreen.getController().setDungeonScreen(newDungeon);
             newWinScreen.getController().setStartScreen(newstart);
+            newWinScreen.getController().setPauseScreen(newPause);
 
             newstart.getController().setDungeonScreen(newDungeon);
             newstart.getController().setLevelSelect(newlevelselect);
