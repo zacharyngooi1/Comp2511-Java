@@ -35,6 +35,7 @@ public class AllLevelCompleteScreen {
     public AllLevelCompleteController getController() {
         return controller;
     }
+
     public Stage getStage() {
         return this.stage;
     }
