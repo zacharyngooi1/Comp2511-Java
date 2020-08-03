@@ -18,7 +18,6 @@ public class HowToPlayController{
     @FXML
     public void handleBack(ActionEvent event) {
         startScreen.start();
-        Audio.playSound(Audio.buttonPress);
     }
 
     public void setStartScreen(StartScreen wantedStartScreen) {

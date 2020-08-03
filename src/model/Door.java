@@ -1,7 +1,5 @@
 package model;
 
-import controllers.Audio;
-
 public class Door extends AlternatingEntity {
     private int id;
 
@@ -23,7 +21,6 @@ public class Door extends AlternatingEntity {
         if (id == key.getID()) {
             setCollisionLayer(new CollisionLayer(0));
             setStatus(true);
-            Audio.playSound(Audio.doorUnlock);
             return true;
         }
 

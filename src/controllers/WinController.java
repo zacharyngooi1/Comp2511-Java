@@ -47,13 +47,11 @@ public class WinController {
         pauseScreen.setDungeonScreen(dungeonScreen);
         pauseScreen.setStartScreen(startScreen);
         dungeonScreen.start();
-        Audio.playSound(Audio.buttonPress);
     }
 
     @FXML
     public void handleMainMenu(ActionEvent event) {
         startScreen.start();
-        Audio.playSound(Audio.buttonPress);
     }
 
     public void setDungeonScreen(DungeonScreen dungeonscreen) {

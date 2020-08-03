@@ -57,7 +57,6 @@ public class DungeonApplication extends Application {
         pauseScreen.setPauseScreen(pauseScreen);
 
         startScreen.start();
-        Audio.playSound(Audio.bgm, true);
     }
 
     public static void main(String[] args) {

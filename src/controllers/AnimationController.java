@@ -27,7 +27,7 @@ public class AnimationController {
     }
 
     public void registerTransition(String transitionName, Animation to) {
-        transitions.put(transitionName, to);
+        transitions.put("transitionName", to);
     }
 
     public void transition() {
@@ -35,7 +35,7 @@ public class AnimationController {
     }
 
     public void transition(String transitionName) {
-        transition(transitions.get(transitionName));
+        transition(transitions.get("transitionName"));
     }
 
     private void transition(Animation next) {

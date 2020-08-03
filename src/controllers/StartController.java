@@ -34,19 +34,16 @@ public class StartController{
     @FXML
     public void handlePlay(ActionEvent event) throws IOException {
         DungeonScreen.start();
-        Audio.playSound(Audio.buttonPress);
     }
 
     @FXML
     public void handleLevelSelect(ActionEvent event) {
         levelSelectScreen.start();
-        Audio.playSound(Audio.buttonPress);
     }
 
     @FXML
     public void handleHowToPlay(ActionEvent event) {
         howToPlayScreen.start();
-        Audio.playSound(Audio.buttonPress);
     }
 
     @FXML

@@ -81,7 +81,7 @@ public class DungeonController {
         // Add the ground first so it is below all other views.
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
-                squares.add(new ImageView(Images.dirt), x, y);
+                squares.add(new ImageView(Images.dirtImage), x, y);
             }
         }
 
@@ -123,11 +123,9 @@ public class DungeonController {
         if (dungeon.getPlayer() == null) {
             restarting = true;
             resetScreen.start();
-            Audio.playSound(Audio.lose);
         } else if (dungeon.checkGameWon()) {
             restarting = true;
             winScreen.start();
-            Audio.playSound(Audio.win);
         }
 
         updateUI();
@@ -229,12 +227,12 @@ public class DungeonController {
         for (int y = 0; y < inventoryMaxHeight; y++) {
             for (int x = 0; x < inventoryWidth; x++) {
                 if (!keys.isEmpty()) {
-                    ImageView imageView = new ImageView(Images.key);
+                    ImageView imageView = new ImageView(Images.keyImage);
                     Key nextKey = keys.remove(0);
                     setHue(imageView, doorKeyIDsHues.get(nextKey.getID()));
                     inventory.add(imageView, x, y);
                 } else if (!treasures.isEmpty()) {
-                    ImageView imageView = new ImageView(Images.treasure);
+                    ImageView imageView = new ImageView(Images.treasureImage);
                     treasures.remove(0);
                     inventory.add(imageView, x, y);
                 }

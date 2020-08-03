@@ -73,8 +73,6 @@ public class ResetController{
 
             newDungeon.start();
         }
-
-        Audio.playSound(Audio.buttonPress);
     }
 
     @FXML
@@ -117,8 +115,6 @@ public class ResetController{
 
             newstart.start();
         }
-
-        Audio.playSound(Audio.buttonPress);
     }
 
     /**

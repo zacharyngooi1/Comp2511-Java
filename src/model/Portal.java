@@ -1,7 +1,5 @@
 package model;
 
-import controllers.Audio;
-
 public class Portal extends Entity {
     private int id;
 
@@ -21,9 +19,7 @@ public class Portal extends Entity {
 
         for (Portal portal : dungeon.getPortals()) {
             if (portal != null && portal != this && portal.getID() == getID()) {
-                if (moveableEntity.moveTo(portal.getX(), portal.getY(), false)) {                
-                    Audio.playSound(Audio.teleport);
-                }
+                moveableEntity.moveTo(portal.getX(), portal.getY(), false);
                 return;
             }
         }
