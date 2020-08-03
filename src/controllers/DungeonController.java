@@ -61,6 +61,7 @@ public class DungeonController {
     private StartScreen startScreen;
     private ResetScreen resetScreen;
     private WinScreen winScreen;
+    private PauseScreen pauseScreen;
 
     private Boolean restarting = false;
 
@@ -112,11 +113,8 @@ public class DungeonController {
             case RIGHT:
                 player.moveRight();
                 break;
-            case ESCAPE:
-                startScreen.start();
-                break;
-            case R:
-                resetScreen.start();
+            case P:
+                pauseScreen.start();
                 break;
             default:
                 break;
@@ -256,5 +254,9 @@ public class DungeonController {
 
     public void setWinScreen(WinScreen winscreen) {
         this.winScreen = winscreen;
+    }
+
+    public void setPauseScreen(PauseScreen pausescreen) {
+        this.pauseScreen = pausescreen;
     }
 }

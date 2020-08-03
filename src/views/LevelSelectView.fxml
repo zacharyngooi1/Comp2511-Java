@@ -15,30 +15,30 @@
          <children>
             <ImageView fitHeight="1000.0" fitWidth="1000.0">
                <image>
-                  <Image url="@../resources/images/galaxy-1595995916599-1571.jpg" />
+                  <Image url="@../resources/images/matheus-milani-background-multiplayer1.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="level1" layoutX="453.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleLevel1" text="level 1">
+            <Button fx:id="level1" layoutX="462.0" layoutY="454.0" mnemonicParsing="false" onAction="#handleLevel1" text="level 1">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="level2" layoutX="453.0" layoutY="572.0" mnemonicParsing="false" onAction="#handleLevel2" text="level 2">
+            <Button fx:id="level2" layoutX="462.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleLevel2" text="level 2">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="level3" layoutX="453.0" layoutY="646.0" mnemonicParsing="false" onAction="#handleLevel3" text="level 3">
+            <Button fx:id="level3" layoutX="462.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleLevel3" text="level 3">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="back" layoutX="460.0" layoutY="731.0" mnemonicParsing="false" onAction="#handleBack" text="Back">
+            <Button fx:id="back" layoutX="469.0" layoutY="690.0" mnemonicParsing="false" onAction="#handleBack" text="Back">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <ImageView fitHeight="84.0" fitWidth="236.0" layoutX="372.0" layoutY="141.0">
+            <ImageView fitHeight="84.0" fitWidth="236.0" layoutX="382.0" layoutY="257.0">
                <image>
                   <Image url="@../resources/images/leel.png" />
                </image>

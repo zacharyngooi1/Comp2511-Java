@@ -105,12 +105,7 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <ImageView layoutX="197.0" layoutY="586.0">
-               <image>
-                  <Image url="@../resources/images/icons8-esc-50.png" />
-               </image>
-            </ImageView>
-            <Text layoutX="273.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to the main menu">
+            <Text layoutX="277.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pause The Game">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -140,6 +135,11 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Text>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="201.0" layoutY="591.0">
+               <image>
+                  <Image url="@../resources/images/key-p-of-a-keyboard.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

@@ -31,6 +31,8 @@ public class LevelSelectController {
 
     private WinScreen winScreen;
 
+    private PauseScreen pauseScreen;
+
     @FXML
     public void handleLevel1(ActionEvent event) throws IOException {
         dungeonScreen.setStage(1);
@@ -38,6 +40,9 @@ public class LevelSelectController {
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
+        dungeonScreen.getController().setPauseScreen(pauseScreen);
+        pauseScreen.setDungeonScreen(dungeonScreen);
+        pauseScreen.setStartScreen(startScreen);
         dungeonScreen.start();
     }
 
@@ -48,6 +53,9 @@ public class LevelSelectController {
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
+        dungeonScreen.getController().setPauseScreen(pauseScreen);
+        pauseScreen.setDungeonScreen(dungeonScreen);
+        pauseScreen.setStartScreen(startScreen);
         dungeonScreen.start();
     }
 
@@ -57,7 +65,10 @@ public class LevelSelectController {
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
+        dungeonScreen.getController().setPauseScreen(pauseScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
+        pauseScreen.setDungeonScreen(dungeonScreen);
+        pauseScreen.setStartScreen(startScreen);
         dungeonScreen.start();
     }
 
@@ -80,5 +91,9 @@ public class LevelSelectController {
 
     public void setWinScreen(WinScreen winscreen) {
         this.winScreen = winscreen;
+    }
+
+    public void setPauseScreen(PauseScreen pausescreen) {
+        this.pauseScreen = pausescreen;
     }
 }
