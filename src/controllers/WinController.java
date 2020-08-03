@@ -28,7 +28,6 @@ public class WinController {
 
     private AllLevelCompleteScreen allLevelComplete;
 
-    private PauseScreen pauseScreen;
 
     @FXML
     public void handleNextLevel(ActionEvent event) throws IOException {
@@ -41,12 +40,9 @@ public class WinController {
         dungeonScreen.getController().setResetScreen(resetScreen);
         dungeonScreen.getController().setStartScreen(startScreen);
         dungeonScreen.getController().setWinScreen(winScreen);
-        dungeonScreen.getController().setPauseScreen(pauseScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
-        resetScreen.getController().setPauseScreen(pauseScreen);
         resetScreen.getController().setWinScreen(winScreen);
-        pauseScreen.setDungeonScreen(dungeonScreen);
-        pauseScreen.setStartScreen(startScreen);
+      
         dungeonScreen.start();
         Audio.playSound(Audio.buttonPress);
     }
@@ -77,7 +73,4 @@ public class WinController {
         this.allLevelComplete = endingscreen;
     }
 
-    public void setPauseScreen(PauseScreen pausescreen) {
-        this.pauseScreen = pausescreen;
-    }
 }

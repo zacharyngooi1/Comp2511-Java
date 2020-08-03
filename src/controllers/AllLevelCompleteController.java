@@ -3,8 +3,6 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.application.Platform;
-
 
 /**
  * A JavaFX controller for the dungeon.
@@ -14,9 +12,6 @@ import javafx.application.Platform;
 public class AllLevelCompleteController{
     @FXML
     private Button mainMenu;
-    
-    @FXML
-    private Button exit;
 
     private StartScreen startScreen;
 
@@ -25,12 +20,6 @@ public class AllLevelCompleteController{
         startScreen.start();
         Audio.playSound(Audio.buttonPress);
     }
-
-    @FXML
-    public void handleExit(ActionEvent event) {
-        Platform.exit();    
-    }
-
 
     public void setStartScreen(StartScreen startscreen) {
         this.startScreen = startscreen;
