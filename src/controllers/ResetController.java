@@ -43,9 +43,8 @@ public class ResetController{
             WinScreen newWinScreen = new WinScreen(winScreen.getStage());
             AllLevelCompleteScreen newEndingScreen = new AllLevelCompleteScreen(allLevelCompleteScreen.getStage());
             PauseScreen newPause = new PauseScreen(pauseScreen.getStage());
-
+            System.out.println("retry win" + newWinScreen);
             newDungeon.setStage(dungeonScreen.getInt());
-            
             newEndingScreen.getController().setStartScreen(newstart);
 
             newWinScreen.getController().setAllLevelComplete(newEndingScreen);
@@ -86,6 +85,8 @@ public class ResetController{
             WinScreen newWinScreen = new WinScreen(winScreen.getStage());
             AllLevelCompleteScreen newEndingScreen = new AllLevelCompleteScreen(allLevelCompleteScreen.getStage());
             PauseScreen newPause = new PauseScreen(pauseScreen.getStage());
+            System.out.println("mainmenu win" + newWinScreen);
+
 
             newHowToPlay.getController().setStartScreen(newstart);
 

@@ -42,6 +42,7 @@ public class WinController {
         dungeonScreen.getController().setWinScreen(winScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
         resetScreen.getController().setWinScreen(winScreen);
+        System.out.println("winscreen win" + winScreen);
       
         dungeonScreen.start();
         Audio.playSound(Audio.buttonPress);

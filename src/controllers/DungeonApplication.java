@@ -54,7 +54,6 @@ public class DungeonApplication extends Application {
 
         pauseScreen.setDungeonScreen(dungeonScreen);
         pauseScreen.setStartScreen(startScreen);
-        pauseScreen.setPauseScreen(pauseScreen);
 
         winScreen.getController().setDungeonScreen(dungeonScreen);
         winScreen.getController().setStartScreen(startScreen);
