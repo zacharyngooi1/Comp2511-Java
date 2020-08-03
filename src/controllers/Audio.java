@@ -6,6 +6,9 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 public class Audio {
+    // Set to false when running on a CSE machine
+    private static final boolean audioOn = true;
+
     public static final Media boulderPush = createSound("boulder_push.wav");
     public static final Media buttonPress = createSound("button_press.wav");
     public static final Media doorUnlock = createSound("door_unlock.wav");
@@ -23,6 +26,10 @@ public class Audio {
     public static final Media win = createSound("win.wav");
 
     public static void playSound(Media sound, Boolean infinite) {
+        if (!audioOn) {
+            return;
+        }
+
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
 
         if (infinite) {
@@ -44,6 +51,10 @@ public class Audio {
     }
 
     private static Media createSound(String fileName) {
+        if (!audioOn) {
+            return null;
+        }
+
         return new Media(new File("src/resources/audio/" + fileName).toURI().toString());
     }
 }
