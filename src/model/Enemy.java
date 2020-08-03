@@ -89,6 +89,9 @@ public class Enemy extends MoveableEntity {
             case PLAYER:
                 animationController.transition("attack");
                 break;
+            case PORTAL:
+                animationController.transition("teleport");
+                break;
             default:
                 break;
         }

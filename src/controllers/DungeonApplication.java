@@ -48,6 +48,7 @@ public class DungeonApplication extends Application {
         levelSelectScreen.getController().setWinScreen(winScreen);
 
         startScreen.start();
+        Audio.playSound(Audio.bgm, true);
     }
 
     public static void main(String[] args) {
