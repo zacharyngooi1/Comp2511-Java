@@ -39,6 +39,7 @@ public class LevelSelectController {
         dungeonScreen.getController().setWinScreen(winScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
         dungeonScreen.start();
+        Audio.playSound(Audio.buttonPress);
     }
 
     @FXML
@@ -49,6 +50,7 @@ public class LevelSelectController {
         dungeonScreen.getController().setWinScreen(winScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
         dungeonScreen.start();
+        Audio.playSound(Audio.buttonPress);
     }
 
     @FXML
@@ -59,11 +61,13 @@ public class LevelSelectController {
         dungeonScreen.getController().setWinScreen(winScreen);
         resetScreen.getController().setDungeonScreen(dungeonScreen);
         dungeonScreen.start();
+        Audio.playSound(Audio.buttonPress);
     }
 
     @FXML
     public void handleBack(ActionEvent event) {
         startScreen.start();
+        Audio.playSound(Audio.buttonPress);
     }
 
     public void setDungeonScreen(DungeonScreen dungeonscreen) {

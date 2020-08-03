@@ -18,6 +18,7 @@ public class AllLevelCompleteController{
     @FXML
     public void handleMainMenu(ActionEvent event) {
         startScreen.start();
+        Audio.playSound(Audio.buttonPress);
     }
 
     public void setStartScreen(StartScreen startscreen) {

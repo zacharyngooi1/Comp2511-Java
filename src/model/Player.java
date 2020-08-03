@@ -1,6 +1,7 @@
 package model;
 
 import controllers.AnimationController;
+import controllers.Audio;
 
 import java.lang.Math;
 import java.util.List;
@@ -123,6 +124,7 @@ public class Player extends MoveableEntity {
             }
 
             notifyEnemies();
+            Audio.playSound(Audio.playerMove);
         }
 
         return res;
@@ -161,7 +163,9 @@ public class Player extends MoveableEntity {
         for (Entity entity : dungeon.getEntitiesAtSquare(x, y)) {
             if (entity != null && entity.getTag() == Tag.BOULDER) {
                 Boulder boulder = (Boulder) entity;
-                boulder.moveTo(boulder.getX() + xPush, boulder.getY() + yPush);
+                if (boulder.moveTo(boulder.getX() + xPush, boulder.getY() + yPush)) {
+                    Audio.playSound(Audio.boulderPush);
+                }
             }
         }
     }
@@ -209,12 +213,14 @@ public class Player extends MoveableEntity {
         treasure.removeFromDungeon();
         treasures.add(treasure);
         animationController.transition("pickup");
+        Audio.playSound(Audio.treasurePickup);
     }
 
     private void onKeyEnter(Key key) {
         keys.add(key);
         key.removeFromDungeon();
         animationController.transition("pickup");
+        Audio.playSound(Audio.keyPickup);
     }
 
     private void onEnemyEnter(Enemy enemy) {
@@ -225,6 +231,7 @@ public class Player extends MoveableEntity {
 
             enemy.removeFromDungeon();
             animationController.transition("attack");
+            Audio.playSound(Audio.enemyDeath);
         } else {
             removeFromDungeon();
         }
@@ -238,6 +245,7 @@ public class Player extends MoveableEntity {
         }
 
         animationController.transition("pickup");
+        Audio.playSound(Audio.swordPickup);
     }
 
     private void onInvincibilityEnter(Invincibility invincibility) {
@@ -248,6 +256,7 @@ public class Player extends MoveableEntity {
         }
 
         animationController.transition("pickup");
+        Audio.playSound(Audio.invincibilityPickup);
     }
 
     private void onPortalEnter(Portal portal) {

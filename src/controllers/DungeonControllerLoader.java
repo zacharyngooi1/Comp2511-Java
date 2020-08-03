@@ -47,7 +47,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Player player) {
-        ImageView view = new ImageView(Images.playerIdle1Image);
+        ImageView view = new ImageView(Images.playerIdle1);
         connectEntity(player, view);
         viewsByLayer.get(Layer.PLAYER.ordinal()).add(view);
         entitiesViews.put(player, view);
@@ -55,13 +55,13 @@ public class DungeonControllerLoader extends DungeonLoader {
         AnimationController animationController = new AnimationController(view);
 
         List<Image> animationCycleImages = new ArrayList<>();
-        animationCycleImages.add(Images.playerIdle1Image);
-        animationCycleImages.add(Images.playerIdle2Image);
+        animationCycleImages.add(Images.playerIdle1);
+        animationCycleImages.add(Images.playerIdle2);
         AnimationCycle animationCycle = new AnimationCycle(animationController, 250, animationCycleImages);
 
-        AnimationStatic attack = new AnimationStatic(animationController, 500, Images.playerAttackImage);
-        AnimationStatic pickup = new AnimationStatic(animationController, 500, Images.playerPickupImage);
-        AnimationStatic teleport = new AnimationStatic(animationController, 1000, Images.playerTeleportImage);
+        AnimationStatic attack = new AnimationStatic(animationController, 500, Images.playerAttack);
+        AnimationStatic pickup = new AnimationStatic(animationController, 500, Images.playerPickup);
+        AnimationStatic teleport = new AnimationStatic(animationController, 1000, Images.playerTeleport);
 
         attack.setNext(animationCycle);
         pickup.setNext(animationCycle);
@@ -77,7 +77,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Wall wall) {
-        ImageView view = new ImageView(Images.wallImage);
+        ImageView view = new ImageView(Images.wall);
         connectEntity(wall, view);
         viewsByLayer.get(Layer.OTHERS.ordinal()).add(view);
         entitiesViews.put(wall, view);
@@ -85,7 +85,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Boulder boulder) {
-        ImageView view = new ImageView(Images.boulderImage);
+        ImageView view = new ImageView(Images.boulder);
         connectEntity(boulder, view);
         viewsByLayer.get(Layer.OTHERS.ordinal()).add(view);
         entitiesViews.put(boulder, view);
@@ -93,7 +93,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Enemy enemy) {
-        ImageView view = new ImageView(Images.enemyIdle1Image);
+        ImageView view = new ImageView(Images.enemyIdle1);
         connectEntity(enemy, view);
         viewsByLayer.get(Layer.ENEMIES.ordinal()).add(view);
         entitiesViews.put(enemy, view);
@@ -101,12 +101,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         AnimationController animationController = new AnimationController(view);
 
         List<Image> animationCycleImages = new ArrayList<>();
-        animationCycleImages.add(Images.enemyIdle1Image);
-        animationCycleImages.add(Images.enemyIdle2Image);
+        animationCycleImages.add(Images.enemyIdle1);
+        animationCycleImages.add(Images.enemyIdle2);
         AnimationCycle animationCycle = new AnimationCycle(animationController, 250, animationCycleImages);
 
-        AnimationStatic attack = new AnimationStatic(animationController, 500, Images.enemyAttackImage);
-        AnimationStatic teleport = new AnimationStatic(animationController, 1000, Images.enemyTeleportImage);
+        AnimationStatic attack = new AnimationStatic(animationController, 500, Images.enemyAttack);
+        AnimationStatic teleport = new AnimationStatic(animationController, 1000, Images.enemyTeleport);
 
         attack.setNext(animationCycle);
         teleport.setNext(animationCycle);
@@ -120,7 +120,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Treasure treasure) {
-        ImageView view = new ImageView(Images.treasureImage);
+        ImageView view = new ImageView(Images.treasure);
         connectEntity(treasure, view);
         viewsByLayer.get(Layer.PICKUPS.ordinal()).add(view);
         entitiesViews.put(treasure, view);
@@ -128,7 +128,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Exit exit) {
-        ImageView view = new ImageView(Images.exitImage);
+        ImageView view = new ImageView(Images.exit);
         connectEntity(exit, view);
         viewsByLayer.get(Layer.OTHERS.ordinal()).add(view);
         entitiesViews.put(exit, view);
@@ -136,7 +136,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Key key) {
-        ImageView view = new ImageView(Images.keyImage);
+        ImageView view = new ImageView(Images.key);
         connectEntity(key, view);
         viewsByLayer.get(Layer.PICKUPS.ordinal()).add(view);
         entitiesViews.put(key, view);
@@ -144,16 +144,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(FloorSwitch floorSwitch) {
-        ImageView view = new ImageView(Images.floorSwitchOffImage);
+        ImageView view = new ImageView(Images.floorSwitchOff);
         connectEntity(floorSwitch, view);
-        trackStatus(floorSwitch, view, Images.floorSwitchOnImage, Images.floorSwitchOffImage);
+        trackStatus(floorSwitch, view, Images.floorSwitchOn, Images.floorSwitchOff);
         viewsByLayer.get(Layer.SWITCHES.ordinal()).add(view);
         entitiesViews.put(floorSwitch, view);
     }
 
     @Override
     public void onLoad(Invincibility invincibility) {
-        ImageView view = new ImageView(Images.invincibilityImage);
+        ImageView view = new ImageView(Images.invincibility);
         connectEntity(invincibility, view);
         viewsByLayer.get(Layer.PICKUPS.ordinal()).add(view);
         entitiesViews.put(invincibility, view);
@@ -161,16 +161,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Door door) {
-        ImageView view = new ImageView(Images.doorCloseImage);
+        ImageView view = new ImageView(Images.doorClose);
         connectEntity(door, view);
-        trackStatus(door, view, Images.doorOpenImage, Images.doorCloseImage);
+        trackStatus(door, view, Images.doorOpen, Images.doorClose);
         viewsByLayer.get(Layer.DOORS.ordinal()).add(view);
         entitiesViews.put(door, view);
     }
 
     @Override
     public void onLoad(Portal portal) {
-        ImageView view = new ImageView(Images.portalImage);
+        ImageView view = new ImageView(Images.portal);
         connectEntity(portal, view);
         viewsByLayer.get(Layer.OTHERS.ordinal()).add(view);
         entitiesViews.put(portal, view);
@@ -178,7 +178,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Sword sword) {
-        ImageView view = new ImageView(Images.swordImage);
+        ImageView view = new ImageView(Images.sword);
         connectEntity(sword, view);
         viewsByLayer.get(Layer.PICKUPS.ordinal()).add(view);
         entitiesViews.put(sword, view);
