@@ -12,50 +12,22 @@
 
 <Pane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0">
+      <AnchorPane layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0">
          <children>
-            <Text layoutX="47.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How To Play">
+            <ImageView fitHeight="1000.0" fitWidth="1000.0">
+               <image>
+                  <Image url="@../resources/images/galaxy-tumblr-png-5.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="130.0" layoutY="348.0" stroke="WHITE" strokeType="OUTSIDE" text="How To Play">
                <font>
-                  <Font name="System Bold" size="22.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Group layoutX="39.0" layoutY="108.0">
-               <children>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="39.0">
-                     <image>
-                        <Image url="@../resources/images/keyboard-key-arrow-up.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="39.0" layoutY="40.0">
-                     <image>
-                        <Image url="@../resources/images/keyboard.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="40.0">
-                     <image>
-                        <Image url="@../resources/images/left-arrow-variant-key-on-keyboard.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="79.0" layoutY="40.0">
-                     <image>
-                        <Image url="@../resources/images/keyboard-key-pointing-to-right.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="138.0" layoutY="49.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="Move" />
-               </children>
-            </Group>
-            <Group layoutX="71.0" layoutY="208.0">
-               <children>
-                  <ImageView>
-                     <image>
-                        <Image url="@../resources/images/icons8-esc-50.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="106.0" layoutY="17.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to the main menu" />
-               </children>
-            </Group>
-            <Button fx:id="back" layoutX="39.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleBack" text="Back" />
-            <ScrollPane layoutX="360.0" layoutY="15.0" prefHeight="355.0" prefWidth="413.0">
+            <Group layoutX="192.0" layoutY="406.0" />
+            <Group layoutX="192.0" layoutY="541.0" />
+            <Button fx:id="back" layoutX="133.0" layoutY="677.0" mnemonicParsing="false" onAction="#handleBack" text="Back" />
+            <ScrollPane layoutX="541.0" layoutY="322.0" prefHeight="355.0" prefWidth="413.0">
               <content>
                 <AnchorPane>
                      <children>
@@ -124,10 +96,50 @@
                            </image>
                         </ImageView>
                         <Text layoutX="70.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit" />
+                        <ImageView blendMode="DARKEN" fitHeight="64.0" fitWidth="59.0" layoutX="305.0" layoutY="253.0" nodeOrientation="RIGHT_TO_LEFT" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/images/download.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
               </content>
             </ScrollPane>
+            <ImageView layoutX="197.0" layoutY="586.0">
+               <image>
+                  <Image url="@../resources/images/icons8-esc-50.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="273.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to the main menu">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="200.0" layoutY="541.0">
+               <image>
+                  <Image url="@../resources/images/keyboard.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="156.0" layoutY="541.0">
+               <image>
+                  <Image url="@../resources/images/left-arrow-variant-key-on-keyboard.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="201.0" layoutY="495.0">
+               <image>
+                  <Image url="@../resources/images/keyboard-key-arrow-up.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="247.0" layoutY="541.0">
+               <image>
+                  <Image url="@../resources/images/keyboard-key-pointing-to-right.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="308.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
