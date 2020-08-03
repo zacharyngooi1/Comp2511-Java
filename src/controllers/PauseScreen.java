@@ -13,7 +13,6 @@ import javafx.scene.input.KeyCode;
 public class PauseScreen {
     private Stage stage;
     private String title;
-    private PauseController controller;
     private Scene scene;
 
     private DungeonScreen dungeonScreen;
@@ -26,9 +25,8 @@ public class PauseScreen {
         this.stage = stage;
         title = "paused";
 
-        controller = new PauseController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/PauseView.fxml"));
-        loader.setController(controller);
+
 
         // load into a Parent node called root
         Parent root = loader.load();
@@ -48,10 +46,6 @@ public class PauseScreen {
                 dungeonScreen.start();
             }
         });
-    }
-
-    public PauseController getController() {
-        return controller;
     }
 
     public Stage getStage() {
